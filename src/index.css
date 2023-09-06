@@ -30,7 +30,7 @@
   }
 
   .hero_section {
-    @apply bg-[url('')] bg-cover bg-center bg-no-repeat
+    @apply bg-[url('./assets/images/hero-bg.png')] bg-cover bg-center bg-no-repeat
   }
 
 }
@@ -47,7 +47,7 @@
 
 @media only screen and (max-width: 768px){
   .heading {
-    @apply text-[50px] leading-[36px]
+    @apply text-[44px] leading-[55px]
   }
   .text_para {
     @apply text-[16px] leading-7 mt-3
