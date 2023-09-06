@@ -1,9 +1,15 @@
 import React from 'react'
+import HeroSection from './HeroSection'
 
-const Home = () => {
+const 
+Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      {/* =============== Hero Section ==================== */}
+      <HeroSection />
+    </div>
   )
 }
 
-export default Home
+export default 
+Home
