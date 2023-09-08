@@ -10,7 +10,7 @@ const About = ( ) => {
             {/* ==================== About Image ============ */}
             <div className="relative w-3/4 lg:w-1/2 xl:w-[770px] order-2 lg:order-1">
                 <img src={img} alt="" className="w-3/4" />
-                <div className="absolute w-30 md:w-80 z-20 bottom-4 right-[-30%] md:right-[-7%] lg:right-[12%]">
+                <div className="absolute w-32 md:w-80 z-20 bottom-4 right-[-30%] md:right-[-7%] lg:right-[12%]">
                     <img src={card} alt="" />
                 </div>
             </div>
