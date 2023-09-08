@@ -34,7 +34,7 @@ HeroSection = () => {
                         </div>
                         <div>
                             <h1 className="text-4xl font-bold">30+</h1>
-                            <hr className="h-3 w-[100px] mt-[-20px] bg-irirsBlueColor"></hr>
+                            <hr className="h-3 w-[100px] mt-[-20px] bg-irisBlueColor"></hr>
                             <p className="text_para">Years of Experience</p>
                         </div>
                     </div>
