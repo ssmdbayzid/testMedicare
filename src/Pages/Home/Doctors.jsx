@@ -31,7 +31,7 @@ const Doctors = () => {
               <div className="flex items-center justify-between mt-5">
                   <p className="text-textColor">{data.hospital}</p>
 
-                  <Link to="doctors" className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
+                  <Link to="/doctors" className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
                   <BsArrowRight />
                   </Link>
                 </div>

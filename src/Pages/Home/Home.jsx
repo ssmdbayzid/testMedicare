@@ -5,6 +5,7 @@ import About from './About'
 import Services from './Services'
 import VirtualSupport from './VirtualSupport.'
 import Doctors from './Doctors'
+import FAQ from './FAQ'
 
 const Home = () => {
   return (
@@ -22,6 +23,8 @@ const Home = () => {
       <VirtualSupport />
       {/* =============== Doctors Section ==================== */}
       <Doctors />
+      {/* =============== FAQ Section ==================== */}
+      <FAQ />
 
     </div>
   )
