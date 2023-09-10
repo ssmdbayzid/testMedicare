@@ -7,6 +7,8 @@ import VirtualSupport from './VirtualSupport.'
 import Doctors from './Doctors'
 import FAQ from './FAQ'
 
+import Testimonial from './Testimonial'
+
 const Home = () => {
   return (
     <div>
@@ -15,16 +17,24 @@ const Home = () => {
 
       {/* =============== Work Section ==================== */}
       <WorkSection />
+
       {/* =============== About Section ==================== */}
       <About />
+
       {/* =============== Service Section ==================== */}
       <Services />
+
       {/* =============== Virtual Support Section ==================== */}
       <VirtualSupport />
+
       {/* =============== Doctors Section ==================== */}
       <Doctors />
+
       {/* =============== FAQ Section ==================== */}
       <FAQ />
+
+      {/* =============== Testimonial Section ==================== */}
+      <Testimonial />
 
     </div>
   )

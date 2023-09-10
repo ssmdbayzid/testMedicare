@@ -35,7 +35,7 @@ useEffect(()=>{
 
 
   return (
-    <div className="container mx-auto mt-32">  
+    <div className="container mx-auto my-32">  
         <div  className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8 xl:gap-0">
             <div className="lg:w-1/2 xl:w-[770px]">
                 <div>
@@ -66,5 +66,4 @@ useEffect(()=>{
   )
 }
 
-export default 
-FAQ
+export default FAQ
