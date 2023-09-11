@@ -1,8 +1,16 @@
 import React from 'react'
+/*
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css';
 import 'swiper/css/pagination';
+*/
+
+import  {Pagination} from 'swiper/modules';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import patientComments from '../../assets/data/patientCommentData';
 import {HiStar} from 'react-icons/hi'
 
