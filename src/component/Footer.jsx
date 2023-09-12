@@ -73,7 +73,7 @@ const quickLink3 = [
 const Footer = () => {
   const year = new Date().getFullYear()
   return (
-    <footer className="mt-10 pb-16">
+    <footer className="mt-10 pb-10">
       <div className="container">
         <div className="flex justify-between flex-col md:flex-row flex-wrap gap-7">
           
@@ -82,7 +82,7 @@ const Footer = () => {
         <p>Copy right @{year} developed by Mahbubur Rahman all right  reserved</p>
         <div className="flex items-center gap-3 mt-4">
         {
-          socialLinks && socialLinks.map((link, index)=> <Link className="group hover:bg-primaryColor hover:border-none flex items-center justify-center rounded-full h-9 w-9 border border-solid border-[#181A1E]">
+          socialLinks && socialLinks.map((link, index)=> <Link to={link.path} className="group hover:bg-primaryColor hover:border-none flex items-center justify-center rounded-full h-9 w-9 border border-solid border-[#181A1E]">
             {link.icon}
           </Link>)}
       </div>
@@ -91,7 +91,7 @@ const Footer = () => {
       <div>
         <h2 className="text-[20px] leading-[30px] text-headingColor font-[700] mb-6"> </h2>
         <ul>
-              {quickLink1 &&  quickLink1.map((link, index)=> <li key={index} className="mb-4"> <Link path={link.path} >
+              {quickLink1 &&  quickLink1.map((link, index)=> <li key={index} className="mb-4"> <Link to={link.path} >
                 {link.display}
               </Link></li>)}
         </ul>
@@ -102,7 +102,7 @@ const Footer = () => {
       <div>
         <h2 className="text-[20px] leading-[30px] text-headingColor font-[700] mb-6"> </h2>
         <ul>
-              {quickLink2 &&  quickLink2.map((link, index)=> <li key={index} className="mb-4"> <Link path={link.path} className="hover:font-[500]">
+              {quickLink2 &&  quickLink2.map((link, index)=> <li key={index} className="mb-4"> <Link to={link.path} className="hover:font-[500]">
                 {link.display}
               </Link></li>)}
         </ul>
@@ -114,7 +114,7 @@ const Footer = () => {
       <div>
         <h2 className="text-[20px] leading-[30px] text-headingColor font-[700] mb-6"> </h2>
         <ul>
-              {quickLink3 &&  quickLink3.map((link, index)=> <li key={index} className="mb-4"> <Link path={link.path} >
+              {quickLink3 &&  quickLink3.map((link, index)=> <li key={index} className="mb-4"> <Link to={link.path} >
                 {link.display}
               </Link></li>)}
         </ul>

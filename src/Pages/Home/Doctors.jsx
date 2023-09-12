@@ -12,7 +12,7 @@ const Doctors = () => {
         <h2 className="heading text-center">Our Great Doctors</h2>
         <p className="text_para text-center">World class care for everyone  Our health System offers unmatched export health care</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16 mt-12">
 
         {doctorsData && doctorsData.map((data, index)=>
           <div key={index} className="mx-auto p-3 lg:p-5">
