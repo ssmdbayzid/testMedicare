@@ -5,11 +5,18 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
 const [rating, setRating] = useState(0)
 const [hover, setHover] = useState(0)
 
+const [showFeedback, setShowFeedback] = useState("")
+
 console.log(hover)
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault()
+        console.log(showFeedback, rating)
+    }
   return (
-    <form action=''>
+    <form onSubmit={handleFormSubmit}>
         <div>
-            <h3>How would you rate the overall experience?</h3>
+            <p className="mb-2">How would you rate the overall experience?<span className="text-red-600">*</span></p>
             {[...Array(5).keys().map((_, index)=>{
                 index += 1;
                 return (
@@ -34,8 +41,19 @@ console.log(hover)
                     </button>
                 )
             })]}
+
+            <p className="my-3">Share your Feedback or Suggestion<span className="text-red-600">*</span></p>
+            <textarea type="textarea"
+            onChange={(e)=> setShowFeedback(e.target.value)}
+
+            className="w-full border border-solid p-4 text-textColor"
+            rows="5" 
+            placeholder="Write your  feedback or suggestion here" name="" id="" />
+
         </div>
-    <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn">Submit</button>
+    <button 
+    
+    className="btn">Submit</button>
     </form>
   )
 }
