@@ -7,17 +7,23 @@ const [hover, setHover] = useState(0)
 
 const [showFeedback, setShowFeedback] = useState("")
 
-console.log(hover)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault()
-        console.log(showFeedback, rating)
+        console.log(showFeedback)
     }
+
+            
+    
   return (
     <form onSubmit={handleFormSubmit}>
         <div>
             <p className="mb-2">How would you rate the overall experience?<span className="text-red-600">*</span></p>
-            {[...Array(5).keys().map((_, index)=>{
+
+
+        {
+
+            [...Array(5).keys()].map((_, index)=>{
                 index += 1;
                 return (
                     <button 
@@ -40,7 +46,8 @@ console.log(hover)
                         <span> <AiFillStar /> </span>
                     </button>
                 )
-            })]}
+            })
+        }
 
             <p className="my-3">Share your Feedback or Suggestion<span className="text-red-600">*</span></p>
             <textarea type="textarea"

@@ -48,7 +48,7 @@ useEffect(()=>{
                 
                 {items && items.map((data, index)=>
 
-                 <div key={index} className={`${data.isSelect ? "h-40" : "h-[70px]"} transition-all duration-500  w-full p-3 border-2 mb-3`}>
+                 <div key={index} className={`${data.isSelect ? "h-40" : "h-[70px]"} transition-all overflow-hidden duration-700  w-full p-3 border-2 mb-3`}>
                     <div onClick={()=> handleSeeAnswer(data.id,!data.isSelect)}  className=" cursor-pointer  flex items-center justify-between ">
                     <p className="font-semibold">{data.question}</p>     
                     <div className={`${data.isSelect && "bg-primaryColor"} border-2 p-2 text-2xl`}>                    
@@ -56,12 +56,13 @@ useEffect(()=>{
                     </div>             
                     </div>
                     
-                    {data.isSelect && <p >{data.answer}</p>}
+                    {data.isSelect && <p> {data.answer}</p>}
                 </div>                   
 
                 )}                                                  
             </div>
         </div>
+
     </div>
   )
 }

@@ -15,7 +15,7 @@ const Feedback = () => {
         </p>
         <div className="flex justify-between gap-4 mb-7">
         <div className="flex items-center gap-5">
-          <figure  className="h-10 w-10 rounded-full">
+          <figure  className="h-16 w-16 rounded-full">
             <img src={avatar} alt="" className="w-full" />
           </figure>
           <div className="">
