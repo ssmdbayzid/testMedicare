@@ -74,8 +74,8 @@ const Footer = () => {
   const year = new Date().getFullYear()
   return (
     <footer
-    style={{background: "#26374a url(https://ibb.co/fQLvmW7) no-repeat right bottom"}}
-    className="mt-10 pb-10">
+    style={{background: "#ededed url(https://ibb.co/fQLvmW7) no-repeat right bottom"}}
+    className="mt-10 pb-10 py-10">
       <div className="container">
         <div className="flex justify-between flex-col md:flex-row flex-wrap gap-7">
           

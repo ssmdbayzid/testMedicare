@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BiLogoGoogle } from 'react-icons/bi'
+import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
 
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello <span className="text-primaryColor ">Welcome</span> Back
           </h3>
-          <form action="" className="py-4 md:py-0">
+          <form action="" className="pt-4 md:py-0">
             <div className="mb-5">
             <input type="email" name="email" required
             value={formData.email}
@@ -42,22 +42,23 @@ const Login = () => {
             <span className="text-lg">or  </span>
             <hr className="h-1 w-1/3 bg-irisBlueColor" />
             </div>
-            {/* =============== Third Party Authentication ====================== */}
+               
+          </form>
+          {/* =============== Third Party Authentication ====================== */}
 
-            <div className="flex items-center justify-center gap-5 pt-3">
-              <p className="flex items-center">
+          <div className="flex items-center justify-center gap-10 pt-3">
+              <p className="flex items-center cursor-pointer  border-2 px-3 py-1.5 rounded-md group hover:text-white hover:bg-[#db3236]">
                 < BiLogoGoogle className="text-2xl mr-2" />
-                <p>Google </p>
+                <p className="text-lg leading-7 text-textColor group-hover:text-white">Google </p>
               </p>
 
-              <p className="flex items-center">
-                < BiLogoGoogle className="text-2xl mr-2" />
-                <p>Google </p>
+              <p className="flex items-center cursor-pointer border-2 px-3 py-1.5 rounded-md hover:bg-primaryColor group hover:text-white">
+                < BiLogoFacebook className="text-2xl mr-2" />
+                <p className="text-lg leading-7 text-textColor group-hover:text-white ">Facebook </p>
               </p>
              
             </div>  
-            <p className="mt-3">Already have an account? <a href="/signup" className="text-primaryColor font-semibold">Sign up</a></p>   
-          </form>
+            <p className="mt-3 text-center">Already haven't an account? <a href="/signup" className="text-primaryColor font-semibold">Sign up</a></p>
         </div>
       </div>
     </section>
