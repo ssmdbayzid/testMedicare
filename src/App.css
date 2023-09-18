@@ -39,3 +39,16 @@
   .swiper-slide.swiper-slide-next h2 ,  .swiper-slide.swiper-slide-next p {
     color: #ffffff
   }
+  .App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form_label {
+    @apply  text-textColor font-semibold text-[16px] leading-4 
+  }
+
+  .form_input {
+    @apply w-full px-4 py-3  border border-solid border-[#0066ff61] focus:outline-none focus:border-primaryColor text-[16px] leading-7 placeholder:text-textColor cursor-pointer
+  }
