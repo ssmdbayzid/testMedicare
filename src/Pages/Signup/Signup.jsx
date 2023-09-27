@@ -43,7 +43,7 @@ const Signup = () => {
           </div>
 
           {/* ================ Sign Up Form =========== */}
-          <div className="lg:pl-16 rounded-l-lg py-10">
+          <div className="lg:pl-16 rounded-l-lg py-5">
             <h2 className="text-headingColor text-[22px] leading-9 font-semibold mb-8">
               Create an <span className="text-primaryColor">account</span>
             </h2>
@@ -83,7 +83,7 @@ const Signup = () => {
                value={formData.role}
                onChange={handleInputChange}
               name="role" 
-              id=""
+              id="role"
               className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
               >
                 <option value="patient">Patient</option>
@@ -98,7 +98,7 @@ const Signup = () => {
               value={formData.gender}
               onChange={handleInputChange}
               name="gender" 
-              id=""              
+              id="gender"              
               className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
               >
                 <option value="select">select</option>
