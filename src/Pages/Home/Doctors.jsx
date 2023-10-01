@@ -3,10 +3,22 @@ import doctorsData from '../../assets/data/doctorsData'
 import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import { useGetDoctorsQuery } from '../../state/api'
+
 
 const Doctors = () => {
+  const {data, isError, isLoading} = useGetDoctorsQuery()
+
+  if(data){
+    console.log(data)
+  }
+
+  console.log(process.env.REACT_APP_BASE_URL)
+
   return (
     <div className="container">
+        {isError && <p className="text-red-600">{isError.message}</p>}
+        {isLoading && <p className="text-red-600">{isLoading.message}</p>}
         <div className="xl:w-[470px] mx-auto">
 
         <h2 className="heading text-center">Our Great Doctors</h2>
