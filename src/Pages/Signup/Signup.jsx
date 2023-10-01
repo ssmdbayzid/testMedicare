@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
-import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
+
 import avatar from '../../assets/images/avatar-icon.png'
 
 import signUpImg from '../../assets/images/signup.gif'
+import axios from 'axios'
 const Signup = () => {
-  const [selectedFile, setSelectedFile] = useState(null)
+  
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    photo: selectedFile,
+    photo: "",
     gender: "",
-    role: "patient",
+    role: "",
   })
 
   const handleInputChange = e => {
@@ -21,15 +22,31 @@ const Signup = () => {
 
   const handleFileInputChange = async e =>{
     const file = e.target.files[0];
-    console.log(file)
+    
+    
+    try {
+      
+      const formData = new FormData();
+      formData.append('key', "15abb5d6d10c5792735d187ebb3d95b0");
+      formData.append('image', file)
 
-    // later we will cloudinary to upload image
+      const response = await  axios.post("https://api.imgbb.com/1/upload", formData)
+      const imageUrl = response.data.data.url;      
+      // setFormData({...formData, photo: imageUrl})
+      setPreviewUrl(imageUrl)
+
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
 
   const submitForm = async event => {
     event.preventDefault()
+    console.log({...formData, photo: previewUrl})
   }
+
+  
 
   return (
     <section className="px-5 xl:px-0 lg:py-10">
@@ -44,35 +61,37 @@ const Signup = () => {
 
           {/* ================ Sign Up Form =========== */}
           <div className="lg:pl-16 rounded-l-lg py-5">
-            <h2 className="text-headingColor text-[22px] leading-9 font-semibold mb-8">
+            <h2 className="text-headingColor text-[25px] leading-9 font-semibold mb-3">
               Create an <span className="text-primaryColor">account</span>
             </h2>
             
-            <form action="">
-            <div className="mb-3">
+            <form onSubmit={submitForm}>
+            <div className="mb-1">
               <input
               value={formData.name}
               onChange={handleInputChange}
               name='name'
               type="text" 
               placeholder="Your Name" 
-              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-5 py-2 leading-7" required />
+              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-3 py-2 leading-7" required />
             </div>
-            <div className="mb-3">
+            <div className="mb-1">
               <input
               value={formData.email}
               onChange={handleInputChange}
+              name="email"
               type="email"
               placeholder="Your Email" 
-              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-5 py-2 leading-7" required />
+              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-3 py-2 leading-7" required />
             </div>
-            <div className="mb-3">
+            <div className="mb-1">
               <input
               value={formData.password}
               onChange={handleInputChange}
+              name="password"
               type="password" 
               placeholder="Your Password" 
-              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-5 py-2 leading-7" required />
+              className="w-full border-b border-solid outline-none focus:border-primaryColor text-[16px]  px-3 py-2 leading-7" required />
             </div>
             <div className="mb-5 flex items-center justify-between">
             <label
@@ -80,12 +99,14 @@ const Signup = () => {
             >
               Are you a: 
               <select 
-               value={formData.role}
                onChange={handleInputChange}
-              name="role" 
-              id="role"
+               name="role" 
+               id="role"
+               required
+               value={formData.role}
               className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
               >
+                <option value="">Select</option>
                 <option value="patient">Patient</option>
                 <option value="doctor">Doctor</option>
               </select>
@@ -95,13 +116,14 @@ const Signup = () => {
             >
               Gander: 
               <select 
-              value={formData.gender}
               onChange={handleInputChange}
               name="gender" 
-              id="gender"              
+              id="gender" 
+              required             
+              value={formData.gender}
               className="text-textColor font-semibold text-[15px] leading-7 px-4 py-3 focus:outline-none"
               >
-                <option value="select">select</option>
+                <option value="">select</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
                 <option value="other">Other</option>
@@ -111,7 +133,7 @@ const Signup = () => {
 
           <div className="flex items-center gap-3 mb-2">
             <figure className="w-[50px]  h-[50px] rounded-full border-2 border-solid border-primaryColor/80">
-              <img src={avatar} alt="" className="w-full h-full rounded-full" />
+              <img src={previewUrl ? previewUrl : avatar} alt="" className="w-full h-full rounded-full" />
             </figure>
 
             <div className="relative w-[150px] h-[50px]">
@@ -119,7 +141,8 @@ const Signup = () => {
             onChange={handleFileInputChange}
             type="file"
             accept='.jpg, .png'
-            name="" id="customFile"            
+            name="" id="customFile"
+            required            
             className="absolute top-0 left-0 w-full h-full opacity-0 "
              />
 
@@ -135,14 +158,15 @@ const Signup = () => {
               Submit
             </button>          
           </form>
+    {/*}
           <div className="flex items-center justify-between pt-2">
               <hr className="h-1 w-1/3 bg-irisBlueColor" />
                 <span>or</span>
               <hr className="h-1 w-1/3 bg-irisBlueColor" />
             </div>
 
-          {/* =============== Third Party Authentication ====================== */}
-
+          =============== Third Party Authentication ====================== 
+    
           <div className="flex items-center justify-center gap-10 pt-3">
               <p className="flex items-center cursor-pointer  border-2 px-3 py-1.5 rounded-md group hover:text-white hover:bg-[#db3236]">
                 < BiLogoGoogle className="text-2xl mr-2" />
@@ -154,7 +178,8 @@ const Signup = () => {
                 <p className="text-lg leading-7 text-textColor group-hover:text-white ">Facebook </p>
               </p>
              
-            </div>  
+            </div>
+  */}
             <p className="mt-3 text-center">Already have an account? <a href="/login" className="text-primaryColor font-semibold">Log In</a></p>
           </div>
           

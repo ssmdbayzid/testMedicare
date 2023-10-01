@@ -44,8 +44,9 @@ const Login = () => {
             </div>
                
           </form>
-          {/* =============== Third Party Authentication ====================== */}
 
+          {/* =============== Third Party Authentication ====================== */}
+{/*
           <div className="flex items-center justify-center gap-10 pt-3">
               <p className="flex items-center cursor-pointer  border-2 px-3 py-1.5 rounded-md group hover:text-white hover:bg-[#db3236]">
                 < BiLogoGoogle className="text-2xl mr-2" />
@@ -57,7 +58,8 @@ const Login = () => {
                 <p className="text-lg leading-7 text-textColor group-hover:text-white ">Facebook </p>
               </p>
              
-            </div>  
+            </div> 
+            */} 
             <p className="mt-3 text-center">Already haven't an account? <a href="/signup" className="text-primaryColor font-semibold">Sign up</a></p>
         </div>
       </div>
