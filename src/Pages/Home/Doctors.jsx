@@ -13,7 +13,7 @@ const Doctors = () => {
     console.log(data)
   }
 
-  console.log(process.env.REACT_APP_BASE_URL)
+  console.log()
 
   return (
     <div className="container">
