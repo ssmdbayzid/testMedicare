@@ -1,5 +1,6 @@
 import { setAuthToken } from 'api/auth'
-import React, { useState } from 'react'
+import { AuthContext} from 'context/AuthProvider'
+import React, { useContext, useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
 
 
@@ -9,15 +10,19 @@ const Login = () => {
     password: "",
   })
 
+    const  {login} = useContext(AuthContext)
+
 
   const handleInputChange = e => {
     setFormData({...formData, [e.target.name] : e.target.value })
+
   }
 
   const handleLogin = event => {
     event.preventDefault()
 
-    Login(email, password)
+    login(formData.email, formData.password)
+    
     .then(result => {
       const user  = result.user;
 
@@ -29,12 +34,13 @@ const Login = () => {
       console.log("Current user ", currentUser)
 
     })
+    .catch(error => console.log(error))
     
     
     setAuthToken(formData)
 
   }
-
+  
 
   return (
     <section className="px-5 lg:px-0 md:mt-12">

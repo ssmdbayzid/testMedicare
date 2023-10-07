@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import avatar from '../../assets/images/avatar-icon.png'
 
 import signUpImg from '../../assets/images/signup.gif'
 import axios from 'axios'
+import { AuthContext } from 'context/AuthProvider'
+import { useCreateUserMutation } from 'state/api'
+
+
+
 const Signup = () => {
+  const [ createUser, isSuccess, isLoading, isError] = useCreateUserMutation()
+
   
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState({
@@ -15,6 +22,8 @@ const Signup = () => {
     gender: "",
     role: "",
   })
+
+  const {signUp} = useContext(AuthContext)
 
   const handleInputChange = e => {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -43,7 +52,19 @@ const Signup = () => {
 
   const submitForm = async event => {
     event.preventDefault()
-    console.log({...formData, photo: previewUrl})
+    try {      
+      console.log(formData)
+      const signup = await createUser(formData)
+      console.log(signup)
+    
+    signUp(formData.email, formData.password)
+    } catch (error) {
+      console.log(error)  
+    }
+    
+    
+    
+    
   }
 
   
@@ -157,29 +178,7 @@ const Signup = () => {
             <button className="btn w-full px-5 py-2 mt-2 rounded-md">
               Submit
             </button>          
-          </form>
-    {/*}
-          <div className="flex items-center justify-between pt-2">
-              <hr className="h-1 w-1/3 bg-irisBlueColor" />
-                <span>or</span>
-              <hr className="h-1 w-1/3 bg-irisBlueColor" />
-            </div>
-
-          =============== Third Party Authentication ====================== 
-    
-          <div className="flex items-center justify-center gap-10 pt-3">
-              <p className="flex items-center cursor-pointer  border-2 px-3 py-1.5 rounded-md group hover:text-white hover:bg-[#db3236]">
-                < BiLogoGoogle className="text-2xl mr-2" />
-                <p className="text-lg leading-7 text-textColor group-hover:text-white">Google </p>
-              </p>
-
-              <p className="flex items-center cursor-pointer border-2 px-3 py-1.5 rounded-md hover:bg-primaryColor group hover:text-white">
-                < BiLogoFacebook className="text-2xl mr-2" />
-                <p className="text-lg leading-7 text-textColor group-hover:text-white ">Facebook </p>
-              </p>
-             
-            </div>
-  */}
+          </form>   
             <p className="mt-3 text-center">Already have an account? <a href="/login" className="text-primaryColor font-semibold">Log In</a></p>
           </div>
           

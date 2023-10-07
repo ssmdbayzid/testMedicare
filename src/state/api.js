@@ -16,6 +16,16 @@ export const api = createApi({
     reducerPath: "medicareApi",
     tagTypes: ["User", "Doctors"],
     endpoints: (builder) => ({
+
+        // Create User
+        createUser: builder.mutation({
+            query: (user)=> ({
+                url: `auth/register`,
+                method: 'POST',
+                body: user,
+            }),
+        }),
+
         // Doctors CRUD Operation
         getDoctors: builder.query({
             query:  ()=> 'doctors',
@@ -72,6 +82,7 @@ export const {
     useGetUsersQuery,
     useGetSingleUserQuery,
     
+    useCreateUserMutation,
     useDeleteUserMutation,
 
 } = api;
