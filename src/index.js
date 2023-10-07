@@ -9,6 +9,7 @@ import reportWebVitals from './reportWebVitals';
 // import { setupListeners } from '@reduxjs/toolkit/query';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import AuthProvider from 'context/AuthProvider';
 
 /*
 const store = configureStore({
@@ -26,7 +27,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <AuthProvider>
     <App />
+    </AuthProvider>
     </Provider>
   </React.StrictMode>
 );

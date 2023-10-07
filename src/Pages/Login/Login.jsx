@@ -16,6 +16,20 @@ const Login = () => {
 
   const handleLogin = event => {
     event.preventDefault()
+
+    Login(email, password)
+    .then(result => {
+      const user  = result.user;
+
+      const currentUser = {
+        email: user.email,
+        password: formData.password,
+      }
+
+      console.log("Current user ", currentUser)
+
+    })
+    
     
     setAuthToken(formData)
 
