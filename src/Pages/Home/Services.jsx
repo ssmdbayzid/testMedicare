@@ -12,7 +12,7 @@ const Services = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 mt-16">
         {serviceData && serviceData.map((data, index)=> 
-            <div>
+            <div key={index}>
                 <h2 className="text-3xl font-[700]">{data.name}</h2>
                 <p className="text_para text-justify">{data.description}</p>
                 <div className="flex justify-between items-center mt-8">

@@ -84,7 +84,7 @@ const Footer = () => {
         <p>Copy right @{year} developed by Mahbubur Rahman all right  reserved</p>
         <div className="flex items-center gap-3 mt-4">
         {
-          socialLinks && socialLinks.map((link, index)=> <Link to={link.path} className="group hover:bg-primaryColor hover:border-none flex items-center justify-center rounded-full h-9 w-9 border border-solid border-[#181A1E]">
+          socialLinks && socialLinks.map((link, index)=> <Link to={link.path} key={index} className="group hover:bg-primaryColor hover:border-none flex items-center justify-center rounded-full h-9 w-9 border border-solid border-[#181A1E]">
             {link.icon}
           </Link>)}
       </div>

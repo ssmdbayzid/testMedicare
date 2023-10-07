@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 // Authirization Token
 const getToken = () => {
-    return localStorage.getItem('Token')
+    return localStorage.getItem('auth-token')
 };
 
 

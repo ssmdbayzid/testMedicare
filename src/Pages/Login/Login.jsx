@@ -1,3 +1,4 @@
+import { setAuthToken } from 'api/auth'
 import React, { useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
 
@@ -12,6 +13,15 @@ const Login = () => {
   const handleInputChange = e => {
     setFormData({...formData, [e.target.name] : e.target.value })
   }
+
+  const handleLogin = event => {
+    event.preventDefault()
+    
+    setAuthToken(formData)
+
+  }
+
+
   return (
     <section className="px-5 lg:px-0 md:mt-12">
       <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-md mt:pt-10">
@@ -19,7 +29,7 @@ const Login = () => {
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello <span className="text-primaryColor ">Welcome</span> Back
           </h3>
-          <form action="" className="pt-4 md:py-0">
+          <form onSubmit={handleLogin} className="pt-4 md:py-0">
             <div className="mb-5">
             <input type="email" name="email" required
             value={formData.email}

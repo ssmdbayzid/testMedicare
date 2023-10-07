@@ -1,5 +1,6 @@
 
-import React, { createContext, useEffect } from 'react'
+import { auth } from 'firebase.init';
+import React, { createContext, useEffect, useState } from 'react'
 
 const userAuthContext = createContext();
 import {
@@ -8,7 +9,35 @@ import {
   useAuthState,
   useSignOut, useContext } from 'react-firebase-hooks/auth';
 
+  const AuthContext = createContext();
+
+  export const useAuth  = () => {
+    return useContext(AuthContext)
+  }
+
+  export const  AuthProvider = ({children}) => {
+    const [user, setUser] = useAuthState(auth);
+    const [error, setError] = useState(null);
+
+    useEffect(()=> {
+      setError(null)
+    },[user])
+
+    // Signup 
+    const signUp = async (email, password) => {
+      try {
+        await useCreateUserWithEmailAndPassword(auth, email, password, dis)
+      } catch (error) {
+        
+      }
+    }
+
+
+
+
+  }
 export const  UserAuthContextProvider =({children}) =>{
+  
 
   const [user, setUser] = useState("")
 
