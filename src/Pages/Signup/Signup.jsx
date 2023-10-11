@@ -12,23 +12,26 @@ import { toast } from 'react-toastify'
 
 
 
-
-
-
-const Signup = () => {
-  const [ createUser, isSuccess, isLoading, isError] = useCreateUserMutation()
-  const navigate = useNavigate()
-
-  
-  const [previewUrl, setPreviewUrl] = useState("")
-  const [formData, setFormData] = useState({
+const initialFormData  =
+  {
     name: "",
     email: "",
     password: "",
     photo: "",
     gender: "",
     role: "",
-  })
+  }
+
+
+
+const Signup = () => {
+  const [ createUser] = useCreateUserMutation()
+  const navigate = useNavigate()
+
+  
+  const [previewUrl, setPreviewUrl] = useState("")
+  
+  const [formData, setFormData] = useState(initialFormData)
 
   const {signUp} = useContext(AuthContext)
 
@@ -37,33 +40,42 @@ const Signup = () => {
   }
 
   const handleFileInputChange = async e =>{
+    
     const file = e.target.files[0];
     const imgUrl = await imgUploadToImgBB(file)
     
     setPreviewUrl(imgUrl);
     setFormData({...formData, photo:imgUrl})
+    
   }
 
+  
+  
 
   const submitForm = async event => {
     event.preventDefault()
-    try {            
-      const response = await createUser(formData)
-      if(isLoading){
-        return <p>Loading.....</p>
-      }
-      if(isSuccess){
-        console.log(response)
-        toast("Sign Up Successflly", {
-          position: "top-right"
-        })
-        navigate("/login")
-      }
-    // signUp(formData.email, formData.password)
-    } catch (error) {
-      console.log(error)  
-    }    
-  } 
+        
+        const result = await createUser(formData) 
+        if(result.data){
+          signUp(formData.email, formData.password)
+          toast("Create Account Success", {
+            position: "top-right"
+          })
+          
+          setPreviewUrl("")
+          setFormData(initialFormData)
+          navigate("/login")
+        }
+        if(result.error){
+          toast(result.error.data.message, {
+            position: "top-right"
+          })
+          
+        }
+    }
+
+       
+  
 
   return (
     <section className="px-5 xl:px-0 lg:py-10">
@@ -82,7 +94,7 @@ const Signup = () => {
               Create an <span className="text-primaryColor">account</span>
             </h2>
             
-            <form onSubmit={submitForm}>
+            <form onSubmit={submitForm }>
             <div className="mb-1">
               <input
               value={formData.name}
@@ -149,9 +161,9 @@ const Signup = () => {
           </div>
 
           <div className="flex items-center gap-3 mb-2">
-            <figure className="w-[50px]  h-[50px] rounded-full border-2 border-solid border-primaryColor/80">
+           {previewUrl && <figure className="w-[50px]  h-[50px] rounded-full border-2 border-solid border-primaryColor/80">
               <img src={previewUrl ? previewUrl : avatar} alt="" className="w-full h-full rounded-full" />
-            </figure>
+            </figure>}
 
             <div className="relative w-[150px] h-[50px]">
             <input 
@@ -171,7 +183,8 @@ const Signup = () => {
             </div>
            
           </div>
-            <button className="btn w-full px-5 py-2 mt-2 rounded-md">
+            <button            
+            className="btn w-full px-5 py-2 mt-2 rounded-md">
               Submit
             </button>          
           </form>   
@@ -185,4 +198,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup;
