@@ -6,11 +6,18 @@ import signUpImg from '../../assets/images/signup.gif'
 import axios from 'axios'
 import { AuthContext } from 'context/AuthProvider'
 import { useCreateUserMutation } from 'state/api'
+import imgUploadToImgBB from 'utils/uploadImage'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
+
+
 
 
 
 const Signup = () => {
   const [ createUser, isSuccess, isLoading, isError] = useCreateUserMutation()
+  const navigate = useNavigate()
 
   
   const [previewUrl, setPreviewUrl] = useState("")
@@ -31,43 +38,32 @@ const Signup = () => {
 
   const handleFileInputChange = async e =>{
     const file = e.target.files[0];
+    const imgUrl = await imgUploadToImgBB(file)
     
-    
-    try {
-      
-      const formData = new FormData();
-      formData.append('key', "15abb5d6d10c5792735d187ebb3d95b0");
-      formData.append('image', file)
-
-      const response = await  axios.post("https://api.imgbb.com/1/upload", formData)
-      const imageUrl = response.data.data.url;      
-      // setFormData({...formData, photo: imageUrl})
-      setPreviewUrl(imageUrl)
-
-    } catch (error) {
-      console.log(error.message)
-    }
+    setPreviewUrl(imgUrl);
+    setFormData({...formData, photo:imgUrl})
   }
 
 
   const submitForm = async event => {
     event.preventDefault()
-    try {      
-      console.log(formData)
-      const signup = await createUser(formData)
-      console.log(signup)
-    
-    signUp(formData.email, formData.password)
+    try {            
+      const response = await createUser(formData)
+      if(isLoading){
+        return <p>Loading.....</p>
+      }
+      if(isSuccess){
+        console.log(response)
+        toast("Sign Up Successflly", {
+          position: "top-right"
+        })
+        navigate("/login")
+      }
+    // signUp(formData.email, formData.password)
     } catch (error) {
       console.log(error)  
-    }
-    
-    
-    
-    
-  }
-
-  
+    }    
+  } 
 
   return (
     <section className="px-5 xl:px-0 lg:py-10">
