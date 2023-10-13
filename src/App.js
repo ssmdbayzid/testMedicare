@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <RouterProvider router={router}></RouterProvider>
-      <ToastContainer />                  
+      <ToastContainer theme="dark" position="top-right" autoClose={3000} closeOnClick pauseHover={false} />                  
     </div>
   );
 }

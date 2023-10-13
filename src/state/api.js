@@ -1,4 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { BASE_URL } from 'utils/config';
 
 // Authirization Token
 const getToken = () => {
@@ -6,9 +7,11 @@ const getToken = () => {
 };
 
 
+
 export const api = createApi({
+    
     baseQuery: fetchBaseQuery({        
-        baseUrl: process.env.REACT_APP_BASE_URL,
+        baseUrl: BASE_URL,
         headers: {
             Authorization: `Bearer  ${getToken()}`
         }
@@ -23,6 +26,15 @@ export const api = createApi({
                 url: `auth/register`,
                 method: 'POST',
                 body: user,
+                                
+            }),
+        }),
+        // Create User
+        loginUser: builder.mutation({
+            query: (user)=> ({
+                url: `auth/login`,
+                method: 'POST',
+                body: user,                                
             }),
         }),
 
@@ -83,6 +95,7 @@ export const {
     useGetSingleUserQuery,
     
     useCreateUserMutation,
+    useLoginUserMutation,
     useDeleteUserMutation,
 
 } = api;

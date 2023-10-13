@@ -13,7 +13,7 @@ const Doctors = () => {
     console.log(data)
   }
 
-  console.log()
+  
 
   return (
     <div className="container">

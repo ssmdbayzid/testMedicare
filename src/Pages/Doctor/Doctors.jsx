@@ -4,23 +4,8 @@ import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Testimonial from '../Home/Testimonial'
-import useFetch from '../../hooks/useFetch'
-import { BASE_URL } from '../../utils/config'
-
-
-
 
 const Doctors = () => {
-
-  const {data} = useFetch(`${BASE_URL}/doctors`)
-
-  // if(loading){
-  //   return <p>Loading .....</p>
-  // }
-
-  if(data){
-    console.log(data)
-  }
 
 
   return (

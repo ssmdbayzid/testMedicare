@@ -1,11 +1,7 @@
 import axios from "axios";
 
 
-export const imgUploadToImgBB = async file => {  
-    
-    
-    console.log(file)
-    
+export const imgUploadToImgBB = async file => {              
         const formData = new  FormData();
         formData.append("key", "15abb5d6d10c5792735d187ebb3d95b0")
         formData.append("image", file)

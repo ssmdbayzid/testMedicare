@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import AuthProvider from 'context/AuthProvider';
+import { AuthContextProvider } from 'context/AuthContext';
 
 /*
 const store = configureStore({
@@ -28,7 +29,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>   
     <AuthProvider>
+    <AuthContextProvider>
     <App />    
+    </AuthContextProvider>
     </AuthProvider>   
     </Provider>
   </React.StrictMode>

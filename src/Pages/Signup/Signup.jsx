@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import avatar from '../../assets/images/avatar-icon.png'
 
 import signUpImg from '../../assets/images/signup.gif'
-import axios from 'axios'
+
 import { AuthContext } from 'context/AuthProvider'
 import { useCreateUserMutation } from 'state/api'
 import imgUploadToImgBB from 'utils/uploadImage'
@@ -26,14 +26,16 @@ const initialFormData  =
 
 const Signup = () => {
   const [ createUser] = useCreateUserMutation()
-  const navigate = useNavigate()
-
+ const [loading, setLoading] = useState(false)
   
   const [previewUrl, setPreviewUrl] = useState("")
   
   const [formData, setFormData] = useState(initialFormData)
 
   const {signUp} = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
 
   const handleInputChange = e => {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -53,28 +55,28 @@ const Signup = () => {
   
 
   const submitForm = async event => {
-    event.preventDefault()
-        
-        const result = await createUser(formData) 
+    setLoading(true)
+    event.preventDefault()            
+        const result = await createUser(formData)
+
         if(result.data){
           signUp(formData.email, formData.password)
-          toast("Create Account Success", {
-            position: "top-right"
-          })
+          toast.success("Create Account Success")
           
           setPreviewUrl("")
           setFormData(initialFormData)
           navigate("/login")
+          setLoading(false)
         }
         if(result.error){
-          toast(result.error.data.message, {
-            position: "top-right"
-          })
-          
+         toast.error(result.error.data.message)  
+         setLoading(false)
         }
     }
 
-       
+   if(loading) {
+    return <p>Loading.......</p>
+   }
   
 
   return (

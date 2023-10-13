@@ -2,6 +2,8 @@ import { setAuthToken } from 'api/auth'
 import { AuthContext} from 'context/AuthProvider'
 import React, { useContext, useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
+import { toast } from 'react-toastify'
+import { useLoginUserMutation } from 'state/api'
 
 
 const Login = () => {
@@ -9,39 +11,46 @@ const Login = () => {
     email: "",
     password: "",
   })
-
-    const  {login} = useContext(AuthContext)
+  const [loading, setLoading] = useState(false)
+  const [loginUser] = useLoginUserMutation()
+  const  {login} = useContext(AuthContext)
 
 
   const handleInputChange = e => {
-    setFormData({...formData, [e.target.name] : e.target.value })
-
+   setFormData({...formData, [e.target.name] : e.target.value })
   }
 
-  const handleLogin = event => {
+  const handleLogin = async (event) => {
     event.preventDefault()
 
-    login(formData.email, formData.password)
+          // setLoading(true)
+
+          console.log(formData)
+
+      // login(formData.email, formData.password)
+      
+        const result = await loginUser(formData)
+        if(result.data){
+          toast.success("Create Account Success")
+          
+          console.log("this is from form data",result.data)
+          // signUp(formData.email, formData.password)
+          // navigate("/home")
+          setLoading(false)
+        }
+        if(result.error){
+         toast.error(result.error.data.message)  
+         setLoading(false)
+         console.log("this is from form data",result.error.data.message)
+
+        }
+        
+    }
     
-    .then(result => {
-      const user  = result.user;
-
-      const currentUser = {
-        email: user.email,
-        password: formData.password,
-      }
-
-      console.log("Current user ", currentUser)
-
-    })
-    .catch(error => console.log(error))
-    
-    
-    setAuthToken(formData)
-
-  }
+   if(loading) {
+    return <p>Loading.......</p>
+   } 
   
-
   return (
     <section className="px-5 lg:px-0 md:mt-12">
       <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-md mt:pt-10">
@@ -49,19 +58,25 @@ const Login = () => {
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello <span className="text-primaryColor ">Welcome</span> Back
           </h3>
-          <form onSubmit={handleLogin} className="pt-4 md:py-0">
+          <form
+          onSubmit={handleLogin}
+          className="pt-4 md:py-0">
             <div className="mb-5">
-            <input type="email" name="email" required
+            <input
+            type="email"
+            name="email" required
+            onChange={handleInputChange}
             value={formData.email}
             placeholder='Your email'
-            onChange={handleInputChange}
             className="border-b border-[#0066ff61] border-solid w-full px-4 lg:px-5 py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
             <div className="mb-5">
-            <input type="password" name="password" required
+            <input
+            type="password"
+            name="password" required
+            onChange={handleInputChange}
             value={formData.password}
             placeholder='Your password'
-            onChange={handleInputChange}
             className="border-b border-[#0066ff61] border-solid w-full px-4 lg:px-5 py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
             <button className="btn mt-5 px-5 py-2 justify-between text-[18px] w-full rounded-md">
@@ -93,8 +108,7 @@ const Login = () => {
             <p className="mt-3 text-center">Already haven't an account? <a href="/signup" className="text-primaryColor font-semibold">Sign up</a></p>
         </div>
       </div>
-    </section>
-  )
+    </section>)
 }
 
 export default Login 
