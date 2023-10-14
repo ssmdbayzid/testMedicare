@@ -30,6 +30,7 @@ root.render(
     <Provider store={store}>   
     <AuthProvider>
     <AuthContextProvider>
+    
     <App />    
     </AuthContextProvider>
     </AuthProvider>   

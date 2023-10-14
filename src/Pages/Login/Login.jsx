@@ -1,4 +1,5 @@
 import { setAuthToken } from 'api/auth'
+import { authContext, useAuthContext } from 'context/AuthContext'
 import { AuthContext} from 'context/AuthProvider'
 import React, { useContext, useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
@@ -15,6 +16,11 @@ const Login = () => {
   const [loginUser] = useLoginUserMutation()
   const  {login} = useContext(AuthContext)
 
+  const  {dispatch} = useContext(AuthContext)
+
+  
+  
+  
 
   const handleInputChange = e => {
    setFormData({...formData, [e.target.name] : e.target.value })
@@ -31,9 +37,18 @@ const Login = () => {
       
         const result = await loginUser(formData)
         if(result.data){
-          toast.success("Create Account Success")
+
+          toast.success("Login Success")
           
-          console.log("this is from form data",result.data)
+          dispatch({
+            type: "LOGIN_SUCCESSFULL",
+            payload: {
+              user: result.data.data,
+              role: result.data.role,
+              user: result.data.token,
+            }
+          })
+          console.log("this is from form data", result.data)
           // signUp(formData.email, formData.password)
           // navigate("/home")
           setLoading(false)
