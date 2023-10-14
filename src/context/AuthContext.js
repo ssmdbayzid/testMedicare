@@ -11,19 +11,17 @@ const initialState = {
 
 export const authContext = createContext(initialState);
 
-export const authReducer = (state, action)=>{
+const authReducer = (state, action)=>{
     
     switch(action.type){
-
         
-        case "LOGIN":
+        case "LOGIN_START":
         return {
             user: null,
             role: null,
             token: null,
         };
-        case "LOGIN_SUCCESSFULL": 
-        console.log(action.payload)
+        case "LOGIN_SUCCESSFULL":         
         return  {
             user: action.payload.user,
             token: action.payload.token,
@@ -39,15 +37,23 @@ export const authReducer = (state, action)=>{
 
 export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, initialState)
-
+ 
     useEffect(()=>{
         localStorage.setItem("user", JSON.stringify(state.user));
         localStorage.setItem("role", state.role)
         localStorage.setItem("token", state.token)
     },[state])
     
-    return (<authContext.Provider value={{user: state.user, token: state.token, role: state.role, dispatch}}>
+    return (<authContext.Provider value={{
+        user: state.user, 
+        token: state.token, 
+        role: state.role, 
+        dispatch
+        }}>
         {children}
     </authContext.Provider>)
 }
 
+export const useAuthContext = ()=>{
+    useContext(authContext)
+}

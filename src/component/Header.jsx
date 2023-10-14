@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../assets/images/logo.png'
 import {  Link, NavLink } from 'react-router-dom'
 import avatar from '../assets/images/avatar-icon.png'
 import {BiMenu} from 'react-icons/bi'
 import Menu from './Menu'
+import { authContext } from 'context/AuthContext'
 
 const navLinks = [
     {
@@ -26,6 +27,7 @@ const navLinks = [
 
 const Header = () => {
     const [open, setOpen] = useState(false)
+    const {user, token} = useContext(authContext)
     
   return (
     <div className="header relative flex items-center">
@@ -49,14 +51,22 @@ const Header = () => {
             {/* ============= Nev Right ================= */}
             <div className="flex items-center gap-4">
 
-                <div>
-                    <Link to='/'>
-                        <figure className="w-11 h-11 rounded-full cursor-pointer">
-                        <img src={avatar} alt="" className="w-full  outline-green-600" />
-                        </figure>
-                    </Link>
-                </div>
-                    <Link to="/login" >
+                
+                   { user && token ? 
+                   <>
+                   <Link to='/' className="mr-3">
+                       <figure className="w-11 h-11 rounded-full cursor-pointer">
+                       <img src={user.photo} alt="" className="w-full  outline-green-600" />
+                       </figure>
+                   </Link>
+                   <p className="text-sm">{user.name}</p>
+                   <Link  to="/signup">
+                   <button className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
+                    Sign Up
+                   </button>
+                 </Link>
+               </>                   
+                   : <> <Link to="/login" >
                         <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-textColor transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
                     </Link>
                     
@@ -65,10 +75,9 @@ const Header = () => {
                    Sign Up
                   </button>
                 </Link>
-
+                </>}
                     <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
-                    {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}
-                
+                    {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}                
             </div>
         </div>
       </div>

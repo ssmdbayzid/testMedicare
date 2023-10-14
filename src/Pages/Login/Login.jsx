@@ -5,6 +5,10 @@ import React, { useContext, useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 import { useLoginUserMutation } from 'state/api'
+import  HashLoader  from 'react-spinners/HashLoader'
+import { useNavigate } from 'react-router-dom'
+
+{/* <HashLoader /> */}
 
 
 const Login = () => {
@@ -16,9 +20,9 @@ const Login = () => {
   const [loginUser] = useLoginUserMutation()
   const  {login} = useContext(AuthContext)
 
-  const  {dispatch} = useContext(AuthContext)
+  const  { dispatch } = useContext(authContext)
 
-  
+  const navigate = useNavigate()
   
   
 
@@ -29,7 +33,7 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
 
-          // setLoading(true)
+          setLoading(true)
 
           console.log(formData)
 
@@ -45,12 +49,11 @@ const Login = () => {
             payload: {
               user: result.data.data,
               role: result.data.role,
-              user: result.data.token,
+              token: result.data.token,
             }
-          })
-          console.log("this is from form data", result.data)
+          })          
           // signUp(formData.email, formData.password)
-          // navigate("/home")
+          navigate("/home")
           setLoading(false)
         }
         if(result.error){
@@ -62,9 +65,7 @@ const Login = () => {
         
     }
     
-   if(loading) {
-    return <p>Loading.......</p>
-   } 
+
   
   return (
     <section className="px-5 lg:px-0 md:mt-12">
@@ -95,7 +96,8 @@ const Login = () => {
             className="border-b border-[#0066ff61] border-solid w-full px-4 lg:px-5 py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
             <button className="btn mt-5 px-5 py-2 justify-between text-[18px] w-full rounded-md">
-            Submit
+            {loading ? <HashLoader size={30} color={"#ffffff"} /> 
+            : "Log In" }
             </button>     
             <div className="flex items-center justify-between pt-3">
             <hr className="h-1 w-1/3 bg-irisBlueColor" />
