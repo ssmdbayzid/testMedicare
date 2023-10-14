@@ -62,7 +62,7 @@ const Header = () => {
                    <p className="text-sm">{user.name}</p>
                    <Link  to="/signup">
                    <button className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
-                    Sign Up
+                    Sign Out
                    </button>
                  </Link>
                </>                   
