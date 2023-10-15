@@ -29,6 +29,12 @@ const Header = () => {
     const [open, setOpen] = useState(false)
     const {user, token} = useContext(authContext)
     
+    const signUp = ()=>{
+        console.log("this is from signout")
+        localStorage.removeItem("user")
+        localStorage.removeItem("role")
+        localStorage.removeItem("token")
+    }
   return (
     <div className="header relative flex items-center">
         <div className="container">
@@ -60,11 +66,13 @@ const Header = () => {
                        </figure>
                    </Link>
                    <p className="text-sm">{user.name}</p>
-                   <Link  to="/signup">
-                   <button className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
+                   
+                   <button
+                   onClick={()=> signUp()}
+                    className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
                     Sign Out
                    </button>
-                 </Link>
+                 
                </>                   
                    : <> <Link to="/login" >
                         <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-textColor transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
