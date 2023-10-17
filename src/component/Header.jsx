@@ -27,13 +27,13 @@ const navLinks = [
 
 const Header = () => {
     const [open, setOpen] = useState(false)
-    const {user, token} = useContext(authContext)
+    const {user, token, dispatch} = useContext(authContext)
     
     const signUp = ()=>{
-        console.log("this is from signout")
-        localStorage.removeItem("user")
-        localStorage.removeItem("role")
-        localStorage.removeItem("token")
+        dispatch({
+        type: "LOGOUT"
+    })
+        
     }
   return (
     <div className="header relative flex items-center">

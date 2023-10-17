@@ -28,7 +28,11 @@ const authReducer = (state, action)=>{
             role: action.payload.role,
         };
         case "LOGOUT": 
-        return initialState;
+        return {
+            user: null,
+            role: null,
+            token: null,
+        };
 
         default: 
         return state;

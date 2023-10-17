@@ -84,7 +84,7 @@ const Login = () => {
             onChange={handleInputChange}
             value={formData.email}
             placeholder='Your email'
-            className="border-b border-[#0066ff61] border-solid w-full px-4 lg:px-5 py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
+            className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
             <div className="mb-5">
             <input
@@ -93,7 +93,7 @@ const Login = () => {
             onChange={handleInputChange}
             value={formData.password}
             placeholder='Your password'
-            className="border-b border-[#0066ff61] border-solid w-full px-4 lg:px-5 py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
+            className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
             <button className="btn mt-5 px-5 py-2 justify-between text-[18px] w-full rounded-md">
             {loading ? <HashLoader size={30} color={"#ffffff"} /> 
