@@ -5,6 +5,8 @@ import avatar from '../assets/images/avatar-icon.png'
 import {BiMenu} from 'react-icons/bi'
 import Menu from './Menu'
 import { authContext } from 'context/AuthContext'
+import {CiLight, CiDark} from 'react-icons/ci'
+import { ThemeContext } from 'context/ThemeContext'
 
 const navLinks = [
     {
@@ -28,13 +30,14 @@ const navLinks = [
 const Header = () => {
     const [open, setOpen] = useState(false)
     const {user, token, dispatch} = useContext(authContext)
+    const {darkMode, themeToggle} = useContext(ThemeContext)
     
     const signUp = ()=>{
         dispatch({
         type: "LOGOUT"
-    })
-        
-    }
+    })}
+
+    
   return (
     <div className="header relative flex items-center">
         <div className="container">
@@ -55,7 +58,7 @@ const Header = () => {
 
 
             {/* ============= Nev Right ================= */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center justify-between gap-4">
 
                 
                    { user && token ? 
@@ -65,7 +68,11 @@ const Header = () => {
                        <img src={user.photo} alt="" className="w-full  outline-green-600" />
                        </figure>
                    </Link>
-                   <p className="text-sm">{user.name}</p>
+                   <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
+                   {!darkMode ? <CiLight  className="text-[30px]"/>
+                    : <CiDark className="text-[30px]"/>}
+
+                    </button>
                    
                    <button
                    onClick={()=> signUp()}

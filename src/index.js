@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import AuthProvider from 'context/AuthProvider';
 import { AuthContextProvider } from 'context/AuthContext';
+import { ThemeProvider } from 'context/ThemeContext';
 
 /*
 const store = configureStore({
@@ -30,8 +31,9 @@ root.render(
     <Provider store={store}>   
     <AuthProvider>
     <AuthContextProvider>
-    
+    <ThemeProvider>    
     <App />    
+    </ThemeProvider>
     </AuthContextProvider>
     </AuthProvider>   
     </Provider>

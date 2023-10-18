@@ -12,11 +12,9 @@ module.exports = {
         irisBlueColor: '#01B5D8',
         headingColor: '#181A1E',
         textColor: '#4E545F',
-
       },
       
     },
   },
   plugins: [],
 }
-
