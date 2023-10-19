@@ -13,7 +13,7 @@ function App() {
   const {darkMode, themeToggle} = useContext(ThemeContext)
 
   return (
-    <div className={`${!darkMode ? "bg-white" : "bg-black"}`}>
+    <div className={`${!darkMode ? "bg-white" : "bg-slate-500"}`}>
       <RouterProvider router={router}></RouterProvider>
       <ToastContainer
       theme="dark"

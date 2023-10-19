@@ -30,7 +30,8 @@ const navLinks = [
 const Header = () => {
     const [open, setOpen] = useState(false)
     const {user, token, dispatch} = useContext(authContext)
-    const {darkMode, themeToggle} = useContext(ThemeContext)
+    const {theme, themeToggle} = useContext(ThemeContext)
+    
     
     const signUp = ()=>{
         dispatch({
@@ -68,11 +69,7 @@ const Header = () => {
                        <img src={user.photo} alt="" className="w-full  outline-green-600" />
                        </figure>
                    </Link>
-                   <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
-                   {!darkMode ? <CiLight  className="text-[30px]"/>
-                    : <CiDark className="text-[30px]"/>}
-
-                    </button>
+                   
                    
                    <button
                    onClick={()=> signUp()}
@@ -91,6 +88,12 @@ const Header = () => {
                   </button>
                 </Link>
                 </>}
+                <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
+                   {theme === "dark" ? <CiLight  className="text-[30px]"/>
+                    : <CiDark className="text-[30px]"/>}
+
+                </button>
+
                     <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
                     {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}                
             </div>
