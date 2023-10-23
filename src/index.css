@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
 @layer base {
   .section {
     @apply py-[75px]
@@ -34,6 +35,23 @@
   }
 
 }
+*/
+
+:root {
+  --text-color-light: #333; /* Light theme text color */
+  --text-color-dark: #fff; /* Dark theme text color */
+}
+
+.text-theme {
+  color: var(--text-color-light); /* Default to light theme text color */
+}
+
+.dark .heading {
+  color: var(--text-color-dark); /* Use dark theme text color when the 'dark' class is present */
+}
+
+
+/*
 
 @media only screen and (max-width: 1024px){
   .container {
@@ -53,3 +71,4 @@
     @apply text-[16px] leading-7 mt-3
   }
 }
+*/
