@@ -17,9 +17,9 @@ useEffect(()=>{
 },[])
 
 useEffect(()=>{
-    // document.querySelector("html").setAttribute("data-theme", theme)
-    const htmlElement = document.querySelector('html');
-    htmlElement.classList.toggle(theme);
+    document.querySelector("html").setAttribute("data-theme", theme)
+    // const htmlElement = document.querySelector('html');
+    // htmlElement.classList.toggle(theme);
 },[theme])
 
 

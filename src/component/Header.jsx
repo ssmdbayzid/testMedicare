@@ -93,6 +93,7 @@ const Header = () => {
                     : <CiDark className="text-[30px]"/>}
 
                 </button>
+            <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" className="cursor-pointer">Theme change</button>
 
                     <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
                     {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}                
