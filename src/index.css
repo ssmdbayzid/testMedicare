@@ -41,15 +41,17 @@
   --text-color-light: #333; /* Light theme text color */
   --text-color-dark: #fff; /* Dark theme text color */
 }
-
+@layer components {
 .text-theme {
   color: var(--text-color-light); /* Default to light theme text color */
+  @apply text-[44px] text-headingColor leading-[54px] font-[700] 
 }
 
 .dark .heading {
   color: var(--text-color-dark); /* Use dark theme text color when the 'dark' class is present */
-}
 
+}
+}
 
 /*
 
