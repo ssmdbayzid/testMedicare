@@ -29,7 +29,7 @@ const navLinks = [
 
 const Header = () => {
     const [open, setOpen] = useState(false)
-    const {user, token, dispatch} = useContext(authContext)
+    const {user, token, role, dispatch} = useContext(authContext)
     const {theme, themeToggle} = useContext(ThemeContext)
     
     
@@ -69,10 +69,11 @@ const Header = () => {
                        <img src={user.photo} alt="" className="w-full  outline-green-600" />
                        </figure>
                    </Link>
-                   
+                   <p>{role}</p>
                    
                    <button
                    onClick={()=> signUp()}
+                   style={{color: "var(--my-color)", background: "var(--primary-color)"}}
                     className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
                     Sign Out
                    </button>
@@ -83,7 +84,7 @@ const Header = () => {
                     </Link>
                     
                     <Link  to="/signup">
-                  <button className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
+                  <button style={{background: "var(--primary-color)"}} className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] rounded-full cursor-pointer">
                    Sign Up
                   </button>
                 </Link>
@@ -92,9 +93,7 @@ const Header = () => {
                    {theme === "dark" ? <CiLight  className="text-[30px]"/>
                     : <CiDark className="text-[30px]"/>}
 
-                </button>
-            <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" className="cursor-pointer">Theme change</button>
-
+                </button>           
                     <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
                     {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}                
             </div>

@@ -1,3 +1,5 @@
+import DoctorList from "Dashboard/Doctor/DoctorList";
+import UserList from "Dashboard/User/UserList";
 import DoctorAccount from "Dashboard/doctor-account/DoctorAccount";
 import MyAccount from "Dashboard/user-account/MyAccount";
 
@@ -55,6 +57,20 @@ const router = createBrowserRouter([
                 path: "/doctors/profile/me",
                 element: <PrivateRoute allowedRoles={["doctor"]}>
                         <DoctorAccount />
+                        </PrivateRoute>,
+                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            },
+            {
+                path: "/dashboard/doctors",
+                element: <PrivateRoute allowedRoles={["doctor"]}>
+                        <DoctorList />
+                        </PrivateRoute>,
+                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            },
+            {
+                path: "/dashboard/users",
+                element: <PrivateRoute allowedRoles={["doctor"]}>
+                        <UserList />
                         </PrivateRoute>,
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },

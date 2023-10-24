@@ -4,8 +4,14 @@ import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Testimonial from '../Home/Testimonial'
+import { useGetDoctorsQuery } from 'state/api'
 
 const Doctors = () => {
+  const {data, isError, isLoading} = useGetDoctorsQuery()
+
+  if(data){
+    console.log(data)
+  }
 
 
   return (

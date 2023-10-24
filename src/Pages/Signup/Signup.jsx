@@ -61,8 +61,7 @@ const Signup = () => {
 
         if(result.data){
           signUp(formData.email, formData.password)
-          toast.success("Create Account Success")
-          console.log(result.data)
+          toast.success("Create Account Success")          
           setPreviewUrl("")
           setFormData(initialFormData)
           navigate("/login")
