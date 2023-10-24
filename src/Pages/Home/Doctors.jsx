@@ -4,6 +4,7 @@ import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useGetDoctorsQuery } from '../../state/api'
+import Loader from 'component/Loader'
 
 
 const Doctors = () => {
@@ -12,45 +13,49 @@ const Doctors = () => {
   if(data){
     console.log(data)
   }
-
+  
   
 
   return (
     <div className="container">
-        {isError && <p className="text-red-600">{isError.message}</p>}
-        {isLoading && <p className="text-red-600">{isLoading.message}</p>}
-        <div className="xl:w-[470px] mx-auto">
-
-        <h2 className="heading text-center">Our Great Doctors</h2>
-        <p className="text_para text-center">World class care for everyone  Our health System offers unmatched export health care</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16 mt-12">
-
-        {doctorsData && doctorsData.map((data, index)=>
+       
+       <div className="xl:w-[470px] mx-auto">
+      <h2 className="heading text-center">Our Great Doctors</h2>
+      <p className="text_para text-center">World class care for everyone  Our health System offers unmatched export health care</p>
+      </div>
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16 mt-12">
+         { isError || isLoading ? <>
+          isError ? 
+            <p className="text-red-600">{isError.message}</p>
+           : 
+            <Loader />          
+         </> :<>         
+        {doctorsData && doctorsData.map((doctor, index)=>
           <div key={index} className="mx-auto p-3 lg:p-5">
               <div>
-              <img src={data.photo} alt="" className="w-full" />
+              <img src={doctor.photo} alt="" className="w-full" />
               </div>
-              <h3 className="text-2xl mt-5 mb-3 font-bold">{data.name}</h3>
+              <h3 className="text-2xl mt-5 mb-3 font-bold">{doctor.name}</h3>
               <div className="flex items-center justify-between ">
-              <span className="px-5 rounded-md py-2 text-iris text-irisBlueColor bg-irisBlueColor/20 font-bold">{data.specialization}</span>
+              <span className="px-5 rounded-md py-2 text-iris text-irisBlueColor bg-irisBlueColor/20 font-bold">{doctor.specialization}</span>
                 <div className="flex items-center gap-2">
                 <img src={star} alt="" />
-                <span className="font-bold">{data.avgRating}</span>
-                <span className="text-textColor">({data.totalRating})</span>
+                <span className="font-bold">{doctor.avgRating}</span>
+                <span className="text-textColor">({doctor.totalRating})</span>
                 </div>
               </div>
               <div className="flex items-center justify-between mt-5">
-                  <p className="text-textColor">{data.hospital}</p>
+                  <p className="text-textColor">{doctor.hospital}</p>
 
-                  <Link to="/doctors" className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
+                  <Link to={`/doctors/${doctor.id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
                   <BsArrowRight />
                   </Link>
                 </div>
           </div>)}
+          </>} 
         </div>
+                        
     </div>
-  )
-}
+  )}
 
 export default Doctors
