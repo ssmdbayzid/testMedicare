@@ -2,12 +2,12 @@ import React from 'react'
 import { formateDate } from '../../utils/formateDate'
 
 
-const DoctorAbout = () => {
+const DoctorAbout = ({doctor}) => {
   return (
     <div>
         <div>
             <h3 className="text-[20px] leading-[30px] text-textColor font-semibold flex items-center  gap-2">
-                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> S S Md. Bayzid</span>
+                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {doctor.name}</span>
             </h3>
             <p className="text_para text-justify">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum ratione quo perferendis numquam ut vitae asperiores exercitationem magni, deserunt soluta assumenda expedita consequatur amet eum adipisci nostrum architecto? Facilis, laboriosam!

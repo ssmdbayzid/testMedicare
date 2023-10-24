@@ -1,11 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import avatar from '../../assets/images/avatar-icon.png'
 import { formateDate } from '../../utils/formateDate'
 import  {AiFillStar} from 'react-icons/ai'
 import FeedbackForm from './FeedbackForm'
+import { useParams } from 'react-router-dom'
+import { useGetAllReviewsQuery } from 'state/api'
 
 const Feedback = () => {
+  const {id} = useParams()
   const [showFeedbackForm, setShowFeedbackForm] = useState(false)
+  const [reviews, setReviews] = useState(null)
+
+  const {data, isLoading, isError} = useGetAllReviewsQuery()
+
+              
+    useEffect(()=>{
+      if(data){
+        const doctor = data.data.filter((doctor)=> doctor.doctor === id)
+        setReviews(doctor);  
+      }
+    },[data])  
+    
+    
 
   return (
     <div>
@@ -14,16 +30,30 @@ const Feedback = () => {
           All reviews (272)
         </p>
         <div className="flex justify-between gap-4 mb-7">
-        <div className="flex items-center gap-5">
+       {/* ---------- Given reviews ------------- */}
+      
+      {reviews && reviews.map((review, index)=><div key={index} className="flex items-center gap-5">
           <figure  className="h-16 w-16 rounded-full">
             <img src={avatar} alt="" className="w-full" />
           </figure>
           <div className="">
-            <h3 className="font-bold text-[18px] leading-7 text-primaryColor">Ali Ahmed</h3>
+            <h3 className="font-bold text-[18px] leading-7 text-primaryColor">{review.name}</h3>
             <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
-          <p className="text_para text-[15px] mt-2">Good Service, Highly Recommended </p>
+          <p className="text_para text-[15px] mt-2">{review.reviewText} </p>
+          </div>
+        </div>)}
+       
+     {/* <div  className="flex items-center gap-5">
+          <figure  className="h-16 w-16 rounded-full">
+            <img src={avatar} alt="" className="w-full" />
+          </figure>
+          <div className="">
+            <h3 className="font-bold text-[18px] leading-7 text-primaryColor">S S Md. Bayzid</h3>
+            <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
+          <p className="text_para text-[15px] mt-2">This is feedback</p>
           </div>
         </div>
+        */}
         <div className="flex gap-1">
           {[...Array(5).keys()].map((_, index)=>(
             <AiFillStar key={index} className="text-[#0067FF]" />

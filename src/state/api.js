@@ -29,15 +29,14 @@ export const api = createApi({
                                 
             }),
         }),
-        // Create User
+        // Login User
         loginUser: builder.mutation({
             query: (user)=> ({
                 url: `auth/login`,
                 method: 'POST',
                 body: user,                                
             }),
-        }),
-
+        }),        
         // Doctors CRUD Operation
         getDoctors: builder.query({
             query:  ()=> 'doctors',
@@ -81,6 +80,19 @@ export const api = createApi({
                 method: 'DELETE',                
             })
         }),
+
+        // review post & read operation
+        postReview: builder.mutation({
+            query: ({id, feedback})=>  ({
+                url: `doctors/${id}/reviews`,
+                method: 'POST',
+                body: feedback,
+            })            
+        }),
+        
+        getAllReviews: builder.query({
+            query: ()=> 'reviews'
+        })
         
     })
 })
@@ -94,6 +106,8 @@ export const {
     useGetUsersQuery,
     useGetSingleUserQuery,
     
+    useGetAllReviewsQuery,
+    usePostReviewMutation,
     useCreateUserMutation,
     useLoginUserMutation,
     useDeleteUserMutation,
