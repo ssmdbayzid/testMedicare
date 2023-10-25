@@ -13,7 +13,7 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({        
         baseUrl: BASE_URL,
         headers: {
-            Authorization: `Bearer  ${getToken()}`
+            Authorization: `Bearer ${getToken()}`
         }
     }),
     reducerPath: "medicareApi",

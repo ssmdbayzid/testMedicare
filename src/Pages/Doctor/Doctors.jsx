@@ -8,12 +8,9 @@ import { useGetDoctorsQuery } from 'state/api'
 import Loader from 'component/Loader'
 
 const Doctors = () => {
-  const {data, isError, isLoading} = useGetDoctorsQuery()
+  const {data:doctors, isError, isLoading} = useGetDoctorsQuery()
 
-  if(data){
-    console.log(data)
-  }
-
+ 
 
   return (
     <>
@@ -42,7 +39,7 @@ const Doctors = () => {
       {isError || isLoading ? <>
       isError ? <p>{isError.message}</p>
       : <Loader /> 
-      </>  : <>  {doctorsData && doctorsData.map((doctor, index)=>
+      </>  : <>  {doctors && doctors.data.map((doctor, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
       <div>
       <img src={doctor.photo} alt="" className="w-full" />
@@ -59,7 +56,7 @@ const Doctors = () => {
       <div className="flex items-center justify-between mt-5">
           <p className="text-textColor">{doctor.hospital}</p>
 
-          <Link to={`/doctors/${doctor.id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
+          <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
           <BsArrowRight />
           </Link>
         </div>
