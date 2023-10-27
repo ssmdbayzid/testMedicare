@@ -31,13 +31,11 @@ const Header = () => {
     const [open, setOpen] = useState(false)
     const {user, token, role, dispatch} = useContext(authContext)
     const {theme, themeToggle} = useContext(ThemeContext)
-    
-    
+        
     const signUp = ()=>{
         dispatch({
         type: "LOGOUT"
     })}
-
     
   return (
     <div className="header relative flex items-center">
@@ -59,9 +57,7 @@ const Header = () => {
 
 
             {/* ============= Nev Right ================= */}
-            <div className="flex items-center justify-between gap-4">
-
-                
+            <div className="flex items-center justify-between gap-4">                
                    { user && token ? 
                    <>
                    <Link to='/' className="mr-3">

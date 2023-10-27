@@ -2,6 +2,7 @@ import Loader from 'component/Loader';
 import React, { useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
+import { HashLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { usePostReviewMutation } from 'state/api';
 
@@ -27,10 +28,12 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
             const result = await postReview({id, feedback})
     
             if(result.data){
-                console.log(result.data)
+                toast.success("Thanks for your fedback")
+                setRating(0)
+                setShowFeedback("")
             }
             if(result.error){
-            console.log(result.error.data.message)
+                toast.error(`${result.error.data.message}`,)
             }
         }else{
             toast.error("Please give rating & feedback")
@@ -74,12 +77,13 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
             <p className="my-3">Share your Feedback or Suggestion<span className="text-red-600">*</span></p>
             <textarea type="textarea"
             onChange={(e)=> setShowFeedback(e.target.value)}
+            value={showFeedback}
             className="w-full border border-solid p-4 text-textColor"
             rows="5" placeholder="Write your  feedback or suggestion here" name="" id="" required />
 
         </div>
     <button     
-    className="btn">{isLoading ? <Loader /> : "Submit"}</button>
+    className="btn">{isLoading ? <HashLoader size={20} color="#0067FF" /> : "Submit"}</button>
     </form>
   )
 }

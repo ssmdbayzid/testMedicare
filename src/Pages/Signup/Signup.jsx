@@ -9,6 +9,7 @@ import { useCreateUserMutation } from 'state/api'
 import imgUploadToImgBB from 'utils/uploadImage'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { HashLoader } from 'react-spinners'
 
 
 
@@ -25,8 +26,8 @@ const initialFormData  =
 
 
 const Signup = () => {
-  const [ createUser] = useCreateUserMutation()
- const [loading, setLoading] = useState(false)
+  const [ createUser, {isLoading}] = useCreateUserMutation()
+//  const [loading, setLoading] = useState(false)
   
   const [previewUrl, setPreviewUrl] = useState("")
   
@@ -55,7 +56,7 @@ const Signup = () => {
   
 
   const submitForm = async event => {
-    setLoading(true)
+    // setLoading(true)
     event.preventDefault()            
         const result = await createUser(formData)
 
@@ -65,19 +66,14 @@ const Signup = () => {
           setPreviewUrl("")
           setFormData(initialFormData)
           navigate("/login")
-          setLoading(false)
+          // setLoading(false)
         }
         if(result.error){
          toast.error(result.error.data.message)  
-         setLoading(false)
+        //  setLoading(false)
         }
     }
-
-   if(loading) {
-    return <p>Loading.......</p>
-   }
   
-
   return (
     <section className="px-5 xl:px-0 lg:py-10">
       <div className="max-w-[1170px] md:w-[80%] lg:w-2/3 mx-auto">
@@ -186,7 +182,7 @@ const Signup = () => {
           </div>
             <button            
             className="btn w-full px-5 py-2 mt-2 rounded-md">
-              Submit
+              { !isLoading ? "Submit" :  <HashLoader size={30} color={"#ffffff"} /> }
             </button>          
           </form>   
             <p className="mt-3 text-center">Already have an account? <a href="/login" className="text-primaryColor font-semibold">Log In</a></p>

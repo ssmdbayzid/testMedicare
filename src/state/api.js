@@ -3,7 +3,7 @@ import { BASE_URL } from 'utils/config';
 
 // Authirization Token
 const getToken = () => {
-    return localStorage.getItem('auth-token')
+    return localStorage.getItem('token')
 };
 
 
@@ -17,7 +17,7 @@ export const api = createApi({
         }
     }),
     reducerPath: "medicareApi",
-    tagTypes: ["User", "Doctors"],
+    tagTypes: ["User", "Doctors", "Reviews"],
     endpoints: (builder) => ({
 
         // Create User
@@ -50,12 +50,14 @@ export const api = createApi({
                 url: `doctors/:${id}`,
                 method: 'PUT',
                 body: updateDoctor,
-            })
+            }),
+            invalidatesTags: ["Doctors"]
         }),
         deleteDoctor: builder.mutation({
             query: (id)=> ({
                 url: `doctors/:${id}`,
-                method: 'DELETE',                
+                method: 'DELETE',
+                invalidatesTags: ["Doctors"]                
             })
         }),
         
@@ -87,11 +89,13 @@ export const api = createApi({
                 url: `doctors/${id}/reviews`,
                 method: 'POST',
                 body: feedback,
-            })            
+            }),
+            invalidatesTags: ["Doctors"]            
         }),
         
         getAllReviews: builder.query({
-            query: ()=> 'reviews'
+            query: ()=> 'reviews',
+            providesTags: ["Doctors"]
         })
         
     })

@@ -29,10 +29,11 @@ const Feedback = () => {
         <p className="text-lg leading-7 mb-7 font-semibold text-textColor">
           All reviews (272)
         </p>
-        <div className="flex justify-between gap-4 mb-7">
+        <div className="flex flex-col gap-4 mb-7">
        {/* ---------- Given reviews ------------- */}
       
-      {reviews && reviews.map((review, index)=><div key={index} className="flex items-center gap-5">
+      {reviews && reviews.map((review, index)=><div key={index} className="flex justify-between gap-5">
+        <div  className="flex gap-5">
           <figure  className="h-16 w-16 rounded-full">
             <img src={avatar} alt="" className="w-full" />
           </figure>
@@ -41,6 +42,14 @@ const Feedback = () => {
             <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
           <p className="text_para text-[15px] mt-2">{review.reviewText} </p>
           </div>
+        </div>
+
+          {/* // rating */}
+          <div className="flex gap-1">
+          {[...Array(5).keys()].map((_, index)=>(
+            <AiFillStar key={index} className="text-[#0067FF]" />
+          ))}
+        </div>
         </div>)}
        
      {/* <div  className="flex items-center gap-5">
@@ -54,11 +63,7 @@ const Feedback = () => {
           </div>
         </div>
         */}
-        <div className="flex gap-1">
-          {[...Array(5).keys()].map((_, index)=>(
-            <AiFillStar key={index} className="text-[#0067FF]" />
-          ))}
-        </div>
+        
         </div>
         <div className="">
           {!showFeedbackForm &&  <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block mx-auto">Give  Feedback</button>}
