@@ -43,7 +43,9 @@ const Header = () => {
             <div className="flex justify-between items-center">
 
                 {/* ============= Logo ========== */}
-                <img src={logo} alt="" />
+                <a href="/home">
+                <img src={logo} alt="Logo" className="cursor-pointer"/>
+                </a>
 
                 {/* ================= Navigation ============== */}
                 <div className="navigation hidden md:block ">
@@ -61,8 +63,8 @@ const Header = () => {
                    { user && token ? 
                    <>
                    <Link to='/' className="mr-3">
-                       <figure className="w-11 h-11 rounded-full cursor-pointer">
-                       <img src={user.photo} alt="" className="w-full  outline-green-600" />
+                       <figure className="w-11 h-11 cursor-pointer">
+                       <img src={user.photo} alt="" className="w-full  outline-green-600 rounded-full" />
                        </figure>
                    </Link>
                    <p>{role}</p>

@@ -83,7 +83,12 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
 
         </div>
     <button     
-    className="btn">{isLoading ? <HashLoader size={20} color="#0067FF" /> : "Submit"}</button>
+    className="btn mr-6">{isLoading ? <HashLoader size={20} color="#0067FF" /> : "Submit"}</button>
+    <button 
+    style={{background: "#ededed"}}
+    onClick={()=>setShowFeedbackForm(!showFeedbackForm)}   
+    className="btn bg-slate-300">Cancel</button>
+
     </form>
   )
 }
