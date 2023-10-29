@@ -7,6 +7,7 @@ import Menu from './Menu'
 import { authContext } from 'context/AuthContext'
 import {CiLight, CiDark} from 'react-icons/ci'
 import { ThemeContext } from 'context/ThemeContext'
+import DropdownMenu from './DropdownMenu'
 
 const navLinks = [
     {
@@ -29,6 +30,7 @@ const navLinks = [
 
 const Header = () => {
     const [open, setOpen] = useState(false)
+    const [openMenu, setOpenMenu] = useState(false)
     const {user, token, role, dispatch} = useContext(authContext)
     const {theme, themeToggle} = useContext(ThemeContext)
         
@@ -38,7 +40,7 @@ const Header = () => {
     })}
     
   return (
-    <div className="header relative flex items-center">
+    <div className="header leading-[100%] relative flex items-center">
         <div className="container">
             <div className="flex justify-between items-center">
 
@@ -62,13 +64,14 @@ const Header = () => {
             <div className="flex items-center justify-between gap-4">                
                    { user && token ? 
                    <>
-                   <Link to='/' className="mr-3">
+                   <div className="mr-3"
+                   onClick={()=>setOpenMenu(!openMenu)}
+                   >
                        <figure className="w-11 h-11 cursor-pointer">
-                       <img src={user.photo} alt="" className="w-full  outline-green-600 rounded-full" />
+                       <img src={user.photo} alt="" className={`w-full h-full outline-green-600 ${openMenu && "outline"} rounded-full`} />
                        </figure>
-                   </Link>
-                   <p>{role}</p>
-                   
+                      
+                   </div>                                     
                    <button
                    onClick={()=> signUp()}
                    style={{color: "var(--my-color)", background: "var(--primary-color)"}}
@@ -93,11 +96,14 @@ const Header = () => {
 
                 </button>           
                     <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
-                    {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}                
+                    {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}             
+                      
             </div>
         </div>
       </div>
-
+      { openMenu &&
+          <DropdownMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+       } 
             </div>
   )
 }

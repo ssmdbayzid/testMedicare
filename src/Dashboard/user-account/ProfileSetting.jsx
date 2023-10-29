@@ -17,7 +17,7 @@ const initialFormData  =
     bloodGroup: "",
   }
 
-const ProfileSetting = () => {
+const ProfileSetting = ({tab, setTab}) => {
   const [updateUser, {isLoading}] = useUpdateUserMutation()
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState(initialFormData)
@@ -34,9 +34,7 @@ const ProfileSetting = () => {
         gender: user.gender,
         bloodGroup: user.bloodGroup ? user.bloodGroup :"",        
       }
-      setFormData(existUserData)      
-
-      
+      setFormData(existUserData)            
     }
   },[])
   const navigate = useNavigate()
@@ -55,16 +53,14 @@ const ProfileSetting = () => {
     
   }
 
-  
-  console.log(user)
 
   const submitForm = async event => {
     // setLoading(true)
-    event.preventDefault()            
+    event.preventDefault()   
+    console.log(formData)
+      /*
         const result = await updateUser(formData)
-
-        if(result.data){
-          
+        if(result.data){          
           toast.success("Create Account Success")          
           setPreviewUrl("")
           setFormData(initialFormData)
@@ -75,13 +71,14 @@ const ProfileSetting = () => {
          toast.error(result.error.data.message)  
         //  setLoading(false)
         }
+        */
     }
 
-    console.log(formData)
+  
   return (
     <div>
       <h2 className="text-2xl mt-8 font-bold">Profile Setting</h2>
-      <form action="">
+      <form onSubmit={submitForm}>
         <div className="mb-5">
       <input
             type="text"

@@ -69,7 +69,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/users",
-                element: <PrivateRoute allowedRoles={["doctor"]}>
+                element: <PrivateRoute allowedRoles={["patient"]}>
                         <UserList />
                         </PrivateRoute>,
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)

@@ -78,7 +78,7 @@ const MyAccount = () => {
             </button>
             {
               tab === "booking" ? <MyBooking /> 
-              : <ProfileSetting />
+              : <ProfileSetting tab={tab} setTab={setTab} />
             }
           </div>
         </div>
