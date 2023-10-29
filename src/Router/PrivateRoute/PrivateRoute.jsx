@@ -8,11 +8,12 @@ import { toast } from 'react-toastify';
 const PrivateRoute = ({children, allowedRoles}) => {
   const {token, role} = useContext(authContext)
 
-  if(role !== allowedRoles){
+  /*
+  if(role != allowedRoles.includes(role)){
     toast.error("Access invalid")    
     return <Navigate to="/home" />
   } 
-
+*/
   const isAllowed = allowedRoles.includes(role);
   const accessableRoute = token && isAllowed ? children 
   :  <Navigate to="/login" replace={true} />

@@ -59,12 +59,21 @@ const MyAccount = () => {
           <div>
             <button
             onClick={()=>setTab("booking")}
-            className={` ${tab === "booking" && 'bg-primaryColor text-white'} p-2 px-5 mr-5 rounded-md text-headingColor font-semibold text-lg leading-7 border border-solid border-primaryColor  cursor-pointer`}>
+            className="p-2 px-5 mr-5 rounded-md text-headingColor font-semibold text-lg leading-7 border border-solid border-primaryColor  cursor-pointer"
+            
+            style={{              
+              background: tab === "booking" && "var(--primary-color)",
+              color: tab === "booking" && "var(--my-color)"              
+              }}>
               My Booking
             </button>
             <button
             onClick={()=>setTab("setting")}
-            className={` ${tab === "setting" && 'bg-primaryColor text-white'} p-2 px-5 mr-5 rounded-md text-headingColor font-semibold text-lg leading-7 border border-solid border-primaryColor  cursor-pointer`}>
+            className={` ${tab === "setting" && 'bg-primaryColor text-white'} p-2 px-5 mr-5 rounded-md text-headingColor font-semibold text-lg leading-7 border border-solid border-primaryColor  cursor-pointer`}
+            style={{
+              background: tab === "setting" && "var(--primary-color)",
+              color: tab === "setting" && "var(--my-color)"
+            }}>
               Profile Setting
             </button>
             {

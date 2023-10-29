@@ -3,6 +3,7 @@ import { BASE_URL } from 'utils/config';
 
 // Authirization Token
 const getToken = () => {
+    console.log(localStorage.getItem('token'))
     return localStorage.getItem('token')
 };
 
@@ -13,7 +14,7 @@ export const api = createApi({
     baseQuery: fetchBaseQuery({        
         baseUrl: BASE_URL,
         headers: {
-            Authorization: `Bearer ${getToken()}`
+            Authorization: `Bearer ${localStorage.getItem('token')}`
         }
     }),
     reducerPath: "medicareApi",

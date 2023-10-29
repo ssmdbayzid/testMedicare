@@ -1,6 +1,5 @@
 import { setAuthToken } from 'api/auth'
-import { authContext, useAuthContext } from 'context/AuthContext'
-import { AuthContext} from 'context/AuthProvider'
+import { authContext } from 'context/AuthContext'
 import React, { useContext, useState } from 'react'
 import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
 import { toast } from 'react-toastify'
@@ -18,7 +17,7 @@ const Login = () => {
   })
   const [loading, setLoading] = useState(false)
   const [loginUser] = useLoginUserMutation()
-  const  {login} = useContext(AuthContext)
+  
 
   const  { dispatch } = useContext(authContext)
 
@@ -43,6 +42,7 @@ const Login = () => {
         if(result.data){
 
           toast.success("Login Success")
+          console.log(result)
           
           dispatch({
             type: "LOGIN_SUCCESSFULL",
