@@ -46,7 +46,7 @@ const MyAccount = () => {
             <div className="mt-12 md:mt-24">
               <button
               onClick={()=>signOut()}
-              className="w-full bg-primaryColor p-3 text-lg leading-7 rounded-md text-white mb-3">
+              className="w-full bg-[var(--primary-color)] p-3 text-lg leading-7 rounded-md text-white mb-3">
               Logout
               </button>
               <button className="w-full bg-[#181A1E] p-3 text-lg leading-7 rounded-md text-white">

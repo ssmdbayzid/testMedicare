@@ -26,8 +26,8 @@ const initialFormData  =
 
 
 const Signup = () => {
-  const [ createUser, {isLoading}] = useCreateUserMutation()
-//  const [loading, setLoading] = useState(false)
+  const [ createUser] = useCreateUserMutation()
+ const [loading, setLoading] = useState(false)
   
   const [previewUrl, setPreviewUrl] = useState("")
   
@@ -56,7 +56,7 @@ const Signup = () => {
   
 
   const submitForm = async event => {
-    // setLoading(true)
+    setLoading(true)
     event.preventDefault()            
         const result = await createUser(formData)
 
@@ -66,7 +66,7 @@ const Signup = () => {
           setPreviewUrl("")
           setFormData(initialFormData)
           navigate("/login")
-          // setLoading(false)
+          setLoading(false)
         }
         if(result.error){
          toast.error(result.error.data.message)  
@@ -182,7 +182,7 @@ const Signup = () => {
           </div>
             <button            
             className="btn w-full px-5 py-2 mt-2 rounded-md">
-              { !isLoading ? "Submit" :  <HashLoader size={30} color={"#ffffff"} /> }
+              { loading && <HashLoader size={30} color={"#ffffff"} />} Submit
             </button>          
           </form>   
             <p className="mt-3 text-center">Already have an account? <a href="/login" className="text-primaryColor font-semibold">Log In</a></p>

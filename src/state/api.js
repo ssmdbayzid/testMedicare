@@ -37,6 +37,7 @@ export const api = createApi({
                 method: 'POST',
                 body: user,                                
             }),
+            providesTags: ["User"]
         }),        
         // Doctors CRUD Operation
         getDoctors: builder.query({
@@ -48,10 +49,11 @@ export const api = createApi({
         }),
         updateDoctor: builder.mutation({
             query: ({id, updateDoctor})=> ({
-                url: `doctors/:${id}`,
+                url: `doctors/${id}`,
                 method: 'PUT',
                 body: updateDoctor,
             }),
+            
             invalidatesTags: ["Doctors"]
         }),
         deleteDoctor: builder.mutation({
@@ -65,17 +67,19 @@ export const api = createApi({
         // Users CRUD Operation
         getUsers: builder.query({
             query:  ()=> 'users',
+            providesTags: ["User"],
         }),
         getSingleUser: builder.query({
             query: (id)=> `users/${id}`,
             providesTags: ["User"]
         }),
         updateUser: builder.mutation({
-            query: ({id, updateUser})=> ({
-                url: `users/:${id}`,
+            query: ({id, ...rest})=> ({
+                url: `users/${id}`,
                 method: 'PUT',
-                body: updateUser,
-            })
+                body: rest,
+            }),
+            invalidatesTags: ["User"]
         }),
         deleteUser: builder.mutation({
             query: (id)=> ({
