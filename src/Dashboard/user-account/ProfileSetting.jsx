@@ -15,7 +15,7 @@ const initialFormData  =
     password: "",
     photo: "",
     gender: "",    
-    bloodGroup: "",
+    bloodType: "",
   }
 
 const ProfileSetting = ({tab, setTab}) => {
@@ -24,7 +24,7 @@ const ProfileSetting = ({tab, setTab}) => {
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState(initialFormData)
   
-  const {user} = useContext(authContext)
+  const {user, dispatch} = useContext(authContext)
   
 
   const userId = user._id;
@@ -36,7 +36,7 @@ const ProfileSetting = ({tab, setTab}) => {
         name: user.name,
         email: user.email,                
         gender: user.gender,
-        bloodGroup: user.bloodGroup ||"",        
+        bloodType: user.bloodType || "",        
       })
     }
   },[])
@@ -64,10 +64,13 @@ const ProfileSetting = ({tab, setTab}) => {
         const result = await updateUser(updatedData)
         if(result.data){          
           toast.success("User Updated Success")          
-          setPreviewUrl("")
-          console.log(result.data)
-          // setFormData(initialFormData)
-          // navigate("/users/profile/me")
+          setPreviewUrl("")                
+          dispatch({
+            type: "UPDATE_USER",
+            payload: {user: result.data.updateUser}
+          })          
+          setFormData(initialFormData)
+          navigate("/users/profile/me")
          setLoading(false)          
         }
         if(result.error){
@@ -87,7 +90,7 @@ const ProfileSetting = ({tab, setTab}) => {
             onChange={handleInputChange}
             value={formData.name}
             placeholder={formData.name}
-            className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
+          className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
         </div>
         <div className="mb-5">
       <input
@@ -106,24 +109,36 @@ const ProfileSetting = ({tab, setTab}) => {
             placeholder={formData.password ? formData.password : "Password"}            
             className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
         </div>
-        <div className="mb-5">
-      <input
-            type="text"
-            name="bloodGroup" required
-            onChange={handleInputChange}
-            value={formData.bloodGroup && formData.bloodGroup}
-            placeholder={formData.bloodGroup ? formData.bloodGroup : "Blood Group"}
-            className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
+        
+        <div className="flex gap-12 w-full lg:w-3/4">
+        <div className="flex mb-10">
+          <label htmlFor="bloodType">Blood Group</label>
+          <select 
+          name="bloodType"
+          id="bloodType"
+          onChange={handleInputChange}
+          value={formData.bloodType}          
+          className=" ml-2 text-center  text-[var(--my-color)] bg-[var(--primary-color)]"          >
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>      
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+          </select>
         </div>
         <div className="flex mb-10">
         <label htmlFor="gender" className="mr-5">Gender</label>
         {/* background: "var(--primary-color)", */}
         <select         
-        name="gender" id="gender" value={formData.gender} onChange={handleInputChange} className="text-white w-3/12 text-center text-[var(--my-color)] bg-[var(--primary-color)]">
+        name="gender" id="gender" value={formData.gender} onChange={handleInputChange} className="w-3/4 text-center text-[var(--my-color)] bg-[var(--primary-color)]">
           <option value="male" className="" >Male</option>
-          <option value="female" selected className="">Female</option>
+          <option value="female" className="">Female</option>
           <option value="other" className="">Other</option>
         </select>
+        </div>
         </div>
         
         {/* // image uploadImage */}

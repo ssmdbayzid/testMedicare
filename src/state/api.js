@@ -26,9 +26,9 @@ export const api = createApi({
             query: (user)=> ({
                 url: `auth/register`,
                 method: 'POST',
-                body: user,
-                                
+                body: user,                                
             }),
+            providesTags: ["User"]
         }),
         // Login User
         loginUser: builder.mutation({

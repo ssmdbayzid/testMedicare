@@ -10,12 +10,13 @@
   --iris-color: #01B5D8;
   --heading-color: #181A1E;
   --text-color: #4E545F;
+
 }
 
 [data-theme='dark'] {
   --my-color : #121212;
-  --primary-color: #D9F99D;
-  --secondary-color: #FDE68A,
+  --primary-color: #0067FF;
+  --secondary-color: #FDE68A;
   --purple-color : #4B5563;
   --iris-color: #F3F4F6;
   --heading-color: #fff;

@@ -38,7 +38,7 @@ const MyAccount = () => {
             <p className="text-textColor text-[16px] leading-6 font-medium">
               Blood Type: 
               <span className="ml-2 text-red-600 text-[22px] leading-8 font-bold">
-                O-
+                {user.bloodType ? user.bloodType : "(-)"}
               </span>
             </p>
             </div>

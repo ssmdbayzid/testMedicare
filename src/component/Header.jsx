@@ -81,7 +81,7 @@ const Header = () => {
                  
                </>                   
                    : <> <Link to="/login" >
-                        <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-textColor transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
+                        <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-[#121212] transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
                     </Link>
                     
                     <Link  to="/signup">
@@ -91,7 +91,7 @@ const Header = () => {
                 </Link>
                 </>}
                 <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
-                   {theme === "dark" ? <CiLight  className="text-[30px]"/>
+                   {theme === "dark" ? <CiLight  className="text-[30px]"/>                                                                                                                                          
                     : <CiDark className="text-[30px]"/>}
 
                 </button>           
