@@ -1,40 +1,59 @@
-import React from 'react'
-import {BsTrash} from 'react-icons/bs'
+import { BsTrash } from "react-icons/bs"
 
-const Qualification = ({setOpen}) => {
-  return (
-    <div>
-      <p className="my-3">Qualification</p>
-        
-        <div className="flex justify-between items-center gap-10">
-          <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="startingDate">Starting Date</label>
-          <input type="date" name="" id="" className=" border px-5 py-3" />
-          </div>
-          <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="startingDate">Ending Date</label>
-          <input type="date" name="" id="" className=" border px-5 py-3" />
-          </div>
-        </div>
-        <div className="flex items-center justify-between gap-10 mt-3">
-        <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="startingDate">Starting Date</label>
-          <input type="date" name="" id="" className=" border px-5 py-3" />
-          </div>
-          <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="startingDate">Ending Date</label>
-          <input type="date" name="" id="" className=" border px-5 py-3" />
-          </div>
-        </div>
-        
-        <div
-        onClick={()=>setOpen(false)}
-        className="w-8 rounded-full h-8 bg-red-600 text-white flex items-center justify-center cursor-pointer mt-5">
-        <BsTrash className="text-lg"/ >
-        </div>
-
-    </div>
-  )
+const Qualification = ({qualification, setQualification}) => {
+  
+  const remove = (id) =>{
+    const updateQuakification = qualification.filter((item)=> item.id !== id)
+    setQualification(updateQuakification)
+  }
+  return (<div className="relative overflow-x-auto my-10">
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                   Degree
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    University
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Start Date
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    End Date
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {qualification.map((data, index)=> <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {data.degree}
+                </th>
+                <td className="px-6 py-4">
+                    {data.university}
+                </td>
+                <td className="px-6 py-4">
+                    {data.startDate}
+                </td>
+                <td className="px-6 py-4">
+                    {data.endDate}
+                </td>
+                <td className="px-6 py-4">
+                <div
+                onClick={()=>remove(data.id)}
+                title="Remove Qualification"
+                className="w-8 rounded-full h-8 bg-red-200 hover:bg-red-500 text-white flex items-center justify-center cursor-pointer">
+                <BsTrash className="text-lg"/ >
+                </div>
+                </td>
+            </tr>)}
+           
+        </tbody>
+    </table>
+</div>)
 }
 
 export default Qualification
