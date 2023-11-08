@@ -17,6 +17,7 @@ const Profile = () => {
   }])
   const [data, setData] = useState(initialState)
   const [open, setOpen] = useState(false);
+  const [openExperience, setOpenExperience] = useState(false);
 
   const addQualification = () => {
     const newQualification = {
@@ -104,7 +105,7 @@ const Profile = () => {
         <Qualification  qualification={qualification} setQualification={setQualification}/>
         } 
         </div>
-        <div>
+        
         
         {open && 
         <div>
@@ -139,21 +140,85 @@ const Profile = () => {
           type="text" placeholder="University Name" name="university" id="university" className=" border px-5 py-3" required />
           </div>
         </div>
-        <div className="flex items-center gap-10">
+
+        <div className="flex items-center mt-8 gap-5">
         <div  
-        onClick={()=>addQualification()}      
-        className="btn">Save</div>
+        onClick={()=>addQualification()}  
+        style={{marginTop: "0px"}}    
+        className="btn ">Save</div>
+   
+   
         <div
         onClick={()=>setOpen(false)}
-        className="w-8 rounded-full h-8 bg-red-600 text-white flex items-center justify-center cursor-pointer">
-        <BsTrash className="text-lg"/ >
+        className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
+        <BsTrash className="text-2xl"/ >
         </div>
-        </div>
+        </div>        
     </div>
         }
         <p
         onClick={()=>setOpen(true)}
-         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-28 text-center mt-3 cursor-pointer">Qualification</p>
+         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Qualification</p>
+        {/* ====== Experience======== */}
+        <div>
+        {(qualification && Object.values(qualification[0]).every(value=> value !== "")) && 
+        <Qualification  qualification={qualification} setQualification={setQualification}/>
+        } 
+        </div>
+        <div>
+        
+        {openExperience && 
+        <div>
+      <p className="my-3">Experience</p>
+        {/* ======= Starting date ===== */}
+        <div className="flex justify-between items-center gap-10">
+          <div className="flex flex-col w-full">
+          <label className="mb-2" htmlFor="startDate">Starting Date</label>
+          <input
+          onChange={handleOnChange}
+          type="date" name="startDate" id="startDate" className=" border px-5 py-3" required/>
+          </div>
+          <div className="flex flex-col w-full">
+          <label className="mb-2" htmlFor="endDate">Ending Date</label>
+          <input
+          onChange={handleOnChange}          
+          type="date" name="endDate" id="endDate" className=" border px-5 py-3" required/>
+          </div>
+        </div>
+        {/* ========== Degree & University Name == */}
+        <div className="flex items-center justify-between gap-10 mt-3">
+        <div className="flex flex-col w-full">
+          <label className="mb-2" htmlFor="degree">Degree</label>
+          <input 
+          onChange={handleOnChange}                    
+          type="text" placeholder="Degree" name="degree" id="degree" className=" border px-5 py-3" required />
+          </div>
+          <div className="flex flex-col w-full">
+          <label className="mb-2" htmlFor="university">University</label>
+          <input 
+          onChange={handleOnChange}                              
+          type="text" placeholder="University Name" name="university" id="university" className=" border px-5 py-3" required />
+          </div>
+        </div>
+
+        <div className="flex items-center mt-8 gap-5">
+        <div  
+        onClick={()=>addQualification()}  
+        style={{marginTop: "0px"}}    
+        className="btn ">Save</div>
+   
+   
+        <div
+        onClick={()=>setOpenExperience(false)}
+        className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
+        <BsTrash className="text-2xl"/ >
+        </div>
+        </div>        
+    </div>
+        }
+        <p
+        onClick={()=>setOpenExperience(true)}
+         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>
         </div>
 
       </form>

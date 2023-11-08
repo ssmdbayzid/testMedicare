@@ -24,7 +24,8 @@ const Doctors = () => {
           className="py-4 pl-4 pr-2 bg-transparent w-full  focus:outline-none cursor-pointer placeholder:text-textColor"
           placeholder="Search Doctor"
           name="" id="" />
-          <button className="btn mt-0 rounded-none rounded-r-md">
+          <button 
+          className="py-4 px-8 bg-[var(--primary-color)] text-[var(--my-color)] mt-0 rounded-none rounded-r-md">
             Search
           </button>
 
