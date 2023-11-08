@@ -57,20 +57,17 @@ const ProfileSetting = ({tab, setTab}) => {
     event.preventDefault()   
     setLoading(true)      
 
-    const updatedData = {...formData, id:user._id, photo: previewUrl}
-    
-    console.log(updatedData)
-    const id = user._id;
+    const updatedData = {...formData, id:user._id, photo: previewUrl}    
         const result = await updateUser(updatedData)
         if(result.data){          
-          toast.success("User Updated Success")          
+          toast.success("User Updated Success")   
+          navigate("/home")
           setPreviewUrl("")                
           dispatch({
             type: "UPDATE_USER",
             payload: {user: result.data.updateUser}
           })          
           setFormData(initialFormData)
-          navigate("/users/profile/me")
          setLoading(false)          
         }
         if(result.error){

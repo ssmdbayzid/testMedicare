@@ -11,7 +11,7 @@ HeroSection = () => {
             <div className="flex flex-col md:flex-row gap-16 items-center">
                 {/* ================== Hero Section ================== */}
                 <div className="lg:w-[570px]">
-                    <h1 className="text-[44px] lg:text-[65px] font-[800] ">
+                    <h1 className="text-[var(--heading-color)] text-[44px] lg:text-[65px] font-[800] ">
                     We help patients  
                     live a healthy, 
                     longer life

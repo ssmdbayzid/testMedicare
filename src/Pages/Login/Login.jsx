@@ -59,7 +59,7 @@ const Login = () => {
         if(result.error){
          toast.error(result.error.data.message)  
          setLoading(false)
-         console.log("this is from form data",result.error.data.message)
+         console.log("this is from form data", result.error.data.message)
 
         }
         

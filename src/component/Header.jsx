@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import logo from '../assets/images/logo.png'
+// import logo from '../assets/images/logo.png'
+import logo from '../assets/images/pluslogo.png'
 import {  Link, NavLink } from 'react-router-dom'
 import avatar from '../assets/images/avatar-icon.png'
 import {BiMenu} from 'react-icons/bi'
@@ -45,8 +46,9 @@ const Header = () => {
             <div className="flex justify-between items-center">
 
                 {/* ============= Logo ========== */}
-                <a href="/home">
-                <img src={logo} alt="Logo" className="cursor-pointer"/>
+                <a href="/home" className="flex text-3xl items-center text-[var(--heading-color)] gap-3 font-extrabold">
+                <img src={logo} alt="Logo" className="cursor-pointer w-8"/>
+                <p>Mediplus</p>
                 </a>
 
                 {/* ================= Navigation ============== */}

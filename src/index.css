@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 [data-theme='light'] {
+ --body-bg: #ffffff; 
+ --bg-color: #ffffff; 
+ --menu-bg: #ffffff;
   --my-color : #ffffff;
   --primary-color: #0067FF;
   --secondary-color: #FFB60D;
@@ -14,6 +17,9 @@
 }
 
 [data-theme='dark'] {
+ --body-bg: #121212; 
+ --bg-color: #1e293b;
+ --menu-bg: #374151;
   --my-color : #121212;
   --primary-color: #0067FF;
   --secondary-color: #FDE68A;
@@ -40,7 +46,7 @@
   font-weight: 600;
   border-radius: 9999px;
   background: var(--primary-color);
-  color: var(--my-color);
+  color: white;
 }
 /*
 @layer base {
@@ -77,6 +83,12 @@
 }
 */
 
+ 
+  .numberInput::-webkit-outer-spin-button,
+  .numberInput::-webkit-inner-spin-button {
+    -webkit-apprearance: none;
+    margin: 0;
+  }
 
 body {
   background: var(--my-color);
@@ -113,6 +125,8 @@ body {
   height: 100px;
   line-height: 100px;
   background: url("../src/assets/images/header-bg.png") cover no-repeat center;
+  background-color: var(--menu-bg);
+  border-bottom: .2px solid #e5e7eb;
 }
 
 .hero_section {
