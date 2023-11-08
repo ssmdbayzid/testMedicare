@@ -70,7 +70,7 @@ const Profile = () => {
         </div>
         {/* ====== Qualification======== */}
         <div>
-        <label className="mb-4" htmlFor="ticket-price">Qualification</label>
+        
         {open &&  < Qualification setOpen={setOpen} />}
         <p
         onClick={()=>setOpen(true)}
