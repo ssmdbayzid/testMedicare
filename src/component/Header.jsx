@@ -9,6 +9,7 @@ import { authContext } from 'context/AuthContext'
 import {CiLight, CiDark} from 'react-icons/ci'
 import { ThemeContext } from 'context/ThemeContext'
 import DropdownMenu from './DropdownMenu'
+// import bg from '../assets/images/header-bg.png'
 
 const navLinks = [
     {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import {BsTrash} from 'react-icons/bs'
 import Qualification from './Qualification'
+import TimePicker from 'react-time-picker'
 
 const initialState = {
   startDate: "",
@@ -18,6 +19,8 @@ const Profile = () => {
   const [data, setData] = useState(initialState)
   const [open, setOpen] = useState(false);
   const [openExperience, setOpenExperience] = useState(false);
+  const [value, setValue] = useState("10:00")
+
 
   const addQualification = () => {
     const newQualification = {
@@ -220,6 +223,41 @@ const Profile = () => {
         onClick={()=>setOpenExperience(true)}
          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>
         </div>
+
+
+         {/*===========Add slot  section===========*/}
+         <div className="flex items-center justify-between gap-8">
+         {/* // Date  */}
+         <div className="flex flex-col w-full">
+         <label className="mb-4" htmlFor="date">Date</label>
+         <select name="" id="date" className="w-full p-3 border">
+           <option value="select">Select</option>
+           <option value="saturday">Saturday</option>
+           <option value="sunday">Sunday</option>
+           <option value="monday">Monday</option>
+           <option value="tuesday">Tuesday</option>
+           <option value="wednesday">Wendnesday</option>
+           <option value="thursday">Thursday</option>
+           <option value="friday">Friday</option>
+           
+         </select>
+         </div>
+         {/* // Specialization  */}
+         <div className="flex flex-col w-full">
+         <label className="mb-4" htmlFor="specialization">Starting Time</label>    
+         <input type="time" 
+         onChange={(e)=>setValue(e.target.value)}
+         value={value} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         </div>
+         {/* // Ticket Price  */}
+         <div className="flex flex-col w-full">
+         <label className="mb-4" htmlFor="ticket-price">Ending Time</label>
+         <input type="time" value={value} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         </div>          
+       </div>
+         <p
+         onClick={()=>setOpenExperience(true)}
+          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p>
 
       </form>
       
