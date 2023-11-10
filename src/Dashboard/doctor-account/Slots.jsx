@@ -1,26 +1,23 @@
 import { BsTrash } from "react-icons/bs"
 
-const Qualification = ({qualification, setQualification}) => {
+const Slots = ({slots, setSlots}) => {
   
   const remove = (id) =>{
-    const updateQuakification = qualification.filter((item)=> item.id !== id)
-    setQualification(updateQuakification)
+    const removeSlot = slots.filter((item)=> item.id !== id)
+    setSlots(removeSlot)
   }
   return (<div className="relative overflow-x-auto my-10">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
-                   Degree
+                   Day
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    University
+                    Starting Time
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Start Date
-                </th>
-                <th scope="col" className="px-6 py-3">
-                    End Date
+                    Ending  Time
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Delete
@@ -28,19 +25,17 @@ const Qualification = ({qualification, setQualification}) => {
             </tr>
         </thead>
         <tbody>
-            {qualification.map((data, index)=><tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            {slots.map((data, index)=><tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {data.degree}
+                    {data.day}
                 </th>
                 <td className="px-6 py-4">
-                    {data.university}
+                    {data.startingTime}
                 </td>
                 <td className="px-6 py-4">
-                    {data.startDate}
+                    {data.endingTime}
                 </td>
-                <td className="px-6 py-4">
-                    {data.endDate}
-                </td>
+
                 <td className="px-6 py-4">
                 <div
                 onClick={()=>remove(data.id)}
@@ -56,7 +51,7 @@ const Qualification = ({qualification, setQualification}) => {
 </div>)
 }
 
-export default Qualification
+export default Slots
 
 /* 
             */

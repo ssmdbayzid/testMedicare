@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {BsTrash} from 'react-icons/bs'
 import Qualification from './Qualification'
 import TimePicker from 'react-time-picker'
+import Slots from './Slots'
 
 const initialState = {
   startDate: "",
@@ -10,66 +11,116 @@ const initialState = {
   degree: "",
   university: "",
 }
+const initialExp = {
+  startDate: "",
+  endDate: "",
+  position: "",
+  hospital: "",
+}
 
+const initialSlot = {
+  day:"", startingTime: "", endingTime: "",
+}
 
 const Profile = () => {
+  const [data, setData] = useState(initialState)
+  const [expData, setExpData] = useState(initialExp)
   const [qualification, setQualification] = useState([{
     startDate : "", endDate: "", degree: "", university: "",
   }])
-  const [slots, setSlots] = useState([{
-    day:"", startTime: "", endTime: "",
+  const [experiences, setExperiences] = useState([{
+    startDate : "", endDate: "", position: "", hospital: "",
   }])
-  const [data, setData] = useState(initialState)
+  const [slots, setSlots] = useState([initialSlot])
+  
   const [open, setOpen] = useState(false);
   const [openExperience, setOpenExperience] = useState(false);
   const [openSlot, setOpenSlot] = useState(false);
-  const [startingTime, setStartingTime] = useState("00:00")
-  const [endingTime, setEndingTime] = useState("00:00")
-  const [day, setDay] = useState("")
+
+  const [startingTime, setStartingTime] = useState("")
+  const [endingTime, setEndingTime] = useState("")
+  const [day, setDay] = useState("00:00")
 
 
   const addQualification = () => {
-    const newQualification = {
-      startDate: data.startDate,
-      endDate: data.endDate,
-      degree: data.degree,
-      university: data.university,
+    if(data.startDate && data.endDate && data.degree && data.university){
+      const newQualification = {
+        startDate: data.startDate,
+        endDate: data.endDate,
+        degree: data.degree,
+        university: data.university,
+      }
+      if(qualification.length === 1 && Object.values(qualification[0]).every(value=> value === "")){
+      setQualification([{...newQualification, id:qualification.length}])
+      setOpen(false)
+      }else{
+        setQualification([...qualification, {...newQualification, id:qualification.length + 1}])
+      setOpen(false)
+      }  
     }
-    if(qualification.length === 1 && Object.values(qualification[0]).every(value=> value === "")){
-    setQualification([{...newQualification, id:qualification.length}])
-    setOpen(false)
-    }else{
-      setQualification([...qualification, {...newQualification, id:qualification.length + 1}])
-    setOpen(false)
-    }    
+    else{
+     return alert("Please fillup the form")
+    }     
+  }
+  const addExperience = () => {
+    if(expData.startDate && expData.endDate && expData.position && expData.hospital){
+      const newExperiences = {
+        startDate: data.startDate,
+        endDate: data.endDate,
+        degree: data.position,
+        university: data.hospital,
+      }
+      if(experiences.length === 1 && Object.values(experiences[0]).every(value=> value === "")){
+      setExperiences([{...newExperiences, id:experiences.length}])
+      setOpenExperience(false)
+      }else{
+        setExperiences([...experiences, {...newExperiences, id:experiences.length + 1}])
+        setOpenExperience(false)
+      }  
+    }
+    else{
+     return alert("Please fillup the form")
+    }     
   }
   const handleOnChange = e => {
     setData({...data, [e.target.name]: e.target.value})
   }
+  const handleExpOnChange = e => {
+    setExpData({...expData, [e.target.name]: e.target.value})
+  }
   
     const addSlot = () =>{
-      const newSlot = {
-        day,
-        startTime: startingTime,
-        endTime: endingTime,
-      }
-      setSlots(newSlot)
-      if(slots.length === 1 && Object.values(slots[0]).every(value=> value ="")){
-        setSlots(newSlot)
-        setDay("")
-        setStartingTime("00:00")
-        setEndingTime("00:00")
+      if(day && startingTime && endingTime){
+        const newSlot = {
+          day,
+          startingTime,
+          endingTime,
+        }      
+        if(slots.length === 1 && Object.values(slots[0]).every(value=> value ==="")){
+          setSlots([{...newSlot, id: slots.length}])
+          setDay("")
+          setStartingTime("")
+          setEndingTime("")
+          setOpenSlot(false)
+        }
+        else{
+          setSlots([...slots, {...newSlot, id:slots.length + 1}])
+          setDay("")
+          setStartingTime("")
+          setEndingTime("")
+          setOpenSlot(false)
+        }
       }
       else{
-        setSlots([...slots, newSlot])
-        setDay("")
-        setStartingTime("00:00")
-        setEndingTime("00:00")
-      }
-      
+     return alert("Please fillup the form")
+      }            
     }
   
-  console.log("slots", slots)  
+  // console.log("slots", slots)  
+  // console.log("Qualofication", qualification)  
+  console.log("Experience", experiences)  
+  console.log("Experience Onchange", expData)  
+
 
   return (
     <div>
@@ -131,12 +182,11 @@ const Profile = () => {
         </div>
         {/* ====== Qualification======== */}
         <div>
-        {(qualification && Object.values(qualification[0]).every(value=> value !== "")) && 
+        {(Object.values(qualification[0]).every(value=> value !== "")) && 
         <Qualification  qualification={qualification} setQualification={setQualification}/>
         } 
         </div>
-        
-        
+                
         {open && 
         <div>
       <p className="my-3">Qualification</p>
@@ -190,11 +240,7 @@ const Profile = () => {
         onClick={()=>setOpen(true)}
          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Qualification</p>
         {/* ====== Experience======== */}
-        <div>
-        {(qualification && Object.values(qualification[0]).every(value=> value !== "")) && 
-        <Qualification  qualification={qualification} setQualification={setQualification}/>
-        } 
-        </div>
+
         <div>
         
         {openExperience && 
@@ -205,35 +251,35 @@ const Profile = () => {
           <div className="flex flex-col w-full">
           <label className="mb-2" htmlFor="startDate">Starting Date</label>
           <input
-          onChange={handleOnChange}
+          onChange={handleExpOnChange}
           type="date" name="startDate" id="startDate" className=" border px-5 py-3" required/>
           </div>
           <div className="flex flex-col w-full">
           <label className="mb-2" htmlFor="endDate">Ending Date</label>
           <input
-          onChange={handleOnChange}          
+          onChange={handleExpOnChange}          
           type="date" name="endDate" id="endDate" className=" border px-5 py-3" required/>
           </div>
         </div>
         {/* ========== Degree & University Name == */}
         <div className="flex items-center justify-between gap-10 mt-3">
         <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="degree">Degree</label>
+          <label className="mb-2" htmlFor="position">Position</label>
           <input 
-          onChange={handleOnChange}                    
-          type="text" placeholder="Degree" name="degree" id="degree" className=" border px-5 py-3" required />
+          onChange={handleExpOnChange}                    
+          type="text" placeholder="position" name="position" id="position" className=" border px-5 py-3" required />
           </div>
           <div className="flex flex-col w-full">
-          <label className="mb-2" htmlFor="university">University</label>
+          <label className="mb-2" htmlFor="hospital">Hospital</label>
           <input 
-          onChange={handleOnChange}                              
-          type="text" placeholder="University Name" name="university" id="university" className=" border px-5 py-3" required />
+          onChange={handleExpOnChange}                              
+          type="text" placeholder="Hospital Name" name="hospital" id="hospital" className=" border px-5 py-3" required />
           </div>
         </div>
 
         <div className="flex items-center mt-8 gap-5">
         <div  
-        onClick={()=>addQualification()}  
+        onClick={()=>addExperience()}  
         style={{marginTop: "0px"}}    
         className="btn ">Save</div>
       
@@ -250,10 +296,17 @@ const Profile = () => {
          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>
         </div>
 
+         {/*===========Add slot  section===========*/}
+
+        <div>
+        {Object.values(slots[0]).every(value=> value !== "") && 
+        <Slots  slots={slots} setSlots={setSlots}/>
+        } 
+        </div>
+
         {openSlot && <div>
         <p className="my-3">Slots</p>
 
-         {/*===========Add slot  section===========*/}
          <div className="flex items-center justify-between mt-3 gap-8">
          {/* // Day  */}
          <div className="flex flex-col w-full">
@@ -292,7 +345,12 @@ const Profile = () => {
         className="btn ">Save</div>
       
         <div
-        onClick={()=>setOpenSlot(false)}
+        onClick={()=>{
+          setOpenSlot(false)
+          setDay("")
+          setStartingTime("")
+          setEndingTime("")
+        }}
         className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
         <BsTrash className="text-2xl"/ >
         </div>
