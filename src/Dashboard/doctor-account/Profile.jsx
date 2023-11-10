@@ -16,10 +16,16 @@ const Profile = () => {
   const [qualification, setQualification] = useState([{
     startDate : "", endDate: "", degree: "", university: "",
   }])
+  const [slots, setSlots] = useState([{
+    day:"", startTime: "", endTime: "",
+  }])
   const [data, setData] = useState(initialState)
   const [open, setOpen] = useState(false);
   const [openExperience, setOpenExperience] = useState(false);
-  const [value, setValue] = useState("10:00")
+  const [openSlot, setOpenSlot] = useState(false);
+  const [startingTime, setStartingTime] = useState("00:00")
+  const [endingTime, setEndingTime] = useState("00:00")
+  const [day, setDay] = useState("")
 
 
   const addQualification = () => {
@@ -40,9 +46,30 @@ const Profile = () => {
   const handleOnChange = e => {
     setData({...data, [e.target.name]: e.target.value})
   }
-
-  console.log("Qualification", qualification)
-  console.log("onChange", data.startDate)
+  
+    const addSlot = () =>{
+      const newSlot = {
+        day,
+        startTime: startingTime,
+        endTime: endingTime,
+      }
+      setSlots(newSlot)
+      if(slots.length === 1 && Object.values(slots[0]).every(value=> value ="")){
+        setSlots(newSlot)
+        setDay("")
+        setStartingTime("00:00")
+        setEndingTime("00:00")
+      }
+      else{
+        setSlots([...slots, newSlot])
+        setDay("")
+        setStartingTime("00:00")
+        setEndingTime("00:00")
+      }
+      
+    }
+  
+  console.log("slots", slots)  
 
   return (
     <div>
@@ -209,8 +236,7 @@ const Profile = () => {
         onClick={()=>addQualification()}  
         style={{marginTop: "0px"}}    
         className="btn ">Save</div>
-   
-   
+      
         <div
         onClick={()=>setOpenExperience(false)}
         className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
@@ -224,13 +250,15 @@ const Profile = () => {
          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>
         </div>
 
+        {openSlot && <div>
+        <p className="my-3">Slots</p>
 
          {/*===========Add slot  section===========*/}
-         <div className="flex items-center justify-between gap-8">
-         {/* // Date  */}
+         <div className="flex items-center justify-between mt-3 gap-8">
+         {/* // Day  */}
          <div className="flex flex-col w-full">
-         <label className="mb-4" htmlFor="date">Date</label>
-         <select name="" id="date" className="w-full p-3 border">
+         <label className="mb-4" htmlFor="date">Day</label>
+         <select value={day} onChange={(e)=>setDay(e.target.value)} name="" id="date" className="w-full p-3 border">
            <option value="select">Select</option>
            <option value="saturday">Saturday</option>
            <option value="sunday">Sunday</option>
@@ -242,21 +270,36 @@ const Profile = () => {
            
          </select>
          </div>
-         {/* // Specialization  */}
+         
          <div className="flex flex-col w-full">
          <label className="mb-4" htmlFor="specialization">Starting Time</label>    
          <input type="time" 
-         onChange={(e)=>setValue(e.target.value)}
-         value={value} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         onChange={(e)=>setStartingTime(e.target.value)}
+         value={startingTime} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
          </div>
          {/* // Ticket Price  */}
          <div className="flex flex-col w-full">
          <label className="mb-4" htmlFor="ticket-price">Ending Time</label>
-         <input type="time" value={value} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         <input type="time"
+         onChange={(e)=>setEndingTime(e.target.value)}
+         value={endingTime} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
          </div>          
        </div>
+       <div className="flex items-center mt-8 gap-5">
+        <div  
+        onClick={()=>addSlot()}  
+        style={{marginTop: "0px"}}    
+        className="btn ">Save</div>
+      
+        <div
+        onClick={()=>setOpenSlot(false)}
+        className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
+        <BsTrash className="text-2xl"/ >
+        </div>
+        </div>  
+       </div>}
          <p
-         onClick={()=>setOpenExperience(true)}
+         onClick={()=>setOpenSlot(true)}
           className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p>
 
       </form>
