@@ -1,20 +1,22 @@
 import { BsTrash } from "react-icons/bs"
 
-const Experience = ({qualification, setQualification}) => {
+const Experience = ({experiences, setExperiences}) => {
   
   const remove = (id) =>{
-    const updateQuakification = qualification.filter((item)=> item.id !== id)
-    setQualification(updateQuakification)
+    const updateExperiences = experiences.filter((item)=> item.id !== id)
+    setExperiences(updateExperiences)
   }
+
+  console.log(experiences)
   return (<div className="relative overflow-x-auto my-10">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-6 py-3">
-                   Degree
+                   Hospital
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    University
+                    Position
                 </th>
                 <th scope="col" className="px-6 py-3">
                     Start Date
@@ -28,12 +30,12 @@ const Experience = ({qualification, setQualification}) => {
             </tr>
         </thead>
         <tbody>
-            {qualification.map((data, index)=> <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            {experiences.map((data, index)=> <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {data.degree}
+                    {data.hospital}
                 </th>
                 <td className="px-6 py-4">
-                    {data.university}
+                    {data.position}
                 </td>
                 <td className="px-6 py-4">
                     {data.startDate}
@@ -44,7 +46,7 @@ const Experience = ({qualification, setQualification}) => {
                 <td className="px-6 py-4">
                 <div
                 onClick={()=>remove(data.id)}
-                title="Remove Qualification"
+                title="Remove Experience"
                 className="w-8 rounded-full h-8 bg-red-200 hover:bg-red-500 text-white flex items-center justify-center cursor-pointer">
                 <BsTrash className="text-lg"/ >
                 </div>

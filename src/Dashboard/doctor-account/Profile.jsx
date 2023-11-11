@@ -4,6 +4,8 @@ import {BsTrash} from 'react-icons/bs'
 import Qualification from './Qualification'
 import TimePicker from 'react-time-picker'
 import Slots from './Slots'
+import Experience from './Experience'
+import { HashLoader } from 'react-spinners'
 
 const initialState = {
   startDate: "",
@@ -36,6 +38,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [openExperience, setOpenExperience] = useState(false);
   const [openSlot, setOpenSlot] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const [startingTime, setStartingTime] = useState("")
   const [endingTime, setEndingTime] = useState("")
@@ -65,10 +68,10 @@ const Profile = () => {
   const addExperience = () => {
     if(expData.startDate && expData.endDate && expData.position && expData.hospital){
       const newExperiences = {
-        startDate: data.startDate,
-        endDate: data.endDate,
-        degree: data.position,
-        university: data.hospital,
+        startDate: expData.startDate,
+        endDate: expData.endDate,
+        position: expData.position,
+        hospital: expData.hospital,
       }
       if(experiences.length === 1 && Object.values(experiences[0]).every(value=> value === "")){
       setExperiences([{...newExperiences, id:experiences.length}])
@@ -121,12 +124,27 @@ const Profile = () => {
   console.log("Experience", experiences)  
   console.log("Experience Onchange", expData)  
 
-
+ const updateDoctor =(event) =>{
+  event.preventDefault()
+  setLoading(true)
+  const form = event.target;
+  const updateData = {
+    name: form.name.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    bio: form.bio.value,   
+    gender: form.gender.value,
+    specialization: form.specialization.value,     
+    tiketPrice: form.ticketPrice.value,    
+    about: form.about.value, 
+  } 
+  console.log(updateData)
+ }
   return (
     <div>
         <p className="bg-yellow-100 py-1 px-2">To get approval please complete your profile. We'll review manually and approve within 3 days</p>
       <h2 className="text-2xl text-[var(--text-color)] font-bold mt-3">Profile Information</h2>
-      <form action="/" className="my-3">
+      <form onSubmit={updateDoctor} className="my-3">
         <div className="mb-3">
         <label htmlFor="name" 
         className="text-[var(--text-color)]">Name <span className="text-red-500">*</span></label> <br />
@@ -139,25 +157,25 @@ const Profile = () => {
         className="text-[var(--text-color)]">Email <span className="text-red-500">*</span></label> <br />
 
         <input type="email" name="email" id='email'
-        placeholder="Your Email" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
+        placeholder="Your Email" className="w-full border px-2 py-2 text-lg text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label htmlFor="phone" 
         className="text-[var(--text-color)]">Phone <span className="text-red-500">*</span></label> <br />
-        <input type="text" name="phone" id="phone"
-        placeholder="Your Name" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
+        <input type="number" name="phone" id="phone"
+        placeholder="Phone" className="w-full border px-2 py-2 text-lg text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label  htmlFor="bio" 
         className="text-[var(--text-color)] mb-4">Bio <span className="text-red-500">*</span></label> <br />
-        <textarea type="text" name="bio" id="bio" rows={3}
-        placeholder="Your Bio" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
+        <input type="text" name="bio" id="bio"
+        placeholder="Your Bio" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" required/>
         </div>
         <div className="flex items-center justify-between gap-8">
           {/* // Gender  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="gender">Gender</label>
-          <select name="" id="gender" className="w-full p-3 border">
+          <select name="gender" id="gender" className="w-full p-3 border">
             <option value="select">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -167,17 +185,22 @@ const Profile = () => {
           {/* // Specialization  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="specialization">Specialization</label>
-          <select name="" id="specialization" className="w-full p-3 border">
+          <select name="specialization" id="specialization" className="w-full p-3 border">
             <option value="select">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="immunologists">Immunologists</option>
+            <option value="anesthesiologists">Anesthesiologists</option>
+            <option value="cardiologists">Cardiologists</option>
+            <option value="dermatologists">Dermatologists</option>
+            <option value="gastroenterologists">Gastroenterologists</option>
+            <option value="anesthesiologists">Anesthesiologists</option>
+            <option value="hematologists">Hematologists</option>
+            <option value="neurologists">Neurologists</option>
           </select>
           </div>
           {/* // Ticket Price  */}
           <div className="flex flex-col w-full">
-          <label className="mb-4" htmlFor="ticket-price">Ticket Price</label>
-          <input type="number" className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+          <label className="mb-4" htmlFor="ticketPrice">Ticket Price</label>
+          <input type="number" name="ticketPrice" id="ticketPrice" className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
           </div>          
         </div>
         {/* ====== Qualification======== */}
@@ -240,8 +263,12 @@ const Profile = () => {
         onClick={()=>setOpen(true)}
          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Qualification</p>
         {/* ====== Experience======== */}
-
         <div>
+        <div>
+        {(Object.values(experiences[0]).every(value=> value !== "")) && 
+        <Experience  experiences={experiences} setExperiences={setExperiences}/>
+        } 
+        </div>
         
         {openExperience && 
         <div>
@@ -358,8 +385,14 @@ const Profile = () => {
        </div>}
          <p
          onClick={()=>setOpenSlot(true)}
-          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p>
-
+          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p>          
+        <div className="my-5">
+        <label  htmlFor="about" 
+        className="text-[var(--text-color)] mb-4">About <span className="text-red-500">*</span></label> <br />
+        <textarea type="text" name="about" id="about" rows={3}
+        placeholder="About" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
+        </div>
+        <button className="btn bg-[var(--primary-color)]">{loading && <HashLoader color='#0067FF' size={25} />} Update</button>
       </form>
       
     </div>
