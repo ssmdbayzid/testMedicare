@@ -7,6 +7,7 @@ import Slots from './Slots'
 import Experience from './Experience'
 import { HashLoader } from 'react-spinners'
 
+
 const initialState = {
   startDate: "",
   endDate: "",
@@ -123,7 +124,8 @@ const Profile = () => {
   // console.log("Qualofication", qualification)  
   console.log("Experience", experiences)  
   console.log("Experience Onchange", expData)  
-
+    const time = "12:00"
+  
  const updateDoctor =(event) =>{
   event.preventDefault()
   setLoading(true)
@@ -210,7 +212,7 @@ const Profile = () => {
         } 
         </div>
                 
-        {open && 
+        {open ?  
         <div>
       <p className="my-3">Qualification</p>
         {/* ======= Starting date ===== */}
@@ -258,10 +260,11 @@ const Profile = () => {
         </div>
         </div>        
     </div>
-        }
+        : 
         <p
         onClick={()=>setOpen(true)}
-         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Qualification</p>
+         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Qualification</p> }
+
         {/* ====== Experience======== */}
         <div>
         <div>

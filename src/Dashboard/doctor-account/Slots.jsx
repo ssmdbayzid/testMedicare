@@ -1,4 +1,6 @@
+import moment from "moment"
 import { BsTrash } from "react-icons/bs"
+
 
 const Slots = ({slots, setSlots}) => {
   
@@ -6,6 +8,9 @@ const Slots = ({slots, setSlots}) => {
     const removeSlot = slots.filter((item)=> item.id !== id)
     setSlots(removeSlot)
   }
+  const time = "12:00"
+  console.log(moment(time, "HH:mm"))
+  
   return (<div className="relative overflow-x-auto my-10">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -30,10 +35,10 @@ const Slots = ({slots, setSlots}) => {
                     {data.day}
                 </th>
                 <td className="px-6 py-4">
-                    {data.startingTime}
+                    {moment(data.startingTime, "HH:mm").format("hh:mm A")}
                 </td>
                 <td className="px-6 py-4">
-                    {data.endingTime}
+                {moment(data.endingTime, "HH:mm").format("hh:mm A")}
                 </td>
 
                 <td className="px-6 py-4">

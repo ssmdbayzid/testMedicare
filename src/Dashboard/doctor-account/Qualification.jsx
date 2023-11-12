@@ -10,19 +10,19 @@ const Qualification = ({qualification, setQualification}) => {
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="pl-6 py-3">
                    Degree
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="pl-6 py-3">
                     University
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-2 py-3">
                     Start Date
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-2 py-3">
                     End Date
                 </th>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="pl-6 py-3">
                     Delete
                 </th>
             </tr>
@@ -35,10 +35,10 @@ const Qualification = ({qualification, setQualification}) => {
                 <td className="px-6 py-4">
                     {data.university}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-4">
                     {data.startDate}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-4">
                     {data.endDate}
                 </td>
                 <td className="px-6 py-4">
