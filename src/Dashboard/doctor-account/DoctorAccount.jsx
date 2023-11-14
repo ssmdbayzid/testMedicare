@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Overview from './Overview';
 import DoctorAppointment from './DoctorAppointment';
 import Profile from './Profile';
+import { authContext } from 'context/AuthContext';
 
 const DoctorAccount = () => {
   const [tab, setTab] =  useState("overview");
   
+  const {user, role} = useContext(authContext)
+  console.log("User", user, "role", role)
   return (
     <div className="max-w-[1170px] px-5 mx-auto flex-1 py-12">
       <div className="grid md:grid-cols-3 gap-10">
@@ -27,7 +30,7 @@ const DoctorAccount = () => {
         <div className="md:col-span-2" >
         {tab === "overview" && <Overview />}
         {tab === "appointment" && <DoctorAppointment />}
-        {tab === "profile" && <Profile />}
+        {tab === "profile" && <Profile user={user} />}
         </div>
       </div>
     </div>

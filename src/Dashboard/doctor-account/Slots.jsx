@@ -8,8 +8,7 @@ const Slots = ({slots, setSlots}) => {
     const removeSlot = slots.filter((item)=> item.id !== id)
     setSlots(removeSlot)
   }
-  const time = "12:00"
-  console.log(moment(time, "HH:mm"))
+  
   
   return (<div className="relative overflow-x-auto my-10">
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

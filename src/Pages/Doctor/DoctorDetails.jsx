@@ -14,7 +14,7 @@ const DoctorDetails = () => {
   const {data, isLoading, isError} = useGetSingleDoctorQuery(id)
     const [tab, setTab] = useState("about")
 
-    
+    const {name, averageRating, bio, experience, qualification, photo, about, specialization} = data.data
 
 
   return (<section className='section'>
@@ -23,21 +23,21 @@ const DoctorDetails = () => {
          {data &&  <div className="md:col-span-2">
             <div className="flex items-center gap-5">
               <figure className="max-w-[200px] max-h-[200px] overflow-hidden">
-                <img src={data.data.photo} alt="" className="w-full object-cover" />
+                <img src={photo} alt="" className="w-full object-cover" />
               </figure>
               <div>
               <span className="bg-[#CCF0F3] text-irisBlueColor py-1 lg:py-2 px-6 text-[12px] leading-4 lg:text-[16px] lg:leading-7 font-semibold rounded">
-                Sergeon
+                {specialization}
               </span>
               <h3 className="text-headingColor text-[22px] leading-9 mt-3 font-bold">
-                {data.data.name}
+                {name}
               </h3>
               <div className="flex items-center gap-2">
                 <img src={star} alt="" className="w-6 h-6" />
                 <span className="font-semibold">{data.data.averageRating}</span>
                 (292)
               </div>
-              <p className="mt-3 text-_para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos minima ut laboriosam porro tenetur mollitia, </p>
+              <p className="mt-3 text-_para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">{bio} </p>
             </div>
             </div>
 

@@ -3,14 +3,15 @@ import { formateDate } from '../../utils/formateDate'
 
 
 const DoctorAbout = ({doctor}) => {
+    const {name, averageRating, bio, experience, qualification, photo, about, specialization} = doctor
   return (
     <div>
         <div>
             <h3 className="text-[20px] leading-[30px] text-textColor font-semibold flex items-center  gap-2">
-                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {doctor.name}</span>
+                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {name}</span>
             </h3>
             <p className="text_para text-justify">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum ratione quo perferendis numquam ut vitae asperiores exercitationem magni, deserunt soluta assumenda expedita consequatur amet eum adipisci nostrum architecto? Facilis, laboriosam!
+               {about}
             </p>
         </div>
         <div className="mt-12">
@@ -18,33 +19,23 @@ const DoctorAbout = ({doctor}) => {
                 Education
             </h3>
 
+        {/* ========== Education ================ */}
             <ul className="pt-4 md:p-5">
-            <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px] ">
+           {qualification && qualification.map((data, index)=>
+           <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px] ">
                 <div className="">
                     <span className="text-irisBlueColor  text-[15px] leading-6 font-semibold">
                     {formateDate("09-13-2014")} - {formateDate("09-12-2016")}
+                    {data.startingTime}
                     </span>
                     <p className="text-[16px] leading-6 font-medium text-textColor">
-                        PHD in Surgeon
+                        {data.degree}
                     </p>
                 </div>
                 <p className="text-[14px] leading-5 font-medium text-textColor">
-                    New Apollo Hospital, New York
+                    {data.university}
                 </p>
-            </li>
-            <li className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px] ">
-                <div className="">
-                    <span className="text-irisBlueColor  text-[15px] leading-6 font-semibold">
-                    {formateDate("07-04-2010")} - {formateDate("09-02-2014")}
-                    </span>
-                    <p className="text-[16px] leading-6 font-medium text-textColor">
-                        PHD in Surgeon
-                    </p>
-                </div>
-                <p className="text-[14px] leading-5 font-medium text-textColor">
-                    New Apollo Hospital, New York
-                </p>
-            </li>
+            </li>       )}   
             </ul>
         </div>
         <div className="mt-12">

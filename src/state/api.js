@@ -48,10 +48,10 @@ export const api = createApi({
             providesTags: ["Doctors"]
         }),
         updateDoctor: builder.mutation({
-            query: ({id, updateDoctor})=> ({
+            query: ({id, ...rest})=> ({
                 url: `doctors/${id}`,
                 method: 'PUT',
-                body: updateDoctor,
+                body: rest,
             }),
             
             invalidatesTags: ["Doctors"]

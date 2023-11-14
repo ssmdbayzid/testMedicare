@@ -6,6 +6,8 @@ import TimePicker from 'react-time-picker'
 import Slots from './Slots'
 import Experience from './Experience'
 import { HashLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
+import { useUpdateDoctorMutation } from 'state/api'
 
 
 const initialState = {
@@ -25,7 +27,10 @@ const initialSlot = {
   day:"", startingTime: "", endingTime: "",
 }
 
-const Profile = () => {
+const Profile = ({user}) => {
+  // API
+  const [updateDoctor] = useUpdateDoctorMutation()
+  
   const [data, setData] = useState(initialState)
   const [expData, setExpData] = useState(initialExp)
   const [qualification, setQualification] = useState([{
@@ -57,13 +62,14 @@ const Profile = () => {
       if(qualification.length === 1 && Object.values(qualification[0]).every(value=> value === "")){
       setQualification([{...newQualification, id:qualification.length}])
       setOpen(false)
+      setData(initialState)
       }else{
         setQualification([...qualification, {...newQualification, id:qualification.length + 1}])
       setOpen(false)
       }  
     }
     else{
-     return alert("Please fillup the form")
+      return toast.error("Please complete qualification")     
     }     
   }
   const addExperience = () => {
@@ -77,13 +83,14 @@ const Profile = () => {
       if(experiences.length === 1 && Object.values(experiences[0]).every(value=> value === "")){
       setExperiences([{...newExperiences, id:experiences.length}])
       setOpenExperience(false)
+      setExpData(initialExp)
       }else{
         setExperiences([...experiences, {...newExperiences, id:experiences.length + 1}])
         setOpenExperience(false)
       }  
     }
     else{
-     return alert("Please fillup the form")
+     return toast.error("Please complete experience")
     }     
   }
   const handleOnChange = e => {
@@ -116,69 +123,84 @@ const Profile = () => {
         }
       }
       else{
-     return alert("Please fillup the form")
+     return toast.error("Please complete the slots")
       }            
     }
-  
-  // console.log("slots", slots)  
-  // console.log("Qualofication", qualification)  
-  console.log("Experience", experiences)  
-  console.log("Experience Onchange", expData)  
-    const time = "12:00"
-  
- const updateDoctor =(event) =>{
+ 
+ const formSubmitHandler = async (event) =>{
   event.preventDefault()
   setLoading(true)
   const form = event.target;
-  const updateData = {
-    name: form.name.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    bio: form.bio.value,   
-    gender: form.gender.value,
-    specialization: form.specialization.value,     
-    tiketPrice: form.ticketPrice.value,    
-    about: form.about.value, 
-  } 
-  console.log(updateData)
+
+ console.log(typeof(form.ticketPrice.value))
+
+  if(Object.values(qualification[0]).every(value=> value !== "") && Object.values(experiences[0]).every(value=> value !== "") && Object.values(slots[0]).every(value=> value !== "")){
+    const updateData = {      
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      bio: form.bio.value,   
+      gender: form.gender.value,
+      specialization: form.specialization.value,     
+      ticketPrice: Number(form.ticketPrice.value),    
+      about: form.about.value, 
+      qualification: qualification,
+      experience:experiences,
+      timeSlots:slots,
+    } 
+    const  result = await updateDoctor({...updateData, id: user._id})
+    console.log(result)
+    if(result.success){
+      console.log(console.log(result))
+    }
+    if(result.error){
+      console.log(result)
+      toast.error(result.error.data.message)
+    }
+  }
+  else{
+    return toast.error("Please fillup the form")
+  }
  }
+
+
   return (
     <div>
         <p className="bg-yellow-100 py-1 px-2">To get approval please complete your profile. We'll review manually and approve within 3 days</p>
       <h2 className="text-2xl text-[var(--text-color)] font-bold mt-3">Profile Information</h2>
-      <form onSubmit={updateDoctor} className="my-3">
+      <form onSubmit={formSubmitHandler} className="my-3">
         <div className="mb-3">
         <label htmlFor="name" 
         className="text-[var(--text-color)]">Name <span className="text-red-500">*</span></label> <br />
 
-        <input type="text" name="name" id='name'
+        <input type="text" name="name" id='name' required
         placeholder="Your Name" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label htmlFor="email" 
         className="text-[var(--text-color)]">Email <span className="text-red-500">*</span></label> <br />
 
-        <input type="email" name="email" id='email'
+        <input type="email" name="email" id='email' required
         placeholder="Your Email" className="w-full border px-2 py-2 text-lg text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label htmlFor="phone" 
         className="text-[var(--text-color)]">Phone <span className="text-red-500">*</span></label> <br />
-        <input type="number" name="phone" id="phone"
+        <input type="number" name="phone" id="phone" required
         placeholder="Phone" className="w-full border px-2 py-2 text-lg text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label  htmlFor="bio" 
         className="text-[var(--text-color)] mb-4">Bio <span className="text-red-500">*</span></label> <br />
-        <input type="text" name="bio" id="bio"
-        placeholder="Your Bio" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" required/>
+        <input type="text" name="bio" id="bio" required
+        placeholder="Your Bio" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="flex items-center justify-between gap-8">
           {/* // Gender  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="gender">Gender</label>
-          <select name="gender" id="gender" className="w-full p-3 border">
-            <option value="select">Select</option>
+          <select name="gender" id="gender" className="w-full p-3 border" required>
+            <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -187,8 +209,8 @@ const Profile = () => {
           {/* // Specialization  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="specialization">Specialization</label>
-          <select name="specialization" id="specialization" className="w-full p-3 border">
-            <option value="select">Select</option>
+          <select name="specialization" id="specialization" className="w-full p-3 border" required>
+            <option value="">Select</option>
             <option value="immunologists">Immunologists</option>
             <option value="anesthesiologists">Anesthesiologists</option>
             <option value="cardiologists">Cardiologists</option>
@@ -202,7 +224,7 @@ const Profile = () => {
           {/* // Ticket Price  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="ticketPrice">Ticket Price</label>
-          <input type="number" name="ticketPrice" id="ticketPrice" className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+          <input type="number" name="ticketPrice" id="ticketPrice" className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" required />
           </div>          
         </div>
         {/* ====== Qualification======== */}
@@ -273,7 +295,7 @@ const Profile = () => {
         } 
         </div>
         
-        {openExperience && 
+        {openExperience ? 
         <div>
       <p className="my-3">Experience</p>
         {/* ======= Starting date ===== */}
@@ -319,11 +341,11 @@ const Profile = () => {
         <BsTrash className="text-2xl"/ >
         </div>
         </div>        
-    </div>
-        }
-        <p
+    </div> 
+    : <p
         onClick={()=>setOpenExperience(true)}
-         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>
+         className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Experience</p>}
+        
         </div>
 
          {/*===========Add slot  section===========*/}
@@ -334,9 +356,9 @@ const Profile = () => {
         } 
         </div>
 
-        {openSlot && <div>
+        {openSlot ?
+        <div>
         <p className="my-3">Slots</p>
-
          <div className="flex items-center justify-between mt-3 gap-8">
          {/* // Day  */}
          <div className="flex flex-col w-full">
@@ -385,14 +407,14 @@ const Profile = () => {
         <BsTrash className="text-2xl"/ >
         </div>
         </div>  
-       </div>}
-         <p
+       </div>
+         : <p
          onClick={()=>setOpenSlot(true)}
-          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p>          
+          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p> }         
         <div className="my-5">
         <label  htmlFor="about" 
         className="text-[var(--text-color)] mb-4">About <span className="text-red-500">*</span></label> <br />
-        <textarea type="text" name="about" id="about" rows={3}
+        <textarea type="text" name="about" id="about" rows={3} required
         placeholder="About" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
         </div>
         <button className="btn bg-[var(--primary-color)]">{loading && <HashLoader color='#0067FF' size={25} />} Update</button>
