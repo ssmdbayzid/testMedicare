@@ -43,24 +43,16 @@ const DoctorAbout = ({doctor}) => {
                 Experience
             </h3>
             <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5">
-                <li className="p-4 rounded bg-[#fff9ea]">
+                {experience && experience.map((exp, index)=><li key={index} className="p-4 rounded bg-[#fff9ea]">
                     <span className="text-secondaryColor text-[16px] leading-[25px] font-semibold">                    
-                    {formateDate("08-12-2010")} - {formateDate("08-12-2014")}
+                    {/* {formateDate("08-12-2010")} - {formateDate("08-12-2014")} */}
+                    {exp.startDate} - {exp.endDate}
                     </span>
                     <p className="text-[16px] mt-3 leading-8 semibold">
-                        Sr. Sergion
+                       {exp.position}
                     </p>
-                    <p className="text-sm font-semibold">New Apollo Hospital, New  York</p>
-                </li>
-                <li className="p-4 rounded bg-[#fff9ea]">
-                    <span className="text-secondaryColor text-[16px] leading-[25px] font-semibold">                    
-                    {formateDate("08-12-2010")} - {formateDate("08-12-2014")}
-                    </span>
-                    <p className="text-[16px] mt-3 leading-8 semibold">
-                        Sr. Sergion
-                    </p>
-                    <p className="text-sm font-semibold">New Apollo Hospital, New  York</p>
-                </li>
+                    <p className="text-sm font-semibold">{exp.hospital}</p>
+                </li> )}               
             </ul>
         </div>
     </div>
