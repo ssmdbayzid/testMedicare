@@ -101,7 +101,17 @@ export const api = createApi({
         getAllReviews: builder.query({
             query: ()=> 'reviews',
             providesTags: ["Doctors"]
-        })
+        }),
+
+        // payment checkout
+        paymentCheckOut: builder.mutation({
+            query: (data)=> ({
+                url: `create-checkout-session`,
+                method: 'POST',
+                body: data,                                
+            }),
+            providesTags: ["Doctor", "User"]
+        }),      
         
     })
 })
@@ -120,5 +130,5 @@ export const {
     useCreateUserMutation,
     useLoginUserMutation,
     useDeleteUserMutation,
-
+    usePaymentCheckOutMutation,
 } = api;

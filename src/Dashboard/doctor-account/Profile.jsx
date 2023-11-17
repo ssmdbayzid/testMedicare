@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {BsTrash} from 'react-icons/bs'
 import Qualification from './Qualification'
@@ -27,6 +27,12 @@ const initialSlot = {
   day:"", startingTime: "", endingTime: "",
 }
 
+const initialFormData = {
+  name: "",
+  email: "",
+  gender:"",
+}
+
 const Profile = ({user}) => {
   // API
   const [updateDoctor] = useUpdateDoctorMutation()
@@ -36,6 +42,7 @@ const Profile = ({user}) => {
   const [qualification, setQualification] = useState([{
     startDate : "", endDate: "", degree: "", university: "",
   }])
+  const [formData, setFormData] = useState(initialFormData)
   const [experiences, setExperiences] = useState([{
     startDate : "", endDate: "", position: "", hospital: "",
   }])
@@ -50,6 +57,16 @@ const Profile = ({user}) => {
   const [endingTime, setEndingTime] = useState("")
   const [day, setDay] = useState("00:00")
 
+
+  useEffect(()=>{
+    setFormData({
+      ...formData,
+      name: user.name,
+      email: user.email,
+      gender: "male",
+    })
+  },[])
+  
 
   const addQualification = () => {
     if(data.startDate && data.endDate && data.degree && data.university){
@@ -96,6 +113,9 @@ const Profile = ({user}) => {
   const handleOnChange = e => {
     setData({...data, [e.target.name]: e.target.value})
   }
+  const handleFormOnChange = e => {
+    setFormData({...data, [e.target.name]: e.target.value})
+  }
   const handleExpOnChange = e => {
     setExpData({...expData, [e.target.name]: e.target.value})
   }
@@ -136,11 +156,11 @@ const Profile = ({user}) => {
 
   if(Object.values(qualification[0]).every(value=> value !== "") && Object.values(experiences[0]).every(value=> value !== "") && Object.values(slots[0]).every(value=> value !== "")){
     const updateData = {      
-      name: form.name.value,
-      email: form.email.value,
+      name: formData.name,
+      email: formData.email,
       phone: form.phone.value,
       bio: form.bio.value,   
-      gender: form.gender.value,
+      gender: formData.gender,
       specialization: form.specialization.value,     
       ticketPrice: Number(form.ticketPrice.value),    
       about: form.about.value, 
@@ -173,14 +193,14 @@ const Profile = ({user}) => {
         <label htmlFor="name" 
         className="text-[var(--text-color)]">Name <span className="text-red-500">*</span></label> <br />
 
-        <input type="text" name="name" id='name' required
+        <input type="text"  name="name" id='name' required onChange={handleFormOnChange} value={formData.name}
         placeholder="Your Name" className="w-full border px-2 py-2 text-[18px] text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
         <label htmlFor="email" 
         className="text-[var(--text-color)]">Email <span className="text-red-500">*</span></label> <br />
 
-        <input type="email" name="email" id='email' required
+        <input type="email" name="email" id='email' required onChange={handleFormOnChange} value={formData.email}
         placeholder="Your Email" className="w-full border px-2 py-2 text-lg text-[#121212] rounded-lg mt-2" />
         </div>
         <div className="mb-3">
@@ -199,7 +219,7 @@ const Profile = ({user}) => {
           {/* // Gender  */}
           <div className="flex flex-col w-full">
           <label className="mb-4" htmlFor="gender">Gender</label>
-          <select name="gender" id="gender" className="w-full p-3 border" required>
+          <select name="gender" id="gender" onChange={handleFormOnChange} value={formData.gender} className="w-full p-3 border" required>
             <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>

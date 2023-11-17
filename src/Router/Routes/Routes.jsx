@@ -2,6 +2,7 @@ import DoctorList from "Dashboard/Doctor/DoctorList";
 import UserList from "Dashboard/User/UserList";
 import DoctorAccount from "Dashboard/doctor-account/DoctorAccount";
 import MyAccount from "Dashboard/user-account/MyAccount";
+import BookAppointment from "Pages/Booking/BookAppointment";
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
@@ -69,6 +70,13 @@ const router = createBrowserRouter([
                 path: "/dashboard/users",
                 element: <PrivateRoute allowedRoles={["patient"]}>
                         <UserList />
+                        </PrivateRoute>,
+                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            },
+            {
+                path: "/doctor/:id/bookAppointment",
+                element: <PrivateRoute allowedRoles={["patient"]}>
+                        <BookAppointment />
                         </PrivateRoute>,
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },
