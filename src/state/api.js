@@ -106,7 +106,7 @@ export const api = createApi({
         // payment checkout
         paymentCheckOut: builder.mutation({
             query: (data)=> ({
-                url: `create-checkout-session`,
+                url: `booking`,
                 method: 'POST',
                 body: data,                                
             }),

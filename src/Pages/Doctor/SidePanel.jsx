@@ -16,7 +16,7 @@ const SidePanel = ({doctor}) => {
         sessionId:response.id
       })
       if(result.error){
-        console.log(result.error)
+        console.log("this erro payment page", result.error)
       }
     }
     if(response.error){

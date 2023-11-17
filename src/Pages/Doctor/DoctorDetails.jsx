@@ -18,8 +18,6 @@ const DoctorDetails = () => {
     let doctor;
     if(data){
       doctor = data.data
-
-      console.log(data.data)
     }
 
     // const {name, averageRating, bio, experience, qualification, photo, about, specialization} = data?.data
