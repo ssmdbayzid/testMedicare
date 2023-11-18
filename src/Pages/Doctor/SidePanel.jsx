@@ -24,8 +24,40 @@ const SidePanel = ({doctor}) => {
     }
   }
 
+  const bookAppointment =(e) =>{
+    e.preventDefault()
+    const form = e.target;
+    if((form.bookingTime.value < doctor.timeSlots[0].startingTime)||form.bookingTime.value > doctor.timeSlots[0].endingTime){
+      alert("Please book available time")
+    }else{
+      console.log(e.target.bookingTime.value)
+    }
+  }
+  console.log(doctor)
+
   return (
-    <div className="p-4 md:p-5 rounded-md shadow-xl border border-solid">
+    <div className="px-8 md:w-96 w-full md:p-5 rounded-md shadow-xl border border-solid py-14">
+      <form onSubmit={bookAppointment}>
+      <h1 className="text-3xl font-extrabold text-center text-[var(--heading-color)] mb-3">Book Appointment</h1>
+      <hr className="bg-[var(--primary-color)] w-12 h-1 mx-auto mb-3"/>
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor.specialization} />
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor.name} />
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Patient Name" />
+      <input type="date" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
+      <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
+      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor.timeSlots[0].startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor.timeSlots[0].endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
+      <button
+      onClick={makePayment}
+      className="bg-[var(--primary-color)] text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer">Book Appointment</button>
+      </form>
+    </div>
+    
+  )
+}
+
+export default SidePanel
+
+/* <div className="p-4 md:p-5 rounded-md shadow-xl border border-solid">
       <div className="flex justify-between items-center mb-3">
         <p className=" font-semibold text-[15px]">Ticket Price</p>
         <p className="text-[18px] md:text-[22px] leading-6 md:leading-8 font-bold">{doctor?.ticketPrice} BDT</p>
@@ -37,12 +69,9 @@ const SidePanel = ({doctor}) => {
       <p className="first-letter:capitalize">{slot.day}</p>
       <p> {moment(slot.startingTime, "HH:mm").format("hh:mm A")} - {moment(slot.endingTime, "HH:mm").format("hh:mm A")} </p>
     </div>)}      
-      {/* <Link to={`/doctor/${doctor._id}/bookAppointment`} className="btn rounded-md text-center px-3 text-[15px] md:text-lg cursor-pointer">Book Appointment</Link> */}
+       <Link to={`/doctor/${doctor._id}/bookAppointment`} className="btn rounded-md text-center px-3 text-[15px] md:text-lg cursor-pointer">Book Appointment</Link> 
       <button
       onClick={makePayment}
       className="btn rounded-md text-center px-3 text-[15px] md:text-lg cursor-pointer">Book Appointment</button>
     </div>
-  )
-}
-
-export default SidePanel
+    */
