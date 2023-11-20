@@ -40,12 +40,12 @@ const SidePanel = ({doctor}) => {
       <form onSubmit={bookAppointment}>
       <h1 className="text-3xl font-extrabold text-center text-[var(--heading-color)] mb-3">Book Appointment</h1>
       <hr className="bg-[var(--primary-color)] w-12 h-1 mx-auto mb-3"/>
-      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor.specialization} />
-      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor.name} />
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.specialization} />
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.name} />
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Patient Name" />
       <input type="date" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
       <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
-      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor.timeSlots[0].startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor.timeSlots[0].endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
+      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
       <button
       onClick={makePayment}
       className="bg-[var(--primary-color)] text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer">Book Appointment</button>

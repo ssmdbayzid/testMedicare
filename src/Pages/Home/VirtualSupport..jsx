@@ -14,9 +14,9 @@ const VirtualSupport = () => {
             <div className="w-3/4 lg:w-1/2 xl:w-[670px]">
                 <h2 className="heading">Get virtual treatment anytime</h2>
                 <ul className="ml-3 ">
-                    <li className="text_para text-justify">1. Schedule the appointment directly.</li>
-                    <li className="text_para text-justify">2. Search for your  physician here. and contact their office.</li>
-                    <li className="text_para text-justify">3. View  our physicians are accepting new  parents. use the online  shcedule  tool to select an appointment time. ..</li>
+                    <li className="text-para text-justify">1. Schedule the appointment directly.</li>
+                    <li className="text-para text-justify">2. Search for your  physician here. and contact their office.</li>
+                    <li className="text-para text-justify">3. View  our physicians are accepting new  parents. use the online  shcedule  tool to select an appointment time. ..</li>
                 </ul>
                 <button className="btn">Learn More</button>
             </div>

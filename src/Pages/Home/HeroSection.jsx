@@ -16,26 +16,26 @@ HeroSection = () => {
                     live a healthy, 
                     longer life
                     </h1>
-                    <p className="text_para text-justify">
+                    <p className="text-para text-justify">
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse earum quidem corrupti, soluta dolores suscipit fuga blanditiis. Amet, asperiores deserunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto soluta, perferendis veniam commodi porro corrupti.
                     </p>
-                    <button className="btn">Request an Appointment</button>
+                    <button className="button">Request an Appointment</button>
 
                     <div className="flex items-center mt-12 gap-5">
                         <div>
                             <h1 className="text-4xl font-bold">30+</h1>
                             <hr className="h-3 w-[100px] mt-[-20px] bg-secondaryColor"></hr>
-                            <p className="text_para">Years of Experience</p>
+                            <p className="text-para">Years of Experience</p>
                         </div>
                         <div>
                             <h1 className="text-4xl font-bold">30+</h1>
                             <hr className="h-3 w-[100px] mt-[-20px] bg-purpleColor"></hr>
-                            <p className="text_para">Years of Experience</p>
+                            <p className="text-para">Years of Experience</p>
                         </div>
                         <div>
                             <h1 className="text-4xl font-bold">30+</h1>
                             <hr className="h-3 w-[100px] mt-[-20px] bg-irisBlueColor"></hr>
-                            <p className="text_para">Years of Experience</p>
+                            <p className="text-para">Years of Experience</p>
                         </div>
                     </div>
                 </div>
@@ -57,5 +57,4 @@ HeroSection = () => {
   )
 }
 
-export default 
-HeroSection
+export default HeroSection

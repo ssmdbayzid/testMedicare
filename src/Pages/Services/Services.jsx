@@ -9,13 +9,13 @@ const Services = () => {
      <div className="container">
         <div className="xl:w-[470px] mx-auto">
             <h2 className="heading">Out medical services</h2>
-            <p className="text_para text-center">World class care for everyone Our health System offers unmatched export health care</p>
+            <p className="text-para text-center">World class care for everyone Our health System offers unmatched export health care</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 mt-16">
         {serviceData && serviceData.map((data, index)=> 
             <div>
                 <h2 className="text-3xl font-[700]">{data.name}</h2>
-                <p className="text_para text-justify">{data.description}</p>
+                <p className="text-para text-justify">{data.description}</p>
                 <div className="flex justify-between items-center mt-8">
                 <Link to="/doctors" className="flex items-center justify-center w-12 h-12 border-2 rounded-full hover:bg-primaryColor hover:border-none text-xl hover:text-white">
                     < BsArrowRight />

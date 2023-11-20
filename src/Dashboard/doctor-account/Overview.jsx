@@ -26,7 +26,7 @@ const Overview = () => {
                 <span className="font-semibold">{user.averageRating}</span>
                 (292)
               </div>
-              <p className="mt-3 text-_para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">{user.bio} </p>
+              <p className="mt-3 text-para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">{user.bio} </p>
             </div>
             </div>
 

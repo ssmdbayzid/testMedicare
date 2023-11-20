@@ -9,8 +9,7 @@ const doctorData =[
       "gender": "female",
       "specialization": "cardiologist",
       "ticketPrice": 1500,
-      "about": "I am dedicated to providing the best cardiac care to my patients.",
-     " isApproved": "pending",
+      "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
       "qualification": [
         {
           "startDate": "2005-09-15",
@@ -29,9 +28,8 @@ const doctorData =[
           "id": 1
         }
       ],
-      "timeSlots": [
+      "availableTime": [
         {
-          "day": "monday",
           "startingTime": "09:00",
           "endingTime": "13:00",
           "id": 1
@@ -48,8 +46,7 @@ const doctorData =[
       "gender": "female",
       "specialization": "pediatrician",
       "ticketPrice": 1200,
-      "about": "My goal is to provide comprehensive care for children and their families.",
-     " isApproved": "pending",
+      "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
       "qualification": [
         {
           "startDate": "2007-03-20",
@@ -68,9 +65,8 @@ const doctorData =[
           "id": 1
         }
       ],
-      "timeSlots": [
+      "availableTime": [
         {
-          "day": "tuesday",
           "startingTime": "10:00",
           "endingTime": "14:00",
           "id": 1
@@ -87,8 +83,7 @@ const doctorData =[
       "gender": "male",
       "specialization": "orthopedic surgeon",
       "ticketPrice": 2000,
-      "about": "I focus on providing personalized care for orthopedic conditions.",
-     " isApproved": "pending",
+      "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
       "qualification": [
         {
           "startDate": "2004-06-10",
@@ -107,9 +102,8 @@ const doctorData =[
           "id": 1
         }
       ],
-      "timeSlots": [
+      "availableTime": [
         {
-          "day": "wednesday",
           "startingTime": "08:00",
           "endingTime": "12:00",
           "id": 1
@@ -126,8 +120,7 @@ const doctorData =[
       "gender": "female",
       "specialization": "psychiatrist",
       "ticketPrice": 1800,
-      "about": "I provide compassionate care for individuals dealing with mental health issues.",
-     " isApproved": "pending",
+      "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
       "qualification": [
         {
           "startDate": "2006-01-15",
@@ -146,9 +139,8 @@ const doctorData =[
           "id": 1
         }
       ],
-      "timeSlots": [
+      "availableTime": [
         {
-          "day": "monday",
           "startingTime": "10:00",
           "endingTime": "14:00",
           "id": 1
@@ -165,8 +157,7 @@ const doctorData =[
       "gender": "male",
       "specialization": "oncologist",
       "ticketPrice": 2500,
-      "about": "My aim is to provide the best possible care for cancer patients.",
-     " isApproved": "pending",
+      "about": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
       "qualification": [
         {
           "startDate": "2008-08-05",
@@ -185,9 +176,8 @@ const doctorData =[
           "id": 1
         }
       ],
-      "timeSlots": [
+      "availableTime": [
         {
-          "day": "tuesday",
           "startingTime": "08:00",
           "endingTime": "12:00",
           "id": 1

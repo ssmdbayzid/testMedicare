@@ -51,7 +51,7 @@ const Feedback = () => {
             <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
             </div>
             
-          <p className="text_para mt-1">{review.reviewText} </p>
+          <p className="text-para mt-1">{review.reviewText} </p>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ const Feedback = () => {
           <div className="">
             <h3 className="font-bold text-[18px] leading-7 text-primaryColor">S S Md. Bayzid</h3>
             <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
-          <p className="text_para text-[15px] mt-2">This is feedback</p>
+          <p className="text-para text-[15px] mt-2">This is feedback</p>
           </div>
         </div>
         */}

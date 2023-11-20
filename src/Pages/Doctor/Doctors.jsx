@@ -23,9 +23,9 @@ const Doctors = () => {
           <input type="search"
           className="py-4 pl-4 pr-2 bg-transparent w-full  focus:outline-none cursor-pointer placeholder:text-textColor"
           placeholder="Search Doctor"
-          name="" id="" />
-          <button 
-          className="py-4 px-8 bg-[var(--primary-color)] text-[var(--my-color)] mt-0 rounded-none rounded-r-md">
+          name="" />
+          <button   
+          className="py-4 px-8 bg-[var(--primary-color)] text-white mt-0 rounded-none rounded-r-md">
             Search
           </button>
 
@@ -42,12 +42,12 @@ const Doctors = () => {
       : <Loader /> 
       </>  : <>  {doctors && doctors.data.map((doctor, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
-      <div>
-      <img src={doctor.photo} alt="" className="w-full" />
+      <div className='w-full h-[286px]'>
+      <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />
       </div>
-      <h3 className="text-xl mt-5 mb-3 font-bold">{doctor.name}</h3>
+      <h3 className="text-2xl mt-5 mb-3 font-bold">{doctor.name}</h3>
       <div className="flex items-center justify-between ">
-      <span className="px-2 rounded-md py-2 text-sm text-irisBlueColor bg-irisBlueColor/20 font-bold">{doctor.specialization}</span>
+      <span className="bg-irisBlueColor/20 font-bold text-[var(text-color)] text-lg">{doctor.specialization}</span>
         <div className="flex items-center">
         <img src={star} alt="" />
         <span className="font-semibold">{doctor.avgRating}</span>
@@ -57,7 +57,7 @@ const Doctors = () => {
       <div className="flex items-center justify-between mt-5">
           <p className="text-textColor">{doctor.hospital}</p>
 
-          <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-primaryColor hover:text-white w-10 h-10 rounded-full">
+          <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-[var(--primary-color)] hover:text-white w-10 h-10 rounded-full">
           <BsArrowRight />
           </Link>
         </div>

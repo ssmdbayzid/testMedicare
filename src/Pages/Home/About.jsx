@@ -19,10 +19,10 @@ const About = ( ) => {
             <div className="relative lg:w-1/2 xl:w-[670px] order-1 lg:order-2 ">
                 <h2 className="heading">Proud to be one of the nations best</h2>
 
-                <p className="text_para text-justify">
+                <p className="text-para text-justify">
                     For 30 years U.S News 6 World has recognized us as one of the best publics hospitals in the nations #1 in Taxed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet accusamus quisquam quae repudiandae illum laudantium numquam omnis minima qui ut.
                 </p>
-                <p className="text_para text-justify">
+                <p className="text-para text-justify">
                     For 30 years U.S News 6 World has recognized us as one of the best publics hospitals in the nations #1 in Taxed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet accusamus quisquam quae repudiandae illum laudantium numquam omnis minima qui ut.
                 </p>
 

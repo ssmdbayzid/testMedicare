@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 const Menu = ({setOpen, navLink, open}) => {
   return ( <>
-    <div className={`absolute bg-slate-600 rounded-t-lg shadow-md top-0 ${open ? "right-0" : "right-[-100%]"} transition-all duration-500 h-screen w-5/6 p-5`}>
+    <div className={``}>
     <div className="flex justify-between items-center">
         <figure className="w-full">
         <img src={logo} alt="" className="w-48"/>

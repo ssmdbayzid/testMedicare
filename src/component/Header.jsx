@@ -56,7 +56,7 @@ const Header = () => {
                 <div className="navigation hidden md:block ">
                 <ul className="flex items-center justify-between gap-8 mx-5">
                     { navLinks && navLinks.map((link, index)=>
-                    <NavLink to={link.path} className={navClass => navClass.isActive ? "text-primaryColor text-lg leading-7 font-[600]"
+                    <NavLink to={link.path} className={navClass => navClass.isActive ? "text-[var(--primary-color)] text-lg leading-7 font-[600]"
                     : "text-lg text-textColor font-[500] leading-7" } key={index}>{link.display}</NavLink>)
                     }
                 </ul>
@@ -83,29 +83,31 @@ const Header = () => {
                    </button>
                  
                </>                   
-                   : <> <Link to="/login" >
+                   : <div className='hidden md:flex items-center gap-5'> <Link to="/login" >
                         <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-[#121212] transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
                     </Link>
                     
                     <Link  to="/signup">
-                  <button style={{background: "var(--primary-color)"}} className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] rounded-full cursor-pointer">
+                  {/* <button style={{background: "var(--primary-color)"}} className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] rounded-full cursor-pointer">
+                   Sign Up
+                  </button> */}
+                  <button className="bg-[var(--primary-color)] text-white font-semibolds flex justify-center items-center rounded-lg cursor-pointer py-2 px-6  min-w-[120px] h-[40px] mt-0">
                    Sign Up
                   </button>
                 </Link>
-                </>}
+                </div>}
                 <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
-                   {theme === "dark" ? <CiLight  className="text-[30px]"/>                                                                                                                                          
+                   {theme === "dark" ? <CiLight  className="text-[30px]"/>
                     : <CiDark className="text-[30px]"/>}
 
                 </button>           
-                    <BiMenu onClick={()=> setOpen(!open)} className=" md:hidden text-[40px]" />
-                    {open && <Menu navLink={navLinks} setOpen={setOpen} open={open} />}             
-                      
+                    {!open ? <BiMenu onClick={()=> setOpen(!open)} className="cursor-pointer md:hidden text-[40px]" /> 
+                    : <button onClick={()=> setOpen(!open)} className='text-2xl hover:text-red-600 cursor-pointer'>X</button>  }                                        
             </div>
         </div>
       </div>
-      { openMenu &&
-          <DropdownMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+      { open &&
+          <DropdownMenu open={open} setOpen={setOpen} />
        } 
             </div>
   )

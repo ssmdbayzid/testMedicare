@@ -19,7 +19,7 @@ const Testimonial = () => {
     <div className="container">
         <div className="xl:w-[470px] mx-auto">
             <h2 className="heading text-center">What Our Patient Say</h2>
-            <p className="text_para text-center">World class care for everyone Our health System offers unmatched expert health care </p>
+            <p className="text-para text-center">World class care for everyone Our health System offers unmatched expert health care </p>
         </div>
         <div className="mt-7 lg:mt-18">
         <Swiper

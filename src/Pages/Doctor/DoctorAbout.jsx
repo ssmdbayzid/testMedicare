@@ -10,7 +10,7 @@ const DoctorAbout = ({doctor}) => {
             <h3 className="text-[20px] leading-[30px] text-textColor font-semibold flex items-center  gap-2">
                 About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {name}</span>
             </h3>
-            <p className="text_para text-justify">
+            <p className="text-para text-justify">
                {about}
             </p>
         </div>
@@ -43,7 +43,8 @@ const DoctorAbout = ({doctor}) => {
                 Experience
             </h3>
             <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5">
-                {experience && experience.map((exp, index)=><li key={index} className="p-4 rounded bg-[#fff9ea]">
+                {experience && experience.map((exp, index)=><li key={index} className="p-4 rounded bg-[#fff] border ">
+                    <h1 className="font-semibold text-xl mb-2">Name of  Degree</h1>
                     <span className="text-secondaryColor text-[16px] leading-[25px] font-semibold">                    
                     {/* {formateDate("08-12-2010")} - {formateDate("08-12-2014")} */}
                     {exp.startDate} - {exp.endDate}
