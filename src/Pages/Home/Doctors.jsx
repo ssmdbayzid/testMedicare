@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import doctorsData from '../../assets/data/doctorsData'
 import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useGetDoctorsQuery } from '../../state/api'
 import Loader from 'component/Loader'
+import { authContext } from 'context/AuthContext'
 
 
 const Doctors = () => {
   const {data, isError, isLoading} = useGetDoctorsQuery()
+  const {user} = useContext(authContext)
+
+  if(user){
+    console.log(user)
+  }
 
   if(data){
     console.log("data doctor",data)

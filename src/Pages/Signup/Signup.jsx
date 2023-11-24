@@ -1,10 +1,6 @@
 import React, { useContext, useState } from 'react'
-
 import avatar from '../../assets/images/avatar-icon.png'
-
 import signUpImg from '../../assets/images/signup.gif'
-
-import { AuthContext } from 'context/AuthProvider'
 import { useCreateUserMutation } from 'state/api'
 import imgUploadToImgBB from 'utils/uploadImage'
 import { useNavigate } from 'react-router-dom'
@@ -31,9 +27,7 @@ const Signup = () => {
   
   const [previewUrl, setPreviewUrl] = useState("")
   
-  const [formData, setFormData] = useState(initialFormData)
-
-  const {signUp} = useContext(AuthContext)
+  const [formData, setFormData] = useState(initialFormData)  
 
   const navigate = useNavigate()
 
@@ -61,7 +55,6 @@ const Signup = () => {
         const result = await createUser(formData)
 
         if(result.data){
-          signUp(formData.email, formData.password)
           toast.success("Create Account Success")          
           setPreviewUrl("")
           setFormData(initialFormData)

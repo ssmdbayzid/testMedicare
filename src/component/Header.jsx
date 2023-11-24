@@ -33,14 +33,15 @@ const navLinks = [
 const Header = () => {
     const [open, setOpen] = useState(false)
     const [openMenu, setOpenMenu] = useState(false)
-    const {user, token, role, dispatch} = useContext(authContext)
+    const {user, token, dispatch} = useContext(authContext)
     const {theme, themeToggle} = useContext(ThemeContext)
         
     const signUp = ()=>{
-        dispatch({
-        type: "LOGOUT"
-    })}
-    
+        dispatch({type: "LOG_OUT"})        
+    }
+    if(user && token){
+        console.log("user", user, "token", token)
+    }
   return (
     <div className="header leading-[100%] relative flex items-center">
         <div className="container">
@@ -74,14 +75,10 @@ const Header = () => {
                        <img src={user.photo} alt="" className={`w-full h-full outline-green-600 ${openMenu && "outline"} rounded-full`} />
                        </figure>
                       
-                   </div>                                     
-                   <button
-                   onClick={()=> signUp()}
-                   style={{color: "var(--my-color)", background: "var(--primary-color)"}}
-                    className="flex justify-center items-center py-2 px-6 min-w-[120px]  text-white h-[40px] bg-primaryColor rounded-full cursor-pointer">
-                    Sign Out
-                   </button>
-                 
+                   </div>    
+                   {
+                    openMenu && <DropdownMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+                   }                                                          
                </>                   
                    : <div className='hidden md:flex items-center gap-5'> <Link to="/login" >
                         <button className="flex justify-center items-center min-w-[100px]  py-2 px-6 h-[40px] bg-slate-300 cursor-pointer text-[#121212] transition-all ease-in duration-75 hover:text-primaryColor  hover:underline font-[800] rounded-md group-hover:bg-opacity-0">Log In</button>
@@ -102,12 +99,12 @@ const Header = () => {
 
                 </button>           
                     {!open ? <BiMenu onClick={()=> setOpen(!open)} className="cursor-pointer md:hidden text-[40px]" /> 
-                    : <button onClick={()=> setOpen(!open)} className='text-2xl hover:text-red-600 cursor-pointer'>X</button>  }                                        
+                    : <button onClick={()=> setOpen(!open)} className='text-2xl hover:text-red-600 md:hidden  cursor-pointer'>X</button>  }                                        
             </div>
         </div>
       </div>
       { open &&
-          <DropdownMenu open={open} setOpen={setOpen} />
+          <Menu open={open} setOpen={setOpen} />
        } 
             </div>
   )

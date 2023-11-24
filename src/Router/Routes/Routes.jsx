@@ -44,14 +44,19 @@ const router = createBrowserRouter([
             },
             {
                 path: "/doctors/:id",
-                element: <DoctorDetails />,
+                element: <PrivateRoute allowedRoles={["patient"]}>
+                        <DoctorDetails />,
+                        </PrivateRoute>
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },
+            
             {
                 path: "/users/profile/me",
-                element:<MyAccount />,
+                element: <PrivateRoute allowedRoles={["patient"]}>
+                <MyAccount />,
+                </PrivateRoute>
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
-            },
+            },            
             {
                 path: "/doctors/profile/me",
                 element: <PrivateRoute allowedRoles={["doctor"]}>
@@ -59,6 +64,7 @@ const router = createBrowserRouter([
                         </PrivateRoute>,
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },
+            
             {
                 path: "/dashboard/doctors",
                 element: <PrivateRoute allowedRoles={["doctor"]}>

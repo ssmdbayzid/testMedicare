@@ -1,22 +1,35 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { getRefreshToken } from 'hooks/useGetRefreshToken';
 import { BASE_URL } from 'utils/config';
 
+
 // Authirization Token
-const getToken = () => {
-    console.log(localStorage.getItem('token'))
-    return localStorage.getItem('token')
-};
 
+const accessToken = localStorage("access-token")
 
+const extendedFetchBaseQuery = async (args, api, extraOptions, BASE_URL) =>{
+const url = `${BASE_URL}${args.url}`
 
+    const headers = {
+        ...extraOptions.headers,
+        Authorization: `Bearer ${accessToken}`
+    }
+    try {
+
+        return await fetchBaseQuery({...args, url, headers}, api, extraOptions);
+    } catch (error) {
+        if(error.status === 401){
+            const newToken = getRefreshToken()
+            token = newToken
+            
+            return await fetchBaseQuery({...args, url}, api, extraOptions)
+        }
+        throw error
+    }
+}
 export const api = createApi({
     
-    baseQuery: fetchBaseQuery({        
-        baseUrl: BASE_URL,
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-    }),
+    baseQuery: extendedFetchBaseQuery,
     reducerPath: "medicareApi",
     tagTypes: ["User", "Doctors", "Reviews"],
     endpoints: (builder) => ({

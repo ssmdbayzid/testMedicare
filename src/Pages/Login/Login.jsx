@@ -9,60 +9,48 @@ import { useNavigate } from 'react-router-dom'
 
 {/* <HashLoader /> */}
 
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  })  
   const [loading, setLoading] = useState(false)
   const [loginUser] = useLoginUserMutation()
-  
 
   const  { dispatch } = useContext(authContext)
-
   const navigate = useNavigate()
-  
-  
-
+    
   const handleInputChange = e => {
    setFormData({...formData, [e.target.name] : e.target.value })
   }
 
   const handleLogin = async (event) => {
-    event.preventDefault()
-
+          event.preventDefault()          
           setLoading(true)
-
           console.log(formData)
+        const result = await  loginUser(formData)             
+          if(result.data){
+            toast.success("Login Success")
 
-      // login(formData.email, formData.password)
-      
-        const result = await loginUser(formData)
-        if(result.data){
-
-          toast.success("Login Success")
-          console.log(result)
+            console.log(result.data)
+            dispatch({
+              type: "LOGIN_SUCCESS",
+              payload: {
+                user: result.data.data,
+                accessToken:result.data.accessToken,
+                refreshToken:result.data.refreshToken,
+                role:result.data.role,
+              }
+            })
           
-          dispatch({
-            type: "LOGIN_SUCCESSFULL",
-            payload: {
-              user: result.data.data,
-              role: result.data.role,
-              token: result.data.token,
-            }
-          })          
-          // signUp(formData.email, formData.password)
-          navigate("/home")
-          setLoading(false)
-        }
-        if(result.error){
-         toast.error(result.error.data.message)  
-         setLoading(false)
-         console.log("this is from form data", result.error.data.message)
-
-        }
-        
+            navigate("/home")
+            setLoading(false)               
+          }
+          if(result.error){
+           toast.error(result.error)  
+           setLoading(false)
+           console.log("this is from form data", result.error.data.message)
+          } 
     }
     
 

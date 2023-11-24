@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 const PrivateRoute = ({children, allowedRoles}) => {
   const {token, role} = useContext(authContext)
 
+  console.log(token, role)
   /*
   if(role != allowedRoles.includes(role)){
     toast.error("Access invalid")    
