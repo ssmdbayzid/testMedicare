@@ -10,7 +10,10 @@ import Loader from 'component/Loader'
 const Doctors = () => {
   const {data:doctors, isError, isLoading} = useGetDoctorsQuery()
 
- 
+ if(isError){
+  console.log(isError)
+
+ }
 
   return (
     <>
@@ -37,10 +40,8 @@ const Doctors = () => {
     <div className="container">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
 
-      {isError || isLoading ? <>
-      isError ? <p>{isError.message}</p>
-      : <Loader /> 
-      </>  : <>  {doctors && doctors.data.map((doctor, index)=>
+      {(isError || isLoading) ? <> {isError ? <p className="text-center">Something Went Error</p>  
+      : <Loader/>}    </> :   <>  {doctors && doctors.data.map((doctor, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
       <div className='w-full h-[286px]'>
       <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />

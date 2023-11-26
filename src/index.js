@@ -7,12 +7,11 @@ import reportWebVitals from './reportWebVitals';
 // import { configureStore } from '@reduxjs/toolkit';
 // import { globalreducer } from 'state';
 // import { setupListeners } from '@reduxjs/toolkit/query';
-import { Provider } from 'react-redux';
-import store from './store/store';
-import AuthProvider from 'context/AuthProvider';
-import { AuthContextProvider } from 'context/AuthContext';
-import { ThemeProvider } from 'context/ThemeContext';
+// import store from './store/store';
+
 import ContextProviders from 'providers';
+import { Provider } from 'react-redux';
+import { store } from 'app/store';
 
 /*
 const store = configureStore({

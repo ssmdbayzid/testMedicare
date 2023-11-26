@@ -39,9 +39,9 @@ const Header = () => {
     const signUp = ()=>{
         dispatch({type: "LOG_OUT"})        
     }
-    if(user && token){
-        console.log("user", user, "token", token)
-    }
+    // if(user && token){
+    //     console.log("user", user, "token", token)
+    // }
   return (
     <div className="header leading-[100%] relative flex items-center">
         <div className="container">

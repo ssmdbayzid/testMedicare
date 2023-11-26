@@ -2,28 +2,90 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import { getRefreshToken } from 'hooks/useGetRefreshToken';
 import { BASE_URL } from 'utils/config';
 
+const baseQuery = fetchBaseQuery({
+    baseUrl: BASE_URL,
+    credentials: 'include',
+    prepareHeaders: (headers, {getState})=>{
+        // const token = localStorage.getItem("accessToken")
+        const token = getState().auth.token
+        if(token){
+            headers.set("authorization", `Bearer ${token}`)
+        }
+        return headers;
+    },
+})
+const baseQueryWithReauth = async (args, api, extraOptions)=>{
+    let result = await baseQuery(args, api, extraOptions)
 
-// Authirization Token
-
-const accessToken = localStorage("access-token")
-
-const extendedFetchBaseQuery = async (args, api, extraOptions, BASE_URL) =>{
-const url = `${BASE_URL}${args.url}`
-
-    const headers = {
-        ...extraOptions.headers,
-        Authorization: `Bearer ${accessToken}`
+    if(result?.error?.originalStatue === 401){
+        console.log("Sending refresh token")
+        // send Refresh token to get new access token
+        const refreshResult = await baseQuery('/auth/refresh-token', api, extraOptions)
+        console.log(refreshResult)
+        if(refresh?.data){
+            const user = api.getState().auth.user;
+            // store the new token
+            api.dispatch(setCredentials({...refreshResult.data, user}))
+            // retry the original query with new access token
+            result = await baseQuery(args, api, extraOptions)
+        }
+        else{
+            api.dispatch(logOut())
+        }
+        return result
     }
-    try {
+}
 
-        return await fetchBaseQuery({...args, url, headers}, api, extraOptions);
+
+// ================= ============= ===========
+
+const extendedFetchBaseQuery = async (args, api, extraOptions, prepareHeaders: (headers)=>{
+    const token = localStorage.getItem("accessToken")
+    if(token){
+        headers.set("Authorization", `Bearer ${token}`)
+    }
+    return headers;
+},
+baseUrl: "http://localhost:5000/api/v1", ) =>{
+    
+    try {
+        return await fetchBaseQuery({
+            args,
+            api, 
+            prepareHeaders: (headers)=>{
+            const token = localStorage.getItem("accessToken")
+            if(token){
+                headers.set("Authorization", `Bearer ${token}`)
+            }
+            return headers;
+        },
+        baseUrl: "http://localhost:5000/api/v1",
+        extraOptions,});
     } catch (error) {
         if(error.status === 401){
-            const newToken = getRefreshToken()
-            token = newToken
-            
-            return await fetchBaseQuery({...args, url}, api, extraOptions)
+            try {
+                const newAccessToken = getRefreshToken()
+                localStorage.setItem('access-token', newAccessToken);                                  
+                return await fetchBaseQuery({
+                    args,
+                    api,
+                    baseUrl: "http://localhost:5000/api/v1", 
+                    prepareHeaders: (headers)=>{
+                    const token = localStorage.getItem("accessToken")
+                    if(token){
+                        headers.set("Authorization", `Bearer ${token}`)
+                    }
+                return headers;
+
+                },
+                extraOptions});
+            } catch (error) {
+                console.log(error)
+                throw error
+            }
+           
         }
+        console.log(error)
         throw error
     }
 }

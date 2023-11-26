@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import { useLoginUserMutation } from 'state/api'
 import  HashLoader  from 'react-spinners/HashLoader'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { BASE_URL } from 'utils/config'
 
 {/* <HashLoader /> */}
 
@@ -15,7 +17,7 @@ const Login = () => {
     password: "",
   })  
   const [loading, setLoading] = useState(false)
-  const [loginUser] = useLoginUserMutation()
+  // const [loginUser] = useLoginUserMutation()
 
   const  { dispatch } = useContext(authContext)
   const navigate = useNavigate()
@@ -28,33 +30,29 @@ const Login = () => {
           event.preventDefault()          
           setLoading(true)
           console.log(formData)
-        const result = await  loginUser(formData)             
-          if(result.data){
-            toast.success("Login Success")
-
-            console.log(result.data)
+          try {
+        const response = await axios.post(`${BASE_URL}/auth/login`, formData);
+        const {data:user, accessToken, refreshToken, role } =response?.data
+            
+        toast.success("Login Success")
+            
             dispatch({
               type: "LOGIN_SUCCESS",
               payload: {
-                user: result.data.data,
-                accessToken:result.data.accessToken,
-                refreshToken:result.data.refreshToken,
-                role:result.data.role,
+                user: user,
+                accessToken:accessToken,
+                refreshToken:refreshToken,
+                role:role,
               }
             })
           
             navigate("/home")
             setLoading(false)               
-          }
-          if(result.error){
-           toast.error(result.error)  
-           setLoading(false)
-           console.log("this is from form data", result.error.data.message)
-          } 
-    }
-    
-
-  
+          } catch (error) {          
+              toast.error(error.response.data.message)  
+              setLoading(false)              
+             }             
+          }                
   return (
     <section className="px-5 lg:px-0 md:mt-12">
       <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-md mt:pt-10">
