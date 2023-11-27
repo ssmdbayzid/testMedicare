@@ -1,14 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useState } from 'react'
 // import logo from '../assets/images/logo.png'
 import logo from '../assets/images/pluslogo.png'
 import {  Link, NavLink } from 'react-router-dom'
 import avatar from '../assets/images/avatar-icon.png'
 import {BiMenu} from 'react-icons/bi'
 import Menu from './Menu'
-import { authContext } from 'context/AuthContext'
+
 import {CiLight, CiDark} from 'react-icons/ci'
 import { ThemeContext } from 'context/ThemeContext'
 import DropdownMenu from './DropdownMenu'
+import { useSelector } from 'react-redux'
+import { selectCurrentRole, selectCurrentToken, selectCurrentUser } from 'features/auth/authSlice'
 // import bg from '../assets/images/header-bg.png'
 
 const navLinks = [
@@ -33,11 +35,13 @@ const navLinks = [
 const Header = () => {
     const [open, setOpen] = useState(false)
     const [openMenu, setOpenMenu] = useState(false)
-    const {user, token, dispatch} = useContext(authContext)
+    
     const {theme, themeToggle} = useContext(ThemeContext)
-        
+    const user =  useSelector(selectCurrentUser)
+    const token =  useSelector(selectCurrentToken)
+    const role =  useSelector(selectCurrentRole)
     const signUp = ()=>{
-        dispatch({type: "LOG_OUT"})        
+        // dispatch({type: "LOG_OUT"})        
     }
     // if(user && token){
     //     console.log("user", user, "token", token)

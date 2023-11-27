@@ -4,9 +4,9 @@ import star from '../../assets/images/Star.png'
 import DoctorAbout from './DoctorAbout'
 import Feedback from './Feedback'
 import SidePanel from './SidePanel'
-import { useGetSingleDoctorQuery } from 'state/api'
 import { useParams } from 'react-router-dom'
 import Loader from 'component/Loader'
+import { useGetSingleDoctorQuery } from 'features/doctor/doctor ApiSlice'
 
 
 const DoctorDetails = () => {

@@ -4,16 +4,14 @@ import { formateDate } from '../../utils/formateDate'
 import  {AiFillStar} from 'react-icons/ai'
 import FeedbackForm from './FeedbackForm'
 import { useParams } from 'react-router-dom'
-import { useGetAllReviewsQuery } from 'state/api'
+import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
 
 const Feedback = () => {
   const {id} = useParams()
   const [showFeedbackForm, setShowFeedbackForm] = useState(false)
   const [reviews, setReviews] = useState(null)
-
-  const {data, isLoading, isError} = useGetAllReviewsQuery()
-
               
+  const [data, {isLoading}] = useGetDoctorsQuery()
     useEffect(()=>{
       if(data){
         const doctor = data.data.filter((doctor)=> doctor.doctor === id)

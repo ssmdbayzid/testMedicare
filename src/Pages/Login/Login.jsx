@@ -1,13 +1,19 @@
-import { setAuthToken } from 'api/auth'
 import { authContext } from 'context/AuthContext'
 import React, { useContext, useState } from 'react'
-import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
+
+// import { BiLogoGoogle, BiLogoFacebook } from 'react-icons/bi'
+// import { setAuthToken } from 'api/auth'
+// import { useLoginUserMutation } from 'state/api'
 import { toast } from 'react-toastify'
-import { useLoginUserMutation } from 'state/api'
 import  HashLoader  from 'react-spinners/HashLoader'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from 'utils/config'
+import { useDispatch } from 'react-redux'
+import { setCredentials } from 'features/auth/authSlice'
+import { useLoginMutation } from 'features/auth/authApiSlice'
+
+
 
 {/* <HashLoader /> */}
 
@@ -16,7 +22,8 @@ const Login = () => {
     email: "",
     password: "",
   })  
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)  
+  const [login, {isLoading}] = useLoginMutation()
   // const [loginUser] = useLoginUserMutation()
 
   const  { dispatch } = useContext(authContext)
@@ -31,26 +38,27 @@ const Login = () => {
           setLoading(true)
           console.log(formData)
           try {
-        const response = await axios.post(`${BASE_URL}/auth/login`, formData);
-        const {data:user, accessToken, refreshToken, role } =response?.data
-            
-        toast.success("Login Success")
-            
-            dispatch({
-              type: "LOGIN_SUCCESS",
-              payload: {
-                user: user,
-                accessToken:accessToken,
-                refreshToken:refreshToken,
-                role:role,
-              }
-            })
-          
-            navigate("/home")
+            const userData = await login(formData).unwrap()
+            console.log(userData)                  
             setLoading(false)               
-          } catch (error) {          
-              toast.error(error.response.data.message)  
+          } catch (err) {  
+            console.log(err)
+            if(!err?.response){
+              console.log(err)
+              alert("No server response")
+            }
+            else if(err.response?.status === 400){
+              alert("User or Password Missing")
+            }
+            else if(err.response?.status === 401){
+              alert("Unauthorized")
+            }
+            else {
+              alert("Log In failed")
+              console.log(err)        
+              // toast.error(err.response.data.message)  
               setLoading(false)              
+            }
              }             
           }                
   return (
@@ -115,3 +123,21 @@ const Login = () => {
 }
 
 export default Login 
+
+ /*
+         const response = await axios.post(`${BASE_URL}/auth/login`, formData);
+        const {data:user, accessToken, refreshToken, role } =response?.data
+            
+        toast.success("Login Success")            
+            dispatch({
+              type: "LOGIN_SUCCESS",
+              payload: {
+                user: user,
+                accessToken:accessToken,
+                refreshToken:refreshToken,
+                role:role,
+              }
+            })
+          
+            navigate("/home")
+            */

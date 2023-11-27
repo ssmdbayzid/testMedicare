@@ -7,7 +7,7 @@ import Slots from './Slots'
 import Experience from './Experience'
 import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
-import { useUpdateDoctorMutation } from 'state/api'
+import { useUpdateDoctorMutation } from 'features/doctor/doctor ApiSlice'
 
 
 const initialState = {

@@ -6,7 +6,7 @@ import { BASE_URL } from 'utils/config';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: BASE_URL,
-    credentials: 'include',
+    // credentials: 'include',
     prepareHeaders: (headers, {getState})=>{
         // const token = localStorage.getItem("accessToken")
         const token = getState().auth.token

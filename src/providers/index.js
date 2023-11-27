@@ -5,11 +5,11 @@ import { ThemeProvider } from "context/ThemeContext"
 const Providers = ({children}) =>{
     return (
         <ThemeProvider>
-        <AuthProvider>
-        <AuthContextProvider>
+        {/* <AuthProvider> */}
+        {/* <AuthContextProvider> */}
         {children}
-        </AuthContextProvider>
-        </AuthProvider>
+        {/* </AuthContextProvider> */}
+        {/* </AuthProvider> */}
         </ThemeProvider>
     )
 }

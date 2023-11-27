@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
-import { useUpdateUserMutation } from 'state/api'
 import imgUploadToImgBB from 'utils/uploadImage'
 import avatar from '../../assets/images/avatar-icon.png'
+import { useUpdateUserMutation } from 'features/users/userApiSlice'
 
 const initialFormData  =
   {

@@ -1,5 +1,6 @@
+import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
 import React from 'react'
-import { useGetDoctorsQuery } from 'state/api'
+
 
 const DoctorList = () => {
 

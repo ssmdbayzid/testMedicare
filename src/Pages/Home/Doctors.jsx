@@ -3,18 +3,23 @@ import doctorsData from '../../assets/data/doctorsData'
 import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import { useGetDoctorsQuery } from '../../state/api'
+// import { useGetDoctorsQuery } from '../../state/api'
 import Loader from 'component/Loader'
 import { authContext } from 'context/AuthContext'
+import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
 
 
 const Doctors = () => {
   const {data, isError, isLoading} = useGetDoctorsQuery()
-  const {user} = useContext(authContext)
-
-  if(user){
-    console.log(user)
+  try {
+    
+  } catch (error) {
+    console.log(error)
   }
+  
+
+  
+  if(isError)console.log(isError)
 
   if(data){
     console.log("data doctor",data)

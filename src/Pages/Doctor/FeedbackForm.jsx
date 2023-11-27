@@ -1,10 +1,10 @@
 import Loader from 'component/Loader';
+import { usePostReviewMutation } from 'features/doctor/doctor ApiSlice';
 import React, { useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 import { HashLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
-import { usePostReviewMutation } from 'state/api';
 
 const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
     const [rating, setRating] = useState(0)

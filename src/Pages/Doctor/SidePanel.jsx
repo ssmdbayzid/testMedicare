@@ -2,14 +2,14 @@ import moment from 'moment'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {loadStripe} from '@stripe/stripe-js';
-import { usePaymentCheckOutMutation } from 'state/api';
+import { useBookingMutation } from 'features/booking/bookingApiSlice';
 
 const SidePanel = ({doctor}) => {
-  const [paymentCheckOut] = usePaymentCheckOutMutation()
+  const [booking] = useBookingMutation()
 
   const makePayment = async ()=>{    
     const stripe = await loadStripe("pk_test_51ODQzkSE1wNzm1KdE9pfkilRgrdvFkX1O1pJPHAdGMUWo3JQrRLsL3UBfG7vOZvgfD4Io0YM10UYqqwX3o8H7SiD00XUjWPGqO")
-    const response = paymentCheckOut(doctor)
+    const response = booking(doctor)
     if(response.data){
       console.log(response.data)
       const result = stripe.redirectToCheckout({

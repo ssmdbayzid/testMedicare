@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import avatar from '../../assets/images/avatar-icon.png'
 import signUpImg from '../../assets/images/signup.gif'
-import { useCreateUserMutation } from 'state/api'
 import imgUploadToImgBB from 'utils/uploadImage'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { HashLoader } from 'react-spinners'
+import { useCreateUserMutation } from 'features/auth/authApiSlice'
 
 
 
