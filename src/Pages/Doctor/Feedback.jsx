@@ -4,24 +4,23 @@ import { formateDate } from '../../utils/formateDate'
 import  {AiFillStar} from 'react-icons/ai'
 import FeedbackForm from './FeedbackForm'
 import { useParams } from 'react-router-dom'
-import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
+import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 
 const Feedback = () => {
   const {id} = useParams()
   const [showFeedbackForm, setShowFeedbackForm] = useState(false)
   const [reviews, setReviews] = useState(null)
+  const [data ] = useGetDoctorsQuery()
               
-  const [data, {isLoading}] = useGetDoctorsQuery()
-    useEffect(()=>{
-      if(data){
-        const doctor = data.data.filter((doctor)=> doctor.doctor === id)
-        console.log(doctor)
-        setReviews(doctor);  
-      }
-    },[data])  
+    // useEffect(()=>{
+    //   if(data){
+    //     const doctor = data.data.filter((doctor)=> doctor.doctor === id)
+    //     console.log(doctor)
+    //     setReviews(doctor);  
+    //   }
+    // },[data])  
     
     
-
   return (
     <div>
       <div className="mb-12">
@@ -69,10 +68,10 @@ const Feedback = () => {
         */}
         
         </div>
-        <div className="">
+        {/* <div className="">
           {!showFeedbackForm &&  <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block mx-auto">Give  Feedback</button>}
           {showFeedbackForm && <FeedbackForm showFeedbackForm={showFeedbackForm} setShowFeedbackForm={setShowFeedbackForm} />}
-        </div>
+        </div> */}
       </div>
     </div>
   )

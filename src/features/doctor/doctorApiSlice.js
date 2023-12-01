@@ -20,7 +20,7 @@ export const doctorApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ['Doctors'
         }),
         deleteDoctor: builder.mutation({
             query: (id)=>({
-                url: 'doctors/${id}',
+                url: `doctors/${id}`,
                 method: "DELETE",                
             }),
             invalidatesTags: ['Doctors'],

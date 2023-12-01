@@ -1,5 +1,5 @@
 import Loader from 'component/Loader';
-import { usePostReviewMutation } from 'features/doctor/doctor ApiSlice';
+import { usePostReviewMutation } from 'features/doctor/doctorApiSlice';
 import React, { useState } from 'react'
 import { AiFillStar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';

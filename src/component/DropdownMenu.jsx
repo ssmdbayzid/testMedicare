@@ -1,13 +1,18 @@
 import { authContext } from 'context/AuthContext'
+import { logOut, selectCurrentRole, selectCurrentUser } from 'features/auth/authSlice'
 import React, { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 const DropdownMenu = ({openMenu, setOpenMenu, }) => {
-    const {dispatch, user, role} = useContext(authContext)
+    // const {dispatch, user, role} = useContext(authContext)
     const navigate = useNavigate()
+  const user = useSelector(selectCurrentUser)
+  const role = useSelector(selectCurrentRole)
+    const dispatch = useDispatch()
     const signUp = () =>  {
       setOpenMenu(!openMenu)
-      dispatch({type: "LOG_OUT"})
+      dispatch(logOut())
     }
   return (
     <div   

@@ -1,46 +1,44 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-import { logOut, setCredentials } from 'features/auth/authSlice';
-import { getRefreshToken } from 'hooks/useGetRefreshToken';
+import { logOut, receivedToken} from 'features/auth/authSlice';
+import { toast } from 'react-toastify';
 
-import { BASE_URL } from 'utils/config';
+let  token;
 
+// Get  token and set token as  header bearer
 const baseQuery = fetchBaseQuery({
-    baseUrl: BASE_URL,
-    // credentials: 'include',
-    prepareHeaders: (headers, {getState})=>{
-        // const token = localStorage.getItem("accessToken")
-        const token = getState().auth.token
-        if(token){
-            headers.set("authorization", `Bearer ${token}`)
+    baseUrl: process.env.REACT_APP_BASE_URL,
+    credentials: "include",
+    prepareHeaders: (headers) => {        
+        if (token) {
+            headers.set("Authorization", `Bearer ${token}`);
         }
         return headers;
     },
-})
-const baseQueryWithReauth = async (args, api, extraOptions)=>{
-    let result = await baseQuery(args, api, extraOptions)
-
-    if(result?.error?.originalStatue === 401){
-        console.log("Sending refresh token")
-        // send Refresh token to get new access token
-        const refreshResult = await baseQuery('/auth/refresh-token', api, extraOptions)
-        console.log(refreshResult)
-        if(refreshResult?.data){
-            const user = api.getState().auth.user;
-            console.log(refreshResult?.data , "this is under refresh token get function")
-            // store the new token
-
-            api.dispatch(setCredentials({...refreshResult.data, user}))
-            // retry the original query with new access token
-            result = await baseQuery(args, api, extraOptions)
-        }
-        else{
-            api.dispatch(logOut())
-        }
-        return result
-    }
-}
+});
 
 export  const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
+    // baseQuery: baseQueryWithReauth,
+    baseQuery: async (args, api, extraOptions)=>{
+        token = localStorage.getItem("accessToken")
+        const result = await baseQuery(args, api, extraOptions);
+        if(result?.error?.status === 401) {
+            token = localStorage.getItem("refreshToken")
+            const  refreshResult = await  baseQuery({
+                url: "auth/refresh-token",
+                method: "GET",                                  
+            }, api, extraOptions,)
+            console.log(refreshResult)
+                                   
+            if(refreshResult ?.data){                                
+                api.dispatch(receivedToken(refreshResult.data.accessToken))
+                // retry the original  query with new access token
+                result = await baseQuery(args, api, extraOptions)                      
+            } else {                
+                api.dispatch(logOut())                
+                toast.error("Token expired, please login again")                           
+            }
+        }
+        return result
+    },
     endpoints: builder => ({})
 })

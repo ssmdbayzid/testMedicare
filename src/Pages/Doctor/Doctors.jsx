@@ -5,7 +5,7 @@ import { BsArrowRight } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import Testimonial from '../Home/Testimonial'
 import Loader from 'component/Loader'
-import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
+import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 
 const Doctors = () => {
   const {data:doctors, isError, isLoading} = useGetDoctorsQuery()

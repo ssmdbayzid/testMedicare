@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import imgUploadToImgBB from 'utils/uploadImage'
 import avatar from '../../assets/images/avatar-icon.png'
 import { useUpdateUserMutation } from 'features/users/userApiSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentUser } from 'features/auth/authSlice'
 
 const initialFormData  =
   {
@@ -23,20 +25,19 @@ const ProfileSetting = ({tab, setTab}) => {
   const [loading, setLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState(initialFormData)
-  
-  const {user, dispatch} = useContext(authContext)
-  
+  // const dispatch  = useDispatch()
+  const user = useSelector(selectCurrentUser)
 
-  const userId = user._id;
+      
   useEffect(()=>{
 
     if(user){        
        setFormData({
         ...initialFormData,
-        name: user.name,
-        email: user.email,                
-        gender: user.gender,
-        bloodType: user.bloodType || "",        
+        name: user?.name,
+        email: user?.email,                
+        gender: user?.gender,
+        bloodType: user?.bloodType || "",        
       })
     }
   },[])
@@ -51,8 +52,7 @@ const ProfileSetting = ({tab, setTab}) => {
     const imgUrl = await imgUploadToImgBB(file) 
     setPreviewUrl(imgUrl);
   }
-
-  console.log(formData)
+  
   const submitForm = async event => {    
     event.preventDefault()   
     setLoading(true)      
@@ -63,10 +63,10 @@ const ProfileSetting = ({tab, setTab}) => {
           toast.success("User Updated Success")   
           navigate("/home")
           setPreviewUrl("")                
-          dispatch({
-            type: "UPDATE_USER",
-            payload: {user: result.data.updateUser}
-          })          
+          // dispatch({
+          //   type: "UPDATE_USER",
+          //   payload: {user: result.data.updateUser}
+          // })          
           setFormData(initialFormData)
          setLoading(false)          
         }

@@ -44,12 +44,16 @@ const router = createBrowserRouter([
             },
             {
                 path: "/doctors/:id",
-                element: <PrivateRoute allowedRoles={["patient"]}>
-                        <DoctorDetails />,
-                        </PrivateRoute>
+                element:<PrivateRoute allowedRoles={["patient"]}>
+                        <DoctorDetails />
+                        </PrivateRoute> ,                        
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },
-            
+            // {
+            //     path: "/doctors/:id",
+            //     element: <DoctorDetails />,                        
+            //     // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            // },            
             {
                 path: "/users/profile/me",
                 element: <PrivateRoute allowedRoles={["patient"]}>

@@ -1,8 +1,14 @@
 import React from 'react'
 import img from '../../assets/images/about.png'
 import card from '../../assets/images/about-card.png'
+import { useSelector } from 'react-redux'
+import { selectCurrentRole, selectCurrentToken, selectCurrentUser } from 'features/auth/authSlice'
 
 const About = ( ) => {
+    const user = useSelector(selectCurrentUser)
+    const token = useSelector(selectCurrentToken)
+    const role = useSelector(selectCurrentRole)
+    console.log("user", user, "role", role, "token", token)
   return (
     <div className="container my-24">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20 xl:gap-0 justify-between">

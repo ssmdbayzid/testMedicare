@@ -1,4 +1,4 @@
-import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
+import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 import React from 'react'
 
 

@@ -26,40 +26,32 @@ const Login = () => {
   const [login, {isLoading}] = useLoginMutation()
   // const [loginUser] = useLoginUserMutation()
 
-  const  { dispatch } = useContext(authContext)
+  // const  { dispatch } = useContext(authContext)
   const navigate = useNavigate()
     
   const handleInputChange = e => {
    setFormData({...formData, [e.target.name] : e.target.value })
   }
 
+  const dispatch = useDispatch()
   const handleLogin = async (event) => {
           event.preventDefault()          
           setLoading(true)
           console.log(formData)
           try {
-            const userData = await login(formData).unwrap()
-            console.log(userData)                  
+            // const userData = await axios.post(`${BASE_URL}/auth/login`, formData)
+            const result = await login(formData)
+
+            console.log(result)     
+
+            dispatch(setCredentials(result.data))             
             setLoading(false)               
           } catch (err) {  
             console.log(err)
-            if(!err?.response){
-              console.log(err)
-              alert("No server response")
-            }
-            else if(err.response?.status === 400){
-              alert("User or Password Missing")
-            }
-            else if(err.response?.status === 401){
-              alert("Unauthorized")
-            }
-            else {
-              alert("Log In failed")
-              console.log(err)        
-              // toast.error(err.response.data.message)  
+    
               setLoading(false)              
             }
-             }             
+                          
           }                
   return (
     <section className="px-5 lg:px-0 md:mt-12">

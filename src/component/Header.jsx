@@ -10,7 +10,7 @@ import {CiLight, CiDark} from 'react-icons/ci'
 import { ThemeContext } from 'context/ThemeContext'
 import DropdownMenu from './DropdownMenu'
 import { useSelector } from 'react-redux'
-import { selectCurrentRole, selectCurrentToken, selectCurrentUser } from 'features/auth/authSlice'
+import { logOut, selectCurrentRole, selectCurrentToken, selectCurrentUser } from 'features/auth/authSlice'
 // import bg from '../assets/images/header-bg.png'
 
 const navLinks = [
@@ -40,12 +40,10 @@ const Header = () => {
     const user =  useSelector(selectCurrentUser)
     const token =  useSelector(selectCurrentToken)
     const role =  useSelector(selectCurrentRole)
-    const signUp = ()=>{
-        // dispatch({type: "LOG_OUT"})        
+    
+    if(user && token && role ){
+        console.log("user", user, "token", token, "role", role)
     }
-    // if(user && token){
-    //     console.log("user", user, "token", token)
-    // }
   return (
     <div className="header leading-[100%] relative flex items-center">
         <div className="container">

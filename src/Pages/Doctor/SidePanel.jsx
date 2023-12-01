@@ -7,7 +7,8 @@ import { useBookingMutation } from 'features/booking/bookingApiSlice';
 const SidePanel = ({doctor}) => {
   const [booking] = useBookingMutation()
 
-  const makePayment = async ()=>{    
+  console.log(doctor)
+/*  const makePayment = async ()=>{    
     const stripe = await loadStripe("pk_test_51ODQzkSE1wNzm1KdE9pfkilRgrdvFkX1O1pJPHAdGMUWo3JQrRLsL3UBfG7vOZvgfD4Io0YM10UYqqwX3o8H7SiD00XUjWPGqO")
     const response = booking(doctor)
     if(response.data){
@@ -23,14 +24,17 @@ const SidePanel = ({doctor}) => {
       console.log(response.error)
     }
   }
+  */
 
   const bookAppointment =(e) =>{
     e.preventDefault()
     const form = e.target;
-    if((form.bookingTime.value < doctor.timeSlots[0].startingTime)||form.bookingTime.value > doctor.timeSlots[0].endingTime){
+    // console.log(form.bookingTime.value)
+    if(form.bookingTime.value < doctor.availableTime[0].startingTime||form.bookingTime.value > doctor.availableTime[0].endingTime){
       alert("Please book available time")
     }else{
       console.log(e.target.bookingTime.value)
+      // makePayment()
     }
   }
   console.log(doctor)
@@ -45,9 +49,8 @@ const SidePanel = ({doctor}) => {
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Patient Name" />
       <input type="date" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
       <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
-      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
-      <button
-      onClick={makePayment}
+      {/* <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.availableTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p>  */}
+      <button      
       className="bg-[var(--primary-color)] text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer">Book Appointment</button>
       </form>
     </div>

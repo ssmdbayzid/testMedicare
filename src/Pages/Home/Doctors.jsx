@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 // import { useGetDoctorsQuery } from '../../state/api'
 import Loader from 'component/Loader'
 import { authContext } from 'context/AuthContext'
-import { useGetDoctorsQuery } from 'features/doctor/doctor ApiSlice'
+import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 
 
 const Doctors = () => {
