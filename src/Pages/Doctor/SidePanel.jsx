@@ -49,7 +49,7 @@ const SidePanel = ({doctor}) => {
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Patient Name" />
       <input type="date" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
       <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
-      {/* <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.timeSlots[0]?.availableTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p>  */}
+      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
       <button      
       className="bg-[var(--primary-color)] text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer">Book Appointment</button>
       </form>
@@ -60,6 +60,19 @@ const SidePanel = ({doctor}) => {
 
 export default SidePanel
 
+
+
+
+
+
+
+
+
+
+
+
+
+//  ================================ 
 /* <div className="p-4 md:p-5 rounded-md shadow-xl border border-solid">
       <div className="flex justify-between items-center mb-3">
         <p className=" font-semibold text-[15px]">Ticket Price</p>

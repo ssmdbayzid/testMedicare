@@ -20,12 +20,8 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
         
         if(showFeedback && rating){            
            
-                const feedback = {
-                    reviewText: showFeedback,
-                    rating,
-                }
-
-            const result = await postReview({id, feedback})
+            const result = await postReview({id,  reviewText: showFeedback,
+                rating,})
     
             if(result.data){
                 toast.success("Thanks for your fedback")

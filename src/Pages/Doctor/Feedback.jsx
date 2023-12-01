@@ -10,15 +10,15 @@ const Feedback = () => {
   const {id} = useParams()
   const [showFeedbackForm, setShowFeedbackForm] = useState(false)
   const [reviews, setReviews] = useState(null)
-  const [data ] = useGetDoctorsQuery()
+  const {data } = useGetDoctorsQuery()
               
-    // useEffect(()=>{
-    //   if(data){
-    //     const doctor = data.data.filter((doctor)=> doctor.doctor === id)
-    //     console.log(doctor)
-    //     setReviews(doctor);  
-    //   }
-    // },[data])  
+    useEffect(()=>{
+      if(data){
+        const doctor = data.data.filter((doctor)=> doctor.doctor === id)
+        console.log(doctor)
+        setReviews(doctor);  
+      }
+    },[data])  
     
     
   return (
@@ -28,9 +28,10 @@ const Feedback = () => {
           All reviews (272)
         </p>
         <div className="flex flex-col gap-4 mb-7">
+          
        {/* ---------- Given reviews ------------- */}
       
-      {reviews && reviews.map((review, index)=><div key={index} className="flex justify-between gap-5">
+       {reviews && reviews.map((review, index)=><div key={index} className="flex justify-between gap-5">
         <div  className="flex gap-5">
           <figure  className="h-12 w-12 ">
             <img src={review.user.photo} alt="" className="w-full h-full rounded-full" />
@@ -39,7 +40,7 @@ const Feedback = () => {
             <h3 className="font-bold text-[16px] leading-7 text-primaryColor">{review.user.name}</h3>
             
             <div className="flex items-center gap-3">
-              {/* // rating */}
+               {/* // rating  */}
             <div className="flex gap-1">
             {[...Array(5).keys()].map((_, index)=>(
               <AiFillStar key={index} className="text-[#515152] text-[16px]" />
@@ -50,12 +51,10 @@ const Feedback = () => {
             
           <p className="text-para mt-1">{review.reviewText} </p>
           </div>
-        </div>
-
-          
-        </div>)}
+        </div>          
+        </div>)} 
        
-     {/* <div  className="flex items-center gap-5">
+      <div  className="flex items-center gap-5">
           <figure  className="h-16 w-16 rounded-full">
             <img src={avatar} alt="" className="w-full" />
           </figure>
@@ -65,13 +64,13 @@ const Feedback = () => {
           <p className="text-para text-[15px] mt-2">This is feedback</p>
           </div>
         </div>
-        */}
+      
         
         </div>
-        {/* <div className="">
+        <div className="">
           {!showFeedbackForm &&  <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block mx-auto">Give  Feedback</button>}
           {showFeedbackForm && <FeedbackForm showFeedbackForm={showFeedbackForm} setShowFeedbackForm={setShowFeedbackForm} />}
-        </div> */}
+        </div>
       </div>
     </div>
   )

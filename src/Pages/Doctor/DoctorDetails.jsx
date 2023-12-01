@@ -18,7 +18,7 @@ const DoctorDetails = () => {
   // const [loading, setLoading] = useState(false)
   const {data, error } = useGetSingleDoctorQuery(id)
   
-    const [tab, setTab] = useState("about")
+    const [tab, setTab] = useState("feedback")
     let doctor;
     if(data){
       doctor = data.data
@@ -73,11 +73,10 @@ const DoctorDetails = () => {
           </div>
           <div className="mt-12">
             {
-              tab === "about" && <DoctorAbout doctor={doctor} />
+              tab === "about" ? <DoctorAbout doctor={doctor} />
+              : <Feedback />
             }
-            {
-              tab === "feedback" && <Feedback />
-            }
+           
           </div>          
         </div>
         <div>

@@ -16,9 +16,10 @@ const Doctors = () => {
  }
 
   return (
-    <>
-      {/* ===================== Search Doctors List  ======================== */}
-
+    <div className="flex-1 ">
+      {(isError || isLoading) ? <> {isError ? <p className="text-center">Something Went Error</p>  
+      : <div className=' text-center pt-[10%]'> <Loader/> </div>}    </> :      
+      <>
     <section className="section bg-[#fff9ea">
       <div className="container text-center">
         <h2 className="heading">Find a doctor</h2>
@@ -35,13 +36,12 @@ const Doctors = () => {
         </div>
       </div>
     </section>
-      {/* ===================== Doctors List  ======================== */}
+      
   <section>
     <div className="container">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
 
-      {(isError || isLoading) ? <> {isError ? <p className="text-center">Something Went Error</p>  
-      : <Loader/>}    </> :   <>  {doctors && doctors.data.map((doctor, index)=>
+      {doctors && doctors.data.map((doctor, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
       <div className='w-full h-[286px]'>
       <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />
@@ -62,19 +62,16 @@ const Doctors = () => {
           <BsArrowRight />
           </Link>
         </div>
-  </div>)}
-    </>
-    }
-
+  </div>)}  
 </div>
 </div>
     </section>
 
       {/* ===================== Petient Testimonial   ======================== */}
-
       <Testimonial />
+        </>}
 
-    </>
+    </div>
   )
 }
 

@@ -36,7 +36,7 @@ const Doctors = () => {
       </div>
    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16 mt-12">
          { isError || isLoading ? <>
-          isError ? 
+          
             <p className="text-red-600">{isError.message}</p>
            : 
             <Loader />          

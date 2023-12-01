@@ -39,13 +39,11 @@ const Login = () => {
           setLoading(true)
           console.log(formData)
           try {
-            // const userData = await axios.post(`${BASE_URL}/auth/login`, formData)
+            const userData = await axios.post(`${BASE_URL}/auth/login`, formData)
             const result = await login(formData)
-
-            console.log(result)     
-
             dispatch(setCredentials(result.data))             
-            setLoading(false)               
+            setLoading(false)          
+            navigate("/home")     
           } catch (err) {  
             console.log(err)
     
@@ -55,7 +53,7 @@ const Login = () => {
           }                
   return (
     <section className="px-5 lg:px-0 md:mt-12">
-      <div className="w-full max-w-[570px] mx-auto rounded-lg shadow-md mt:pt-10">
+      <div className="w-full max-w-[570px]  bg-[var(--menu-bg)] mx-auto rounded-lg shadow-md mt:pt-10">
         <div className="p-10">
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">
             Hello <span className="text-primaryColor ">Welcome</span> Back
@@ -81,8 +79,8 @@ const Login = () => {
             placeholder='Your password'
             className="border-b border-[#0066ff61] border-solid w-full  py-2 text-[16px] leading-7 placeholder:text-textColor outline-none focus:outline-none focus:border-primaryColor" />
             </div>
-            <button className="btn mt-5 px-5 py-2 justify-between text-[18px] w-full rounded-md">
-            {loading ? <HashLoader size={30} color={"#ffffff"} /> 
+            <button className="button bg-[var(--primary-color)]  items-center justify-center text-[var(--my-color)] text-[18px] w-full rounded-md">
+            {loading ? <div className='flex items-start gap-6 justify-center'><HashLoader size={30} color={"#ffffff"} /> Log In </div>
             : "Log In" }
             </button>     
             <div className="flex items-center justify-between pt-3">
@@ -92,22 +90,7 @@ const Login = () => {
             </div>
                
           </form>
-
-          {/* =============== Third Party Authentication ====================== */}
-{/*
-          <div className="flex items-center justify-center gap-10 pt-3">
-              <p className="flex items-center cursor-pointer  border-2 px-3 py-1.5 rounded-md group hover:text-white hover:bg-[#db3236]">
-                < BiLogoGoogle className="text-2xl mr-2" />
-                <p className="text-lg leading-7 text-textColor group-hover:text-white">Google </p>
-              </p>
-
-              <p className="flex items-center cursor-pointer border-2 px-3 py-1.5 rounded-md hover:bg-primaryColor group hover:text-white">
-                < BiLogoFacebook className="text-2xl mr-2" />
-                <p className="text-lg leading-7 text-textColor group-hover:text-white ">Facebook </p>
-              </p>
-             
-            </div> 
-            */} 
+       
             <p className="mt-3 text-center">Already haven't an account? <a href="/signup" className="text-primaryColor font-semibold">Sign up</a></p>
         </div>
       </div>
@@ -115,21 +98,3 @@ const Login = () => {
 }
 
 export default Login 
-
- /*
-         const response = await axios.post(`${BASE_URL}/auth/login`, formData);
-        const {data:user, accessToken, refreshToken, role } =response?.data
-            
-        toast.success("Login Success")            
-            dispatch({
-              type: "LOGIN_SUCCESS",
-              payload: {
-                user: user,
-                accessToken:accessToken,
-                refreshToken:refreshToken,
-                role:role,
-              }
-            })
-          
-            navigate("/home")
-            */

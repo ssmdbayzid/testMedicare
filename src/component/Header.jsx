@@ -38,12 +38,7 @@ const Header = () => {
     
     const {theme, themeToggle} = useContext(ThemeContext)
     const user =  useSelector(selectCurrentUser)
-    const token =  useSelector(selectCurrentToken)
-    const role =  useSelector(selectCurrentRole)
-    
-    if(user && token && role ){
-        console.log("user", user, "token", token, "role", role)
-    }
+    const token =  useSelector(selectCurrentToken)            
   return (
     <div className="header leading-[100%] relative flex items-center">
         <div className="container">
