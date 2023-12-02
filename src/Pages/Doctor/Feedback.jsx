@@ -14,6 +14,7 @@ const Feedback = () => {
               
     useEffect(()=>{
       if(data){
+        console.log(data)
         const doctor = data.data.filter((doctor)=> doctor.doctor === id)
         console.log(doctor)
         setReviews(doctor);  
