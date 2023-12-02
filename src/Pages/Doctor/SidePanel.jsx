@@ -7,7 +7,7 @@ import { useBookingMutation } from 'features/booking/bookingApiSlice';
 const SidePanel = ({doctor}) => {
   const [booking] = useBookingMutation()
 
-  console.log(doctor)
+  
 /*  const makePayment = async ()=>{    
     const stripe = await loadStripe("pk_test_51ODQzkSE1wNzm1KdE9pfkilRgrdvFkX1O1pJPHAdGMUWo3JQrRLsL3UBfG7vOZvgfD4Io0YM10UYqqwX3o8H7SiD00XUjWPGqO")
     const response = booking(doctor)
@@ -37,7 +37,6 @@ const SidePanel = ({doctor}) => {
       // makePayment()
     }
   }
-  console.log(doctor)
 
   return (
     <div className="px-8 md:w-96 w-full md:p-5 rounded-md shadow-xl border border-solid py-14">

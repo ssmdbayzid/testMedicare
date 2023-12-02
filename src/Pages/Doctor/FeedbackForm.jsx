@@ -24,13 +24,15 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
                 rating,})
     
             if(result.data){
+                console.log(result.data)
                 toast.success("Thanks for your fedback")
                 setRating(0)
                 setShowFeedback("")
                 setShowFeedbackForm(!showFeedback)
             }
             if(result.error){
-                toast.error(`${result.error.data.message}`,)
+                // toast.error(`${result.error?.data}`,)
+                console.log(result.error)
             }
         }else{
             toast.error("Please give rating & feedback")
