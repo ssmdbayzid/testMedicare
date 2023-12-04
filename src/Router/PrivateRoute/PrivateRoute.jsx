@@ -14,7 +14,8 @@ const PrivateRoute = ({children, allowedRoles}) => {
   const dispatch = useDispatch()
 
   if(!allowedRoles.includes(role)){
-    dispatch(logOut())    
+    toast.error("Invalid")
+    // dispatch(logOut())    
   }   
 
   const isAllowed = allowedRoles.includes(role);

@@ -27,13 +27,13 @@ const Feedback = () => {
     <div>
       <div className="mb-12">
         <p className="text-lg leading-7 mb-7 font-semibold text-textColor">
-          All reviews (272)
+          All reviews ({reviews?.length})
         </p>
         <div className="flex flex-col gap-4 mb-7">
           
        {/* ---------- Given reviews ------------- */}
       
-       {reviews && reviews.map((review, index)=><div key={index} className="flex justify-between gap-5">
+       {reviews && reviews.map((review, index)=><div key={index} className="flex items-center justify-between gap-5">
         <div  className="flex gap-5">
           <figure  className="h-12 w-12 ">
             <img src={review.user?.photo} alt="" className="w-full h-full rounded-full" />
@@ -57,7 +57,7 @@ const Feedback = () => {
                     // className={`${index ==  hover
                         ? "text-yellow-400"
                         : "text-textColor"
-                        } bg-transparent border-none outline-none text-[18px] cursor-pointer`}                       
+                        } bg-transparent border-none outline-none text-[13px] cursor-pointer`}                       
                     >
                         <span> <AiFillStar /> </span>
                     </button>
@@ -72,23 +72,10 @@ const Feedback = () => {
             <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
             </div>
        
-          <p className="text-para mt-1">{review?.reviewText} </p>
+          <p className="text-md mt-1">{review?.reviewText} </p>
           </div>
         </div>          
-        </div>)} 
-       
-      <div  className="flex items-center gap-5">
-          <figure  className="h-16 w-16 rounded-full">
-            <img src={avatar} alt="" className="w-full" />
-          </figure>
-          <div className="">
-            <h3 className="font-bold text-[18px] leading-7 text-primaryColor">S S Md. Bayzid</h3>
-            <p className="text-[14px]"> {formateDate("06-08-2023")} </p>
-          <p className="text-para text-[15px] mt-2">This is feedback</p>
-          </div>
-        </div>
-      
-        
+        </div>)}              
         </div>
         <div className="">
           {!showFeedbackForm &&  <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block mx-auto">Give  Feedback</button>}

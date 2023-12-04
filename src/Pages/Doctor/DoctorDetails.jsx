@@ -9,6 +9,7 @@ import Loader from 'component/Loader'
 import { useGetSingleDoctorQuery } from 'features/doctor/doctorApiSlice'
 import  HashLoader  from 'react-spinners/HashLoader'
 import { toast } from 'react-toastify'
+import { getAveragerRating } from 'hooks/getAverageRating'
 
 
 
@@ -29,6 +30,7 @@ const DoctorDetails = () => {
     
     // const {name, averageRating, bio, experience, qualification, photo, about, specialization} = data?.data
 
+    
   return (<section className='section'>
     {
       !data ? <div className="h-screen flex items-start justify-center">
@@ -51,8 +53,9 @@ const DoctorDetails = () => {
             </h3>
             <div className="flex items-center gap-2">
               <img src={star} alt="" className="w-6 h-6" />
-              <span className="font-semibold">{doctor.averageRating}</span>
-              (292)
+              
+              <span className="font-semibold">{getAveragerRating(doctor?.reviews)}</span>
+              ({doctor?.reviews?.length})
             </div>
             <p className="mt-3 text-para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">{doctor.bio} </p>
           </div>

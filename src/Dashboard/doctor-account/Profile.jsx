@@ -24,7 +24,7 @@ const initialExp = {
 }
 
 const initialSlot = {
-  day:"", startingTime: "", endingTime: "",
+  startingTime: "", endingTime: "",
 }
 
 const initialFormData = {
@@ -121,15 +121,13 @@ const Profile = ({user}) => {
   }
   
     const addSlot = () =>{
-      if(day && startingTime && endingTime){
-        const newSlot = {
-          day,
+      if (startingTime && endingTime){
+        const newSlot = {          
           startingTime,
           endingTime,
         }      
         if(slots.length === 1 && Object.values(slots[0]).every(value=> value ==="")){
-          setSlots([{...newSlot, id: slots.length}])
-          setDay("")
+          setSlots([{...newSlot, id: slots.length}])          
           setStartingTime("")
           setEndingTime("")
           setOpenSlot(false)
@@ -380,21 +378,7 @@ const Profile = ({user}) => {
         <div>
         <p className="my-3">Slots</p>
          <div className="flex items-center justify-between mt-3 gap-8">
-         {/* // Day  */}
-         <div className="flex flex-col w-full">
-         <label className="mb-4" htmlFor="date">Day</label>
-         <select value={day} onChange={(e)=>setDay(e.target.value)} name="" id="date" className="w-full p-3 border">
-           <option value="select">Select</option>
-           <option value="saturday">Saturday</option>
-           <option value="sunday">Sunday</option>
-           <option value="monday">Monday</option>
-           <option value="tuesday">Tuesday</option>
-           <option value="wednesday">Wendnesday</option>
-           <option value="thursday">Thursday</option>
-           <option value="friday">Friday</option>
-           
-         </select>
-         </div>
+         {/* // Day  */}        
          
          <div className="flex flex-col w-full">
          <label className="mb-4" htmlFor="specialization">Starting Time</label>    
@@ -430,7 +414,7 @@ const Profile = ({user}) => {
        </div>
          : <p
          onClick={()=>setOpenSlot(true)}
-          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Add Slot</p> }         
+          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Avaiable Time</p> }         
         <div className="my-5">
         <label  htmlFor="about" 
         className="text-[var(--text-color)] mb-4">About <span className="text-red-500">*</span></label> <br />

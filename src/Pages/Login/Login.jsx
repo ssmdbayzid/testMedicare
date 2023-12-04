@@ -38,18 +38,19 @@ const Login = () => {
           event.preventDefault()          
           setLoading(true)
           console.log(formData)
-          try {
-            const userData = await axios.post(`${BASE_URL}/auth/login`, formData)
+               
             const result = await login(formData)
-            dispatch(setCredentials(result.data))             
-            setLoading(false)          
-            navigate("/home")     
-          } catch (err) {  
-            console.log(err)
-    
-              setLoading(false)              
+            if(result.data){
+              console.log(result.data)
+              dispatch(setCredentials(result.data))             
+              setLoading(false)          
+              navigate("/home")     
             }
-                          
+           if(result.error){
+             console.log(result.error.data)
+             toast.error(result.error.data?.message)
+             setLoading(false)                           
+           }                          
           }                
   return (
     <section className="px-5 lg:px-0 md:mt-12">

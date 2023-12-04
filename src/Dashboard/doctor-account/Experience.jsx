@@ -29,24 +29,24 @@ const Experience = ({experiences, setExperiences}) => {
             </tr>
         </thead>
         <tbody>
-            {experiences.map((data, index)=> <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {experiences.map((data, index)=> <tr key={index} className="bg-white  border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" className="px-0 py-4 w-[200px] font-medium text-gray-900  dark:text-white">
                     {data.hospital}
                 </th>
-                <td className="px-6 py-4">
+                <td className="text-center py-4">
                     {data.position}
                 </td>
-                <td className="px-6 py-4">
+                <td className="text-center py-4">
                     {data.startDate}
                 </td>
-                <td className="px-6 py-4">
+                <td className="text-center py-4">
                     {data.endDate}
                 </td>
-                <td className="px-6 py-4">
+                <td className=" text-center py-4">
                 <div
                 onClick={()=>remove(data.id)}
                 title="Remove Experience"
-                className="w-8 rounded-full h-8 bg-red-200 hover:bg-red-500 text-white flex items-center justify-center cursor-pointer">
+                className="mx-auto w-8 rounded-full h-8 bg-red-200 hover:bg-red-500 text-white flex items-center justify-center cursor-pointer">
                 <BsTrash className="text-lg"/ >
                 </div>
                 </td>

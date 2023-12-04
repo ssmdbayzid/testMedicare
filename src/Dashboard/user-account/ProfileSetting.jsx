@@ -62,7 +62,8 @@ const ProfileSetting = ({tab, setTab}) => {
         if(result.data){          
           toast.success("User Updated Success")   
           navigate("/home")
-          setPreviewUrl("")                
+          setPreviewUrl("")  
+          console.log("this is from patient data update")              
           // dispatch({
           //   type: "UPDATE_USER",
           //   payload: {user: result.data.updateUser}
@@ -71,6 +72,8 @@ const ProfileSetting = ({tab, setTab}) => {
          setLoading(false)          
         }
         if(result.error){
+          console.log("this is from patient Failed to up data")              
+
          toast.error(result.error.data.message)          
          setLoading(false)
         }                
