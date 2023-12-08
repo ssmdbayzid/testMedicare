@@ -51,8 +51,8 @@ const Doctors = () => {
               <span className="px-5 rounded-md py-2 text-iris text-[#01B5D8] bg-[#01B5D8]/20 font-bold">{doctor.specialization}</span>
                 <div className="flex items-center gap-2">
                 <img src={star} alt="" />
-                <span className="font-bold">{doctor.avgRating}</span>
-                <span className="text-textColor">({doctor.totalRating})</span>
+                <span className="font-bold">{doctor?.averageRating.toFixed(2)}</span>
+                <span className="text-textColor">({doctor?.totalRating})</span>
                 </div>
               </div>
               <div className="flex items-center justify-between mt-5">

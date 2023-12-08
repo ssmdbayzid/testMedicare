@@ -1,13 +1,17 @@
 import moment from 'moment'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {loadStripe} from '@stripe/stripe-js';
 import { useBookingMutation } from 'features/booking/bookingApiSlice';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'features/auth/authSlice';
 
 const SidePanel = ({doctor}) => {
   const [booking] = useBookingMutation()
 
-  
+  const user = useSelector(selectCurrentUser)
+  const {id} = useParams()
 /*  const makePayment = async ()=>{    
     const stripe = await loadStripe("pk_test_51ODQzkSE1wNzm1KdE9pfkilRgrdvFkX1O1pJPHAdGMUWo3JQrRLsL3UBfG7vOZvgfD4Io0YM10UYqqwX3o8H7SiD00XUjWPGqO")
     const response = booking(doctor)
@@ -31,11 +35,28 @@ const SidePanel = ({doctor}) => {
     const form = e.target;
     // console.log(form.bookingTime.value)
     if(form.bookingTime.value < doctor.availableTime[0].startingTime||form.bookingTime.value > doctor.availableTime[0].endingTime){
-      alert("Please book available time")
+      alert("Please book available time")      
     }else{
-      console.log(e.target.bookingTime.value)
+      
       // makePayment()
-    }
+      const data = {
+
+        doctorId: id,
+        userId: user._id,
+        doctorInfo: doctor,
+        userInfo: user,
+        data: form.date.value,
+        time: form.bookingTime.value,
+
+      }
+      const response = booking(data)
+      if(response.data){
+        console.log(response.data)
+      }
+        if(response.error){
+          console.log("this erro payment page", response.error)
+        }         
+    }       
   }
 
   return (
@@ -46,7 +67,7 @@ const SidePanel = ({doctor}) => {
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.specialization} />
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.name} />
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Patient Name" />
-      <input type="date" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
+      <input type="date" name='date' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
       <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
       <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime[0]?.endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
       <button      

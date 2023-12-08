@@ -16,7 +16,7 @@ const {user, dispatch} = useContext(authContext)
   }
   console.log(user)
   return (
-    <div className="max-w-[1770px] px-5 mx-auto">
+    <div className="max-w-[1770px] px-5 mx-auto flex-1 mt-10">
       {!user ? <p>User Not  Found</p>: 
       <div className="grid md:grid-cols-3 gap-10">
       <div className="pb-12 px-7 rounded-md">

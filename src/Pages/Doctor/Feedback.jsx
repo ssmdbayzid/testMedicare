@@ -35,9 +35,9 @@ const Feedback = () => {
       
        {reviews && reviews.map((review, index)=><div key={index} className="flex items-center justify-between gap-5">
         <div  className="flex gap-5">
-          <figure  className="h-12 w-12 ">
-            <img src={review.user?.photo} alt="" className="w-full h-full rounded-full" />
-          </figure>
+          
+            <img src={review.user?.photo} alt="" className="w-16 h-14 rounded-full" />
+          
           <div className="">
             
             <h3 className="font-bold text-[16px] leading-7 text-primaryColor">{review.user?.name}</h3>

@@ -4,9 +4,11 @@ import { toast } from 'react-toastify';
 
 let  token;
 
+
 // Get  token and set token as  header bearer
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_URL,
+    // baseUrl: process.env.REACT_APP_BASE_URL,
+    baseUrl: "http://localhost:5000/api/v1",
     credentials: "include",
     prepareHeaders: (headers) => {        
         if (token) {
