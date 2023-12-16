@@ -9,3 +9,5 @@ export {default as Doctors} from './Doctor/Doctors.jsx'
 export {default as DoctorDetails} from './Doctor/DoctorDetails.jsx'
 export {default as BookAppointment} from './Booking/BookAppointment.js'
 
+export {default as CheckOutCancel} from './Booking/CheckOutCancel.jsx'
+export {default as CheckOutSuccess} from './Booking/CheckOutSuccess.jsx'

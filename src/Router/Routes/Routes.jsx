@@ -4,9 +4,10 @@ import DoctorAccount from "Dashboard/doctor-account/DoctorAccount";
 import MyAccount from "Dashboard/user-account/MyAccount";
 import BookAppointment from "Pages/Booking/BookAppointment";
 
+
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
-const { Home, Contact, Login, Signup, DoctorDetails, Doctors, Services } = require("../../Pages");
+const { Home, Contact, Login, Signup, DoctorDetails, Doctors, Services, CheckOutCancel, CheckOutSuccess  } = require("../../Pages");
 const { default: PrivateRoute } = require("../PrivateRoute/PrivateRoute");
 
 const router = createBrowserRouter([
@@ -42,6 +43,17 @@ const router = createBrowserRouter([
                 path: '/services',
                 element: <Services />,
             },
+
+            {
+                path: "/payment-success",
+                element: <CheckOutSuccess />,                        
+                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            },            
+            {
+                path: "/payment-cancel",
+                element: <CheckOutCancel />,                        
+                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+            },   
             {
                 path: "/doctors/:id",
                 element:<PrivateRoute allowedRoles={["patient"]}>
@@ -49,11 +61,7 @@ const router = createBrowserRouter([
                         </PrivateRoute> ,                        
                 // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
             },
-            // {
-            //     path: "/doctors/:id",
-            //     element: <DoctorDetails />,                        
-            //     // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
-            // },            
+                     
             {
                 path: "/users/profile/me",
                 element: <PrivateRoute allowedRoles={["patient"]}>
