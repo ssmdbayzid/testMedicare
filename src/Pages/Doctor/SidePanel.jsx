@@ -27,7 +27,7 @@ const SidePanel = ({doctor}) => {
   const makePayment  = async (e) =>{
       e.preventDefault()
       
-      axios.post('http://localhost:5000/api/v1/book-appointment', {
+     /* axios.post('http://localhost:5000/api/v1/book-appointment', {
         id,
         doctorId: doctor._id,
         userId: user._id,
@@ -44,8 +44,9 @@ const SidePanel = ({doctor}) => {
       .catch(error=> {
         console.log(error);
       });
+      */
            
-      /*
+      
       const form = e.target;      
       const selectedDate = new Date(form.date.value);
       const currentDate = new Date();             
@@ -73,8 +74,7 @@ const SidePanel = ({doctor}) => {
         doctorId: doctor._id,
         userId: user._id,
         date: form.date.value,
-        time: form.bookingTime.value,
-        ticketPrice: doctor.ticketPrice,
+        time: form.bookingTime.value,        
       })
       .then(res => {
         console.log(res);
@@ -94,7 +94,7 @@ const SidePanel = ({doctor}) => {
       } else {
         toast.error("Select date from today")
       } 
-      */
+      
       
     }
 
