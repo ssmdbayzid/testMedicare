@@ -11,7 +11,7 @@ const CheckOutSuccess = () => {
           <h1 className="text-4xl text-center font-bold md:font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 ">Thank You For Book An Appointment!</h1>
           
           <a
-          href='/user/profile/me'
+          href='/users/profile/me'
             className="inline-flex items-center px-4 py-2 text-white bg-indigo-600 border border-indigo-600 rounded mmd:rounded-full hover:bg-indigo-700 focus:outline-none focus:ring">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" stroke-width="2">
