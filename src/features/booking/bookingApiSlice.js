@@ -1,10 +1,10 @@
 const { apiSlice } = require("app/api/apiSlice");
 
-const bookingApiSlice = apiSlice.enhanceEndpoints({addTags: ['booking', "Users", "Doctors"]}).injectEndpoints({
+const bookingApiSlice = apiSlice.enhanceEndpoints({addTags: ['Booking', "Users", "Doctors"]}).injectEndpoints({
     endpoints: builder =>({
         booking: builder.mutation({
             query: ({doctorId, ...rest})=> ({
-                url: 'booking',
+                url: 'Booking',
                 method: "POST",
                 body: rest,
             })

@@ -1,7 +1,7 @@
 import { authContext } from 'context/AuthContext'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HashLoader } from 'react-spinners'
+import { ClimbingBoxLoader, HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import imgUploadToImgBB from 'utils/uploadImage'
 import avatar from '../../assets/images/avatar-icon.png'
@@ -52,7 +52,7 @@ const ProfileSetting = ({tab, setTab}) => {
     const imgUrl = await imgUploadToImgBB(file) 
     setPreviewUrl(imgUrl);
   }
-  
+  console.log(user)
   const submitForm = async event => {    
     event.preventDefault()   
     setLoading(true)      
@@ -63,17 +63,13 @@ const ProfileSetting = ({tab, setTab}) => {
           toast.success("User Updated Success")   
           navigate("/home")
           setPreviewUrl("")  
-          console.log("this is from patient data update")              
-          // dispatch({
-          //   type: "UPDATE_USER",
-          //   payload: {user: result.data.updateUser}
-          // })          
+          console.log("this is from patient data update")                          
           setFormData(initialFormData)
          setLoading(false)          
         }
         if(result.error){
           console.log("this is from patient Failed to up data")              
-
+          console.log(result.error)
          toast.error(result.error.data.message)          
          setLoading(false)
         }                
