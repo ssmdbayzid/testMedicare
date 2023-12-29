@@ -5,6 +5,7 @@ import ProfileSetting from './ProfileSetting';
 import Loader from 'component/Loader';
 import { authContext } from 'context/AuthContext';
 
+
 const MyAccount = () => {
 const {user, dispatch} = useContext(authContext)
   const [tab, setTab] = useState("booking")

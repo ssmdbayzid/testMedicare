@@ -67,7 +67,7 @@ const SidePanel = ({doctor}) => {
       var selectedMonth = selectedDate.getMonth() + 1;
       var selectedDay = selectedDate.getDate();
 
-      if(currentYear <= selectedYear && currentMonth <= selectedMonth && currentDay <= selectedDay){      
+      if(currentYear <= selectedYear && currentMonth <= selectedMonth && (selectedMonth == currentMonth && currentDay <= selectedDay)){      
         if(startingTime <= selectedTime && endingTime >= selectedTime){
           axios.post('http://localhost:5000/api/v1/book-appointment', {
         id,
@@ -77,10 +77,8 @@ const SidePanel = ({doctor}) => {
         time: form.bookingTime.value,        
       })
       .then(res => {
-        console.log(res);
-        if(res.data.url){
-          window.location.href = res.data.url
-        }
+        window.location.replace(res.data.url)
+        
       })
       .catch(error=> {
         console.log(error);

@@ -7,9 +7,16 @@ const bookingApiSlice = apiSlice.enhanceEndpoints({addTags: ['Booking', "Users",
                 url: 'Booking',
                 method: "POST",
                 body: rest,
-            })
-        })
+            }),           
+        }),
+        getAllBooking: builder.query({
+            query: ()=> 'booking',
+            providesTags: ["Doctors"]
+           }),
     })
 })
 
-export const {useBookingMutation} = bookingApiSlice;
+export const {
+    useBookingMutation,
+    useGetAllBookingQuery,
+} = bookingApiSlice;
