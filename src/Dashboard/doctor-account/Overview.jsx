@@ -23,19 +23,17 @@ const Overview = () => {
               </h3>
               <div className="flex items-center gap-2">
                 <img src={star} alt="" className="w-6 h-6" />
-                <span className="font-semibold">{user.averageRating}</span>
-                (292)
+                <span className="font-semibold">{(user.averageRating).toFixed(2)} ({user.totalRating})</span>                
               </div>
               <p className="mt-3 text-para text-[14px] md:text-15 leading-6 lg:max-w-[390px]">{user.bio} </p>
             </div>
             </div>
 
    
-            <div className="mt-12">
-              
+            <div className="mt-12">              
               <DoctorAbout doctor={user} />                                        
             </div>          
-          </div>)
+          </div>
           <div>          
           </div>
         </div>

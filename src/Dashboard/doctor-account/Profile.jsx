@@ -23,9 +23,6 @@ const initialExp = {
   hospital: "",
 }
 
-const initialSlot = {
-  startingTime: "", endingTime: "",
-}
 
 const initialFormData = {
   name: "",
@@ -46,18 +43,11 @@ const Profile = ({user}) => {
   const [experiences, setExperiences] = useState([{
     startDate : "", endDate: "", position: "", hospital: "",
   }])
-  const [slots, setSlots] = useState([initialSlot])
   
   const [open, setOpen] = useState(false);
   const [openExperience, setOpenExperience] = useState(false);
-  const [openSlot, setOpenSlot] = useState(false);
   const [loading, setLoading] = useState(false)
-
-  const [startingTime, setStartingTime] = useState("")
-  const [endingTime, setEndingTime] = useState("")
-  const [day, setDay] = useState("00:00")
-
-
+  
   useEffect(()=>{
     setFormData({
       ...formData,
@@ -119,40 +109,17 @@ const Profile = ({user}) => {
   const handleExpOnChange = e => {
     setExpData({...expData, [e.target.name]: e.target.value})
   }
-  
-    const addSlot = () =>{
-      if (startingTime && endingTime){
-        const newSlot = {          
-          startingTime,
-          endingTime,
-        }      
-        if(slots.length === 1 && Object.values(slots[0]).every(value=> value ==="")){
-          setSlots([{...newSlot, id: slots.length}])          
-          setStartingTime("")
-          setEndingTime("")
-          setOpenSlot(false)
-        }
-        else{
-          setSlots([...slots, {...newSlot, id:slots.length + 1}])
-          setDay("")
-          setStartingTime("")
-          setEndingTime("")
-          setOpenSlot(false)
-        }
-      }
-      else{
-     return toast.error("Please complete the slots")
-      }            
-    }
- 
+
+
  const formSubmitHandler = async (event) =>{
   event.preventDefault()
   setLoading(true)
   const form = event.target;
 
- console.log(typeof(form.ticketPrice.value))
+ console.log("Slot starting time", form.startTime.value)
+ console.log("Slot ending time", form.endTime.value)
 
-  if(Object.values(qualification[0]).every(value=> value !== "") && Object.values(experiences[0]).every(value=> value !== "") && Object.values(slots[0]).every(value=> value !== "")){
+  if(Object.values(qualification[0]).every(value=> value !== "") && Object.values(experiences[0]).every(value=> value !== "")){
     const updateData = {      
       name: formData.name,
       email: formData.email,
@@ -164,7 +131,10 @@ const Profile = ({user}) => {
       about: form.about.value, 
       qualification: qualification,
       experience:experiences,
-      timeSlots:slots,
+      availableTime:{
+        startingTime : form.startTime.value,
+        endingTime : form.endTime.value,
+      },
     } 
     const  result = await updateDoctor({...updateData, id: user._id})
     console.log(result)
@@ -179,12 +149,13 @@ const Profile = ({user}) => {
   else{
     return toast.error("Please fillup the form")
   }
+  
  }
 
 
   return (
     <div>
-        <p className="bg-yellow-100 py-1 px-2">To get approval please complete your profile. We'll review manually and approve within 3 days</p>
+        <p className="bg-yellow-200 text-red-700 py-1 px-2 text-sm text-center">To get approval please complete your profile. We'll review manually and approve within 3 days</p>
       <h2 className="text-2xl text-[var(--text-color)] font-bold mt-3">Profile Information</h2>
       <form onSubmit={formSubmitHandler} className="my-3">
         <div className="mb-3">
@@ -367,54 +338,35 @@ const Profile = ({user}) => {
         </div>
 
          {/*===========Add slot  section===========*/}
-
+             
         <div>
-        {Object.values(slots[0]).every(value=> value !== "") && 
-        <Slots  slots={slots} setSlots={setSlots}/>
-        } 
-        </div>
-
-        {openSlot ?
-        <div>
-        <p className="my-3">Slots</p>
+        <p className="my-3">Available Time</p>
          <div className="flex items-center justify-between mt-3 gap-8">
          {/* // Day  */}        
          
          <div className="flex flex-col w-full">
          <label className="mb-4" htmlFor="specialization">Starting Time</label>    
-         <input type="time" 
-         onChange={(e)=>setStartingTime(e.target.value)}
-         value={startingTime} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         <input 
+         type="time" 
+         name="startTime"         
+         className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
          </div>
          {/* // Ticket Price  */}
          <div className="flex flex-col w-full">
          <label className="mb-4" htmlFor="ticket-price">Ending Time</label>
-         <input type="time"
-         onChange={(e)=>setEndingTime(e.target.value)}
-         value={endingTime} className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
+         <input 
+         type="time"
+         name="endTime"
+         className="numberInput appearance-none leading-tight w-full border p-3 focus:outline-none numberInput selection:focus:shadow-outline" />
          </div>          
        </div>
        <div className="flex items-center mt-8 gap-5">
-        <div  
-        onClick={()=>addSlot()}  
-        style={{marginTop: "0px"}}    
-        className="btn ">Save</div>
-      
-        <div
-        onClick={()=>{
-          setOpenSlot(false)
-          setDay("")
-          setStartingTime("")
-          setEndingTime("")
-        }}
-        className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center cursor-pointer">
-        <BsTrash className="text-2xl"/ >
-        </div>
         </div>  
        </div>
-         : <p
-         onClick={()=>setOpenSlot(true)}
-          className="px-2 border py-3 bg-[#121212]/90 hover:bg-[#121212] text-white w-[25%] text-center mt-3 cursor-pointer">Avaiable Time</p> }         
+           
+          
+          
+          
         <div className="my-5">
         <label  htmlFor="about" 
         className="text-[var(--text-color)] mb-4">About <span className="text-red-500">*</span></label> <br />
