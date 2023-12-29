@@ -4,48 +4,53 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { BsArrowRight } from 'react-icons/bs'
 import star from '../../assets/images/Star.png'
+import moment from 'moment'
 
-const MyBooking = () => {
-  const {data, isError, isLoading} = useGetAllBookingQuery()
+const MyBooking = ({user}) => {
+  console.log(user.appointment)
   
-  console.log(data?.data?.map(item=> {
-    return item.doctor
-  }))
   return (
-    <div  className="flex-1">
-      {(isError || isLoading) ? 
-      <>
-      {isError ?
-    <p className="text-center">Something Went Error</p>   
-     : <div className=' text-center pt-[10%]'> <Loader/> </div>
-     }
-      </>: <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
+    <div  className="">
+      
      <h1>This is appointment's booking</h1>
-     {data && data?.data?.map((doctor, index)=>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 mt-10">
+     {user && user?.appointment?.map((data, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
       <div className='w-full h-[286px]'>
-      <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />
+      <img src={data.doctor.photo} alt="" className="w-full h-full rounded-xl" />
       </div>
-      <h3 className="text-2xl mt-5 mb-3 font-bold">{doctor.name}</h3>
+      <h3 className="text-2xl md:text-xl mt-5 mb-3 font-bold">{data.doctor.name}</h3>
       <div className="flex items-center justify-between ">
-      <span className="bg-irisBlueColor/20 font-bold text-[var(text-color)] text-lg">{doctor.specialization}</span>
-        <div className="flex items-center">
+      {/* <span className="bg-irisBlueColor/20 font-bold text-[var(text-color)] text-lg">{data.doctor.specialization}</span> */}
+      <span className="text-[#01B5D8] bg-[#01B5D8]/20 text-irisBlueColor py-1 px-2 text-[12px] leading-4 lg:text-[16px] lg:leading-7 font-semibold rounded first-letter:uppercase">
+              {data.doctor.specialization}
+            </span>
+            <div className="flex items-center">
         <img src={star} alt="" />
-        <span className="font-semibold">{doctor.avgRating}</span>
-        <span className="text-textColor">({doctor.totalRating})</span>
-        </div>
+      <span>{(data.doctor.averageRating).toFixed(2)} ({data.doctor.totalRating})</span>
+            </div>
       </div>
-      <div className="flex items-center justify-between mt-5">
-          <p className="text-textColor">{doctor.hospital}</p>
-
-          <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-[var(--primary-color)] hover:text-white w-10 h-10 rounded-full">
-          <BsArrowRight />
-          </Link>
+        <div className="flex justify-between mt-1">          
+        <span className="font-semibold">Date:</span>
+        <span className="font-semibold text-primary">{moment(data.appointmentDate).format('DD MMM YYYY')}</span>
         </div>
+        <div className="flex justify-between mt-1">          
+        <span className="font-semibold">Time:</span>        
+        <span className="text-textColor text-primary">{moment(data.time, "HH:mm").format("hh:mm A")}</span>
+        </div>
+      <Link
+      to={`/doctors/${data.doctor._id}`}
+      className="group flex bg-primary/90 text-white items-center justify-between mt-5 p-1 rounded-r-full">
+          
+          <p className="text-textColor pl-1">About Doctor</p>
+
+          <p  className="flex items-center justify-center text-lg border-2 group-hover:border-none group-hover:bg-[var(--primary-color)] hover:text-white w-10 h-10 rounded-full">
+          <BsArrowRight />
+          </p>
+        </Link>
   </div>)}   
 </div>
-      </>}
+
     </div>
   )
 }

@@ -4,11 +4,20 @@ import MyBooking from './MyBooking';
 import ProfileSetting from './ProfileSetting';
 import Loader from 'component/Loader';
 import { authContext } from 'context/AuthContext';
+import { useGetSingleUserQuery } from 'features/users/userApiSlice';
+
 
 
 const MyAccount = () => {
 const {user, dispatch} = useContext(authContext)
   const [tab, setTab] = useState("booking")
+  
+  const {data, isError, isLoading} = useGetSingleUserQuery(user._id)
+
+ if(isError){
+  console.log(isError)
+
+ }
 
   const logOut = ()=>{
     dispatch({
@@ -59,6 +68,8 @@ const {user, dispatch} = useContext(authContext)
         
       </div>
       <div className="md:col-span-2 md:px-7">
+      {(isError || isLoading) ? <> {isError ? <p className="text-center">Something Went Error</p>  
+      : <div className=' text-center pt-[10%]'> <Loader/> </div>}    </> :       
         <div>
           <button
           onClick={()=>setTab("booking")}
@@ -80,10 +91,10 @@ const {user, dispatch} = useContext(authContext)
             Profile Setting
           </button>
           {
-            tab === "booking" ? <MyBooking /> 
+            tab === "booking" ? <MyBooking user={data?.data} /> 
             : <ProfileSetting tab={tab} setTab={setTab} />
           }
-        </div>
+        </div>}
       </div>
     </div>
       }      
