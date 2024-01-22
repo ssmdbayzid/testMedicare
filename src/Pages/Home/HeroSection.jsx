@@ -2,6 +2,7 @@ import React from 'react'
 import img1 from '../../assets/images/hero-img01.png'
 import img2 from '../../assets/images/hero-img02.png'
 import img3 from '../../assets/images/hero-img03.png'
+import { Link } from 'react-router-dom'
 
 const 
 HeroSection = () => {
@@ -19,22 +20,25 @@ HeroSection = () => {
                     <p className="text-para text-justify">
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse earum quidem corrupti, soluta dolores suscipit fuga blanditiis. Amet, asperiores deserunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto soluta, perferendis veniam commodi porro corrupti.
                     </p>
-                    <button className="button">Request an Appointment</button>
+                    <Link to={"/doctors"}>
+                        <button className='button'>Request an Appointment
+                        </button> 
+                        </Link>
 
                     <div className="flex items-center mt-12 gap-5">
                         <div>
-                            <h1 className="text-4xl font-bold">30+</h1>
-                            <hr className="h-3 w-[100px] mt-[-20px] bg-secondaryColor"></hr>
+                            <h1 className="text-4xl font-bold ">30+</h1>
+                            <hr className="h-2 w-[100px] mt-[-10px]  bg-[var(--secondary-color)]"></hr>
                             <p className="text-para">Years of Experience</p>
                         </div>
                         <div>
-                            <h1 className="text-4xl font-bold">30+</h1>
-                            <hr className="h-3 w-[100px] mt-[-20px] bg-purpleColor"></hr>
+                            <h1 className="text-4xl font-bold ">30+</h1>
+                            <hr className="h-2 w-[100px] mt-[-10px]  bg-[var(--purple-color)]"></hr>
                             <p className="text-para">Years of Experience</p>
                         </div>
                         <div>
-                            <h1 className="text-4xl font-bold">30+</h1>
-                            <hr className="h-3 w-[100px] mt-[-20px] bg-irisBlueColor"></hr>
+                            <h1 className="text-4xl font-bold ">30+</h1>
+                            <hr className="h-2 w-[100px] mt-[-10px]  bg-[var(--iris-color)]"></hr>
                             <p className="text-para">Years of Experience</p>
                         </div>
                     </div>

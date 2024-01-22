@@ -16,7 +16,7 @@ const Services = () => {
                 <h2 className="text-3xl font-[700]">{data.name}</h2>
                 <p className="text-para text-justify">{data.description}</p>
                 <div className="flex justify-between items-center mt-8">
-                <Link to="/doctors" className="flex items-center justify-center w-12 h-12 border-2 rounded-full hover:bg-primaryColor hover:border-none text-xl hover:text-white">
+                <Link to="/doctors" className="flex items-center justify-center w-12 h-12 border-2 rounded-full hover:bg-[var(--primary-color)] hover:border-none text-xl hover:text-white">
                     < BsArrowRight />
                 </Link>
 
@@ -24,8 +24,7 @@ const Services = () => {
                 style={{
                     background: `${data.bgColor}`,
                     color: `${data.textColor}`                    
-                }}
-                >
+                }}>
                     {index + 1}
                 </div>
                 </div>

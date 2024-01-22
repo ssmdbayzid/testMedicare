@@ -53,7 +53,7 @@ const Login = () => {
            }                          
           }                
   return (
-    <section className="px-5 lg:px-0 md:mt-12">
+    <section className="px-5 lg:px-0 md:mt-12 flex-1">
       <div className="w-full max-w-[570px]  bg-[var(--menu-bg)] mx-auto rounded-lg shadow-md mt:pt-10">
         <div className="p-10">
           <h3 className="text-headingColor text-[22px] leading-9 font-bold mb-10 ">

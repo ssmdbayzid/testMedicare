@@ -8,6 +8,7 @@ import Experience from './Experience'
 import { HashLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import { useUpdateDoctorMutation } from 'features/doctor/doctorApiSlice'
+import { useNavigate } from 'react-router-dom'
 
 
 const initialState = {
@@ -30,7 +31,9 @@ const initialFormData = {
   gender:"",
 }
 
-const Profile = ({user}) => {
+const Profile = ({setTab, user}) => {
+
+  const navigate = useNavigate()
   // API
   const [updateDoctor] = useUpdateDoctorMutation()
   
@@ -138,8 +141,10 @@ const Profile = ({user}) => {
     } 
     const  result = await updateDoctor({...updateData, id: user._id})
     console.log(result)
+
     if(result.success){
       console.log(console.log(result))
+      setTab("overview")
     }
     if(result.error){
       console.log(result)

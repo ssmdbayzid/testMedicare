@@ -3,11 +3,13 @@ import UserList from "Dashboard/User/UserList";
 import DoctorAccount from "Dashboard/doctor-account/DoctorAccount";
 import MyAccount from "Dashboard/user-account/MyAccount";
 import BookAppointment from "Pages/Booking/BookAppointment";
+import CheckOutFail from "Pages/Booking/CheckOutFail";
+import Contact from "Pages/Contact/Contact";
 
 
 const { createBrowserRouter } = require("react-router-dom");
 const { default: Main } = require("../../Layout/Main");
-const { Home, Contact, Login, Signup, DoctorDetails, Doctors, Services, CheckOutCancel, CheckOutSuccess  } = require("../../Pages");
+const { Home,  Login, Signup, DoctorDetails, Doctors, Services, CheckOutCancel, CheckOutSuccess  } = require("../../Pages");
 const { default: PrivateRoute } = require("../PrivateRoute/PrivateRoute");
 
 const router = createBrowserRouter([
@@ -46,57 +48,53 @@ const router = createBrowserRouter([
 
             {
                 path: "/payment-success",
-                element: <CheckOutSuccess />,                        
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                element: <CheckOutSuccess />,                                        
             },            
             {
+                path: "/payment-failed",
+                element: <CheckOutFail />,                                        
+            },   
+            {
                 path: "/payment-cancel",
-                element: <CheckOutCancel />,                        
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                element: <CheckOutCancel />,                                        
             },   
             {
                 path: "/doctors/:id",
                 element:<PrivateRoute allowedRoles={["patient"]}>
                         <DoctorDetails />
-                        </PrivateRoute> ,                        
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                        </PrivateRoute> ,                                        
             },
                      
             {
-                path: "/users/profile/me",
+                path: "/users/profile/:id",
                 element: <PrivateRoute allowedRoles={["patient"]}>
                 <MyAccount />,
-                </PrivateRoute>
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                </PrivateRoute>                
             },            
             {
-                path: "/doctors/profile/me",
+                path: "/doctors/profile/:id",
                 element: <PrivateRoute allowedRoles={["doctor"]}>
                         <DoctorAccount />
-                        </PrivateRoute>,
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                        </PrivateRoute>,                
             },
             
             {
                 path: "/dashboard/doctors",
                 element: <PrivateRoute allowedRoles={["doctor"]}>
                         <DoctorList />
-                        </PrivateRoute>,
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                        </PrivateRoute>,                
             },
             {
                 path: "/dashboard/users",
                 element: <PrivateRoute allowedRoles={["patient"]}>
                         <UserList />
-                        </PrivateRoute>,
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                        </PrivateRoute>,                
             },
             {
                 path: "/doctor/:id/bookAppointment",
                 element: <PrivateRoute allowedRoles={["patient"]}>
                         <BookAppointment />
-                        </PrivateRoute>,
-                // loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+                        </PrivateRoute>,                
             },
         ]
     }

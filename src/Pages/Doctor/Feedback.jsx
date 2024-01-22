@@ -78,7 +78,7 @@ const Feedback = () => {
         </div>)}              
         </div>
         <div className="">
-          {!showFeedbackForm &&  <button onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block mx-auto">Give  Feedback</button>}
+          {!showFeedbackForm &&  <button style={{background: "var(--primary-color)"}} onClick={()=> setShowFeedbackForm(!showFeedbackForm)} className="btn block text-white mx-auto">Give  Feedback</button>}
           {showFeedbackForm && <FeedbackForm showFeedbackForm={showFeedbackForm} setShowFeedbackForm={setShowFeedbackForm} />}
         </div>
       </div>

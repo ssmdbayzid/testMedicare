@@ -20,17 +20,15 @@ const initialFormData  =
     bloodType: "",
   }
 
-const ProfileSetting = ({tab, setTab}) => {
-  const [updateUser] = useUpdateUserMutation()
+
+const ProfileSetting = ({user, tab, setTab}) => {
+  const [updateUser, { isLoading }] = useUpdateUserMutation()
   const [loading, setLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("")
   const [formData, setFormData] = useState(initialFormData)
   // const dispatch  = useDispatch()
-  const user = useSelector(selectCurrentUser)
-
       
   useEffect(()=>{
-
     if(user){        
        setFormData({
         ...initialFormData,
@@ -52,7 +50,7 @@ const ProfileSetting = ({tab, setTab}) => {
     const imgUrl = await imgUploadToImgBB(file) 
     setPreviewUrl(imgUrl);
   }
-  console.log(user)
+  
   const submitForm = async event => {    
     event.preventDefault()   
     setLoading(true)      
@@ -61,15 +59,14 @@ const ProfileSetting = ({tab, setTab}) => {
         const result = await updateUser(updatedData)
         if(result.data){          
           toast.success("User Updated Success")   
-          navigate("/home")
+          setTab("booking")
           setPreviewUrl("")  
-          console.log("this is from patient data update")                          
+          console.log("result", result.data)                          
           setFormData(initialFormData)
-         setLoading(false)          
+          setLoading(false)          
         }
         if(result.error){
-          console.log("this is from patient Failed to up data")              
-          console.log(result.error)
+          console.log("this is from patient", result.error)                        
          toast.error(result.error.data.message)          
          setLoading(false)
         }                
@@ -108,7 +105,7 @@ const ProfileSetting = ({tab, setTab}) => {
         
         <div className="flex gap-12 w-full lg:w-3/4">
         <div className="flex mb-10">
-          <label htmlFor="bloodType">Blood Group</label>
+          <label htmlFor="bloodType" className='whitespace-nowrap'>Blood Group</label>
           <select 
           name="bloodType"
           id="bloodType"
@@ -159,9 +156,10 @@ const ProfileSetting = ({tab, setTab}) => {
              </label>
             </div>
             </div>                     
-            <button            
-            className="btn w-full px-5 py-2 mt-2 rounded-md">
-              { loading &&  <HashLoader size={30} color={"#ffffff"} /> } Submit
+            <button  
+            style={{background: 'var(--primary-color)', color:"white"}}          
+            className="btn w-full px-5 py-2 mt-4 rounded-md">
+              {isLoading ? <> <HashLoader size={20} color="#fffff" /> Updating </>: "Submit"}
             </button>  
       </form>
     </div>

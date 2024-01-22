@@ -10,6 +10,10 @@ export const doctorApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ['Doctors'
             query: (id)=>`doctors/${id}`,
             providesTags: ["Doctors"]
         }),
+        getDoctorProfile: builder.query({
+            query: (id)=>`doctors/profile/${id}`,
+            providesTags: ["Doctors"]
+        }),
         updateDoctor: builder.mutation({
             query: ({id, ...rest})=>({
                 url: `doctors/${id}`,
@@ -39,6 +43,7 @@ export const doctorApiSlice = apiSlice.enhanceEndpoints({addTagTypes: ['Doctors'
 export const {
 useGetDoctorsQuery,
 useGetSingleDoctorQuery,
+useGetDoctorProfileQuery,
 useUpdateDoctorMutation,
 useDeleteDoctorMutation,
 usePostReviewMutation

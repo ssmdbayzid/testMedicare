@@ -3,15 +3,18 @@ import { formateDate } from '../../utils/formateDate'
 
 
 const DoctorAbout = ({doctor}) => {
-    const {name, averageRating, bio, experience, qualification, photo, about, specialization} = doctor
+    
+     
+
+    
   return (
     <div>
         <div>
             <h3 className="text-[20px] leading-[30px] text-textColor font-semibold flex items-center  gap-2">
-                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {name}</span>
+                About of <span className="text-irisBlueColor font-bold text-[24px] leading-9"> {doctor?.name}</span>
             </h3>
             <p className="text-para text-justify">
-               {about}
+               {doctor?.about}
             </p>
         </div>
         <div className="mt-12">
@@ -21,7 +24,7 @@ const DoctorAbout = ({doctor}) => {
 
         {/* ========== Education ================ */}
             <ul className="pt-4 md:p-5">
-           {qualification && qualification.map((data, index)=>
+           {doctor?.qualification && doctor?.qualification.map((data, index)=>
            <li key={index} className="flex flex-col sm:flex-row sm:justify-between sm:items-end md:gap-5 mb-[30px] ">
                 <div className="">
                     <span className="text-irisBlueColor  text-[15px] leading-6 font-semibold">
@@ -43,7 +46,7 @@ const DoctorAbout = ({doctor}) => {
                 Experience
             </h3>
             <ul className="grid sm:grid-cols-2 gap-[30px] pt-4 md:p-5">
-                {experience && experience.map((exp, index)=><li key={index} className="p-4 rounded bg-[#fff] border ">
+                {doctor?.experience && doctor?.experience.map((exp, index)=><li key={index} className="p-4 rounded bg-[#fff] border ">
                     <h1 className="font-semibold text-xl mb-2">Name of  Degree</h1>
                     <span className="text-secondaryColor text-[16px] leading-[25px] font-semibold">                    
                     {/* {formateDate("08-12-2010")} - {formateDate("08-12-2014")} */}

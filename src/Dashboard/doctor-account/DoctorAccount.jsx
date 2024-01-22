@@ -1,24 +1,59 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Overview from './Overview';
 import DoctorAppointment from './DoctorAppointment';
 import Profile from './Profile';
 import { authContext } from 'context/AuthContext';
+import { useGetDoctorProfileQuery } from 'features/doctor/doctorApiSlice';
+import { useParams } from 'react-router-dom';
+import Loader from 'component/Loader';
+
 
 const DoctorAccount = () => {
   const [tab, setTab] =  useState("overview");
+  const {id} = useParams()
+  const {data, isError, isLoading} = useGetDoctorProfileQuery(id)  
+  const [user, setUser] = useState(null)
+
+  useEffect(()=>{
+    if(data){
+      setUser(data.data)      
+    }
+  },[data])
   
-  const {user, role} = useContext(authContext)
-  console.log("User", user, "role", role)
   return (
-    <div className="max-w-[1170px] px-5 mx-auto flex-1 py-12">
-      <div className="grid md:grid-cols-3 gap-10">
-        {/* ============ Sidebar ============ */}
-        {/* <p>This is from doctor about</p> */}
-       <div className="p-6 rounded-md bg-white shadow-xl w-full">
+    <div className="container px-5 mx-auto flex-1 py-12">
+      { isError || isLoading ? <>
+        <p className="text-red-600">{isError.message}</p>
+        : <Loader />
+      </>:
+      <div className="grid md:grid-cols-3 gap-10 items-start">
+            
+      <div className="p-3 bg-white rounded-md sticky top-0 shadow-xl w-1/2 md:w-full">      
+        <div className="flex items-center justify-center">
+          <figure className="w-36  rounded-full border-2 border-solid border-primaryColor">
+            <img 
+            src={user?.photo}
+            alt=""
+            srcset="" 
+            className="w-full h-full rounded-md"
+            />
+          </figure>
+        </div>
+        
+        <div className="text-center mt-4">
+          <h3 className="text-lg leading-7 text-headingColor font-bold">
+            {user?.name}
+          </h3>
+          <p className="text-textColor text-[16px] leading-6 font-medium mb-2">
+            {user?.email}
+          </p>        
+          <hr className='w-full md:w-4/5 mx-auto' />
+          </div>
+      
         <button 
         onClick={()=>setTab("overview")}
         className={`${tab === "overview" ? "text-blue-500 bg-blue-200 font-semibold" :
-         "text-[#121212] bg-white"} w-full px-3 py-2 `}>Overview</button>
+         "text-[#121212] bg-white"} w-full  px-3 py-2`}>Overview</button>
         <button
         onClick={()=>setTab("appointment")}        
         className={`${tab === "appointment" ? "text-blue-500 bg-blue-200 font-semibold" :
@@ -29,12 +64,12 @@ const DoctorAccount = () => {
         "text-[#121212] bg-white"} w-full px-3 py-2 `}>Profile</button>
         </div>
         <div className="md:col-span-2" >
-        {tab === "overview" && <Overview />}
-        {tab === "appointment" && <DoctorAppointment />}
-        {tab === "profile" && <Profile user={user} />}
+        {tab === "overview" && <Overview  user2={user}/>}
+        {tab === "appointment" && <DoctorAppointment user={user} />}
+        {tab === "profile" && <Profile setTab={setTab} user={user} />}
         </div>
 
-      </div>
+      </div>}
     </div>
   )
 }

@@ -6,10 +6,8 @@ let  token;
 
 
 // Get  token and set token as  header bearer
-const baseQuery = fetchBaseQuery({
-    // baseUrl: process.env.REACT_APP_BASE_URL,
-    baseUrl: "http://localhost:5000/api/v1",
-    credentials: "include",
+const baseQuery = fetchBaseQuery({        
+    baseUrl: "http://localhost:5000/api/v1/",        
     prepareHeaders: (headers) => {        
         if (token) {
             headers.set("Authorization", `Bearer ${token}`);

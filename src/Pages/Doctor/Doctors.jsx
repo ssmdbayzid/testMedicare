@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import doctorsData from '../../assets/data/doctorsData'
 import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
@@ -8,12 +8,20 @@ import Loader from 'component/Loader'
 import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 
 const Doctors = () => {
-  const {data:doctors, isError, isLoading} = useGetDoctorsQuery()
+  const {data, isError, isLoading} = useGetDoctorsQuery()
+  const [products, setProducts] = useState(null)
+  const [searchInput, setSearchInput] = useState("")
 
- if(isError){
-  console.log(isError)
+useEffect(()=>{
+  if(data){
+    localStorage.setItem("doctors", JSON.stringify(data.data))
+    const filterDoctor = data.data.filter(
+      doctor =>  doctor.name.toLowerCase().includes(searchInput.toLowerCase())
+      )
+      setProducts(filterDoctor)
+  }
+},[searchInput, data])
 
- }
 
   return (
     <div className="flex-1 ">
@@ -23,10 +31,10 @@ const Doctors = () => {
     <section className="section bg-[#fff9ea">
       <div className="container text-center">
         <h2 className="heading">Find a doctor</h2>
-        <div className="max-w-[570px]  mt-7 mx-auto bg-[#0066ff2c] rounded-md flex items-center  justify-between">
-          <input type="search"
+        <div className="w-full md:max-w-[570px] mt-7 mx-auto bg-[#0066ff2c] rounded-md flex items-center justify-between">
+          <input type="search" onChange={(e)=> setSearchInput(e.target.value)}
           className="py-4 pl-4 pr-2 bg-transparent w-full  focus:outline-none cursor-pointer placeholder:text-textColor"
-          placeholder="Search Doctor"
+          placeholder="Find doctor "
           name="" />
           <button   
           className="py-4 px-8 bg-[var(--primary-color)] text-white mt-0 rounded-none rounded-r-md">
@@ -37,11 +45,11 @@ const Doctors = () => {
       </div>
     </section>
       
-  <section>
-    <div className="container">
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
+  <section className='container'>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-6">
 
-      {doctors && doctors.data.map((doctor, index)=>
+      {products && products.map((doctor, index)=>
   <div key={index} className="mx-auto p-3 lg:p-5">
       <div className='w-full h-[286px]'>
       <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />
@@ -56,7 +64,7 @@ const Doctors = () => {
         </div>
       </div>
       <div className="flex items-center justify-between mt-5">
-          <p className="text-textColor">{doctor.hospital}</p>
+          <p className="text-textColor">{doctor.experience[0].hospital}</p>
 
           <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 hover:border-none hover:bg-[var(--primary-color)] hover:text-white w-10 h-10 rounded-full">
           <BsArrowRight />
@@ -64,7 +72,7 @@ const Doctors = () => {
         </div>
   </div>)}  
 </div>
-</div>
+
     </section>
 
       {/* ===================== Petient Testimonial   ======================== */}

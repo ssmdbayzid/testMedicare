@@ -34,7 +34,7 @@ const Doctors = () => {
       <h2 className="heading text-center">Our Great Doctors</h2>
       <p className="text-para text-center">World class care for everyone  Our health System offers unmatched export health care</p>
       </div>
-   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 lg:gap-16 mt-12">
+   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
          { isError || isLoading ? <>
           
             <p className="text-red-600">{isError.message}</p>
@@ -42,13 +42,13 @@ const Doctors = () => {
             <Loader />          
          </> :<>         
         {data && data.data.map((doctor, index)=>
-          <div key={index} className="mx-auto p-3 lg:p-5">
+          <div key={index} className="mx-auto w-full">
               <div className="w-full h-[286px]">
               <img src={doctor.photo} alt="" className="w-full h-full rounded-xl" />
               </div>
               <h3 className="text-2xl mt-5 mb-3 font-bold">{doctor.name}</h3>
               <div className="flex items-center justify-between ">
-              <span className="px-5 rounded-md py-2 text-iris text-[#01B5D8] bg-[#01B5D8]/20 font-bold">{doctor.specialization}</span>
+              <span className="px-2 text-md rounded-md py-2 text-iris text-[#01B5D8] bg-[#01B5D8]/20 font-bold">{doctor.specialization}</span>
                 <div className="flex items-center gap-2">
                 <img src={star} alt="" />
                 <span className="font-bold">{doctor?.averageRating.toFixed(2)}</span>

@@ -78,15 +78,14 @@ const FeedbackForm = ({showFeedbackForm, setShowFeedbackForm}) => {
             onChange={(e)=> setShowFeedback(e.target.value)}
             value={showFeedback}
             className="w-full border border-solid p-4 text-textColor"
-            rows="5" placeholder="Write your  feedback or suggestion here" name="" id="" required />
+            rows="5" placeholder="Write your feedback or suggestion here" name="" id="" required />
 
         </div>
     <button     
-    className="btn mr-6">{isLoading ? <HashLoader size={20} color="#0067FF" /> : "Submit"}</button>
-    <button 
-    style={{background: "#ededed"}}
+    className="px-5 py-2 bg-blue-800 bg-opacity-80 hover:bg-opacity-100 rounded-lg text-white mr-6">{isLoading ? <HashLoader size={20} color="#fffff" /> : "Submit"}</button>
+    <button     
     onClick={()=>setShowFeedbackForm(!showFeedbackForm)}   
-    className="btn bg-slate-300">Cancel</button>
+    className=" bg-red-700  border rounded-lg text-white px-5 py-2  mr-6 font-semibold">Cancel</button>
 
     </form>
   )
