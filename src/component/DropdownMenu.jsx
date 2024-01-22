@@ -16,7 +16,7 @@ const DropdownMenu = ({openMenu, setOpenMenu, }) => {
     }
   return (
     <div   
-    className={"top-24  opacity-1 right-28 absolute bg-[var(--my-color)]  rounded-lg shadow-md px-2 w-56 transition-all duration-500 "}>
+    className={"top-24  bg-slate-100 opacity-1 right-28 absolute  rounded-lg shadow-black/40 shadow-lg px-2 w-56 transition-all duration-500 "}>
 
         {/* <!-- Dropdown menu --> */}
         <div className="px-4 py-3">

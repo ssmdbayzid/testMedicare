@@ -5,10 +5,7 @@ import { useSelector } from 'react-redux'
 import { selectCurrentRole, selectCurrentToken, selectCurrentUser } from 'features/auth/authSlice'
 
 const About = ( ) => {
-    const user = useSelector(selectCurrentUser)
-    const token = useSelector(selectCurrentToken)
-    const role = useSelector(selectCurrentRole)
-    console.log("user", user, "role", role, "token", token)
+    
   return (
     <div className="container my-24">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20 xl:gap-0 justify-between">
@@ -32,7 +29,7 @@ const About = ( ) => {
                     For 30 years U.S News 6 World has recognized us as one of the best publics hospitals in the nations #1 in Taxed. Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet accusamus quisquam quae repudiandae illum laudantium numquam omnis minima qui ut.
                 </p>
 
-                <button className="btn">Learn More</button>
+                <button className="button">Learn More</button>
             </div>
         </div>
     </div>

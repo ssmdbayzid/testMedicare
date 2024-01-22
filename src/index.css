@@ -125,7 +125,7 @@ body {
   height: 100px;
   line-height: 100px;
   background: url("../src/assets/images/header-bg.png") cover no-repeat center;
-  background-color: var(--menu-bg);
+  /* background-color: var(--menu-bg); */
   border-bottom: .2px solid #e5e7eb;
 }
 

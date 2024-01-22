@@ -18,7 +18,7 @@ const VirtualSupport = () => {
                     <li className="text-para text-justify">2. Search for your  physician here. and contact their office.</li>
                     <li className="text-para text-justify">3. View  our physicians are accepting new  parents. use the online  shcedule  tool to select an appointment time. ..</li>
                 </ul>
-                <button className="btn">Learn More</button>
+                <button className="button">Learn More</button>
             </div>
 
 

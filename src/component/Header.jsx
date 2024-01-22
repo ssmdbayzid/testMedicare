@@ -35,12 +35,24 @@ const navLinks = [
 const Header = () => {
     const [open, setOpen] = useState(false)
     const [openMenu, setOpenMenu] = useState(false)
+    const [scroll, setScroll] = useState(false)
+    
+    // change nav color when scroll
+    const onChange = () =>{
+        if(window.scrollY >= 90){
+            setScroll(true)
+        }else{
+            setScroll(false)
+        }
+    }
+    window.addEventListener("scroll", onChange)
+
     
     const {theme, themeToggle} = useContext(ThemeContext)
     const user =  useSelector(selectCurrentUser)
     const token =  useSelector(selectCurrentToken)            
   return (
-    <div className="header leading-[100%] relative flex items-center">
+    <div className={` ${scroll ? "bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 fixed top-0 left-0" : "bg-white relative transform duration-200"}   header leading-[100%] z-[999] flex items-center`}>
         <div className="container">
             <div className="flex justify-between items-center">
 

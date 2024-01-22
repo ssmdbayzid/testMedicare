@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import doctorsData from '../../assets/data/doctorsData'
 import star from '../../assets/images/Star.png'
 import { BsArrowRight } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, } from 'react-router-dom'
 // import { useGetDoctorsQuery } from '../../state/api'
 import Loader from 'component/Loader'
 import { authContext } from 'context/AuthContext'
@@ -11,6 +11,8 @@ import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 
 const Doctors = () => {
   const {data, isError, isLoading} = useGetDoctorsQuery()
+
+
   try {
     
   } catch (error) {
