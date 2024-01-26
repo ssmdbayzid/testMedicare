@@ -115,7 +115,7 @@ const Header = () => {
         </div>
       </div>
       
-          <div className={`md:hidden  bg-white shadow-xl w-full max-w-[400px]  ${open ? "left-0" : "-z-20 -left-full"} top-[70px] absolute transition-all  duration-500 w-[75%] shadow-black shadow-xl`}>
+          <div className={`md:hidden  bg-white shadow-xl w-full max-w-[400px]  ${open ? "left-0" : "-z-20 -left-full"} top-0 absolute transition-all  duration-500 w-[75%] shadow-black shadow-xl`}>
             <Menu navLinks={navLinks} setOpen={setOpen}  className="relative "/>
           </div>
         
