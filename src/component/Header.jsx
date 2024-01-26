@@ -52,19 +52,19 @@ const Header = () => {
     const user =  useSelector(selectCurrentUser)
     const token =  useSelector(selectCurrentToken)            
   return (
-    <div className={` ${scroll ? "bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 fixed top-0 left-0" : "bg-white relative transform duration-200"}   header leading-[100%] z-[999] flex items-center`}>
+    <div className={` ${scroll ? "bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 fixed top-0 left-0" : "bg-white relative transform duration-200"}   header  z-[999] flex items-center md:py-4 py-3`}>
         <div className="container">
             <div className="flex justify-between items-center">
 
                 {/* ============= Logo ========== */}
-                <a href="/home" className="flex text-3xl items-center text-[var(--heading-color)] gap-3 font-extrabold">
-                <img src={logo} alt="Logo" className="cursor-pointer w-8"/>
+                <a href="/home" className="flex text-xl md:text-3xl items-center text-[var(--heading-color)] gap-3 font-extrabold">
+                <img src={logo} alt="Logo" className="cursor-pointer w-6 md:w-8"/>
                 <p>Mediplus</p>
                 </a>
 
                 {/* ================= Navigation ============== */}
                 <div className="navigation hidden md:block ">
-                <ul className="flex items-center justify-between gap-8 mx-5">
+                <ul className="flex items-center justify-between gap-3 md:gap-8 mx-5">
                     { navLinks && navLinks.map((link, index)=>
                     <NavLink to={link.path} className={navClass => navClass.isActive ? "text-[var(--primary-color)] text-lg leading-7 font-[600]"
                     : "text-lg text-textColor font-[500] leading-7" } key={index}>{link.display}</NavLink>)
@@ -74,10 +74,10 @@ const Header = () => {
 
 
             {/* ============= Nev Right ================= */}
-            <div className="flex items-center justify-between gap-4">                
+            <div className="flex items-center justify-between gap-2 md:gap-4">                
                    { user && token ? 
                    <>
-                   <div className="mr-3"
+                   <div className="mr-1 md:mr-3"
                    onClick={()=>setOpenMenu(!openMenu)}
                    >
                        <figure className="w-11 h-11 cursor-pointer">
@@ -102,19 +102,23 @@ const Header = () => {
                   </button>
                 </Link>
                 </div>}
-                <button onClick={themeToggle} className="text-sm hover:bg-slate-300 rounded-full p-1">
+                <button onClick={themeToggle} className="text-[16px] hover:bg-slate-300 rounded-full p-1">
                    {theme === "dark" ? <CiLight  className="text-[30px]"/>
                     : <CiDark className="text-[30px]"/>}
 
-                </button>           
-                    {!open ? <BiMenu onClick={()=> setOpen(!open)} className="cursor-pointer md:hidden text-[40px]" /> 
-                    : <button onClick={()=> setOpen(!open)} className='text-2xl hover:text-red-600 md:hidden  cursor-pointer'>X</button>  }                                        
+                </button>      
+                     <div className="w-5">       
+                    {!open ? <BiMenu onClick={()=> setOpen(!open)} className="text-[35px] cursor-pointer md:hidden" /> 
+                    : <button onClick={()=> setOpen(!open)} className='text-[30px] hover:text-red-600 md:hidden cursor-pointer'>X</button>  }        
+                    </div>                                         
             </div>
         </div>
       </div>
-      { open &&
-          <Menu open={open} setOpen={setOpen} />
-       } 
+      
+          <div className={`md:hidden  bg-white shadow-xl w-full max-w-[400px]  ${open ? "left-0" : "-z-20 -left-full"} top-[70px] absolute transition-all  duration-500 w-[75%] shadow-black shadow-xl`}>
+            <Menu navLinks={navLinks} setOpen={setOpen}  className="relative "/>
+          </div>
+        
             </div>
   )
 }
