@@ -59,7 +59,7 @@ const Header = () => {
                 {/* ============= Logo ========== */}
                 <a href="/home" className="flex text-xl md:text-3xl items-center text-[var(--heading-color)] gap-3 font-extrabold">
                 <img src={logo} alt="Logo" className="cursor-pointer w-6 md:w-8"/>
-                <p>Mediplus</p>
+                <p>Medicare</p>
                 </a>
 
                 {/* ================= Navigation ============== */}
