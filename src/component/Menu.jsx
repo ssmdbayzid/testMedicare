@@ -50,7 +50,7 @@ const Menu = ({setOpen,  open}) => {
                 <img src={logo} alt="Logo" className="cursor-pointer  w-6 md:w-8"/>
                 <p>Mediplus</p>
                 </a>
-                <MdClose className='text-4xl ' />
+                <MdClose onClick={()=>setOpen(!open)} className='text-4xl ' />
       </div>
      
             <ul className="gap-6  flex flex-col justify-center  mx-5 ml-4 pt-12">
