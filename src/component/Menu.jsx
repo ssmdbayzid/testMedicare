@@ -79,7 +79,7 @@ const Menu = ({setOpen,  open}) => {
                  onClick={()=>{logOut(); setOpen(!open)}}
                 to={"/login"}><button className='w-[90%] text-white text-xl bg-blue-700 py-2  ml-3 mr-3 rounded-full mt-10'>Log Out</button></Link> </>
 
-                :  <> <Link  to={"/login"}><button onClick={()=>setOpen(!open)} className='w-[90%] text-white text-xl bg-blue-700 py-2  ml-3 mr-3 rounded-full mt-3'>Login sds</button></Link>
+                :  <> <Link  to={"/login"}><button onClick={()=>setOpen(!open)} className='w-[90%] text-white text-xl bg-blue-700 py-2  ml-3 mr-3 rounded-full mt-3'>Login</button></Link>
                 <Link  to={"/signup"}><button onClick={()=>setOpen(!open)} className='w-[90%] text-white text-xl bg-gray-600 py-2  ml-3 mr-3 rounded-full mt-3'>Signup</button></Link> </>}
       
       </div>
