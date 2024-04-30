@@ -40,7 +40,7 @@ const MyBooking = ({user}) => {
         </div>
       <Link
       to={`/doctors/${data.doctor._id}`}
-      className="group flex bg-primary/90 text-white items-center justify-between mt-5 p-1 rounded-r-full">
+      className="group flex bg-[var(--primary-color)] text-white items-center justify-between mt-5 p-1 rounded-r-full">
           
           <p className="text-textColor pl-1">About Doctor</p>
 
