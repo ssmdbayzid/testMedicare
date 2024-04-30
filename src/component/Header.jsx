@@ -59,7 +59,7 @@ const Header = () => {
                 {/* ============= Logo ========== */}
                 <a href="/home" className="flex text-xl md:text-3xl items-center text-[var(--heading-color)] gap-3 font-extrabold">
                 <img src={logo} alt="Logo" className="cursor-pointer w-6 md:w-8"/>
-                <p>Mediplus</p>
+                <p>Medicare</p>
                 </a>
 
                 {/* ================= Navigation ============== */}
@@ -115,8 +115,8 @@ const Header = () => {
         </div>
       </div>
       
-          <div className={`md:hidden  bg-white shadow-xl w-full max-w-[400px]  ${open ? "left-0" : "-z-20 -left-full"} top-[70px] absolute transition-all  duration-500 w-[75%] shadow-black shadow-xl`}>
-            <Menu navLinks={navLinks} setOpen={setOpen}  className="relative "/>
+          <div className={`md:hidden  bg-white shadow-xl w-full max-w-[400px]  ${open ? "left-0" : "-z-20 -left-full"} top-0 absolute transition-all  duration-500 w-[75%] shadow-black shadow-xl`}>
+            <Menu navLinks={navLinks} setOpen={setOpen} open={open} className="relative "/>
           </div>
         
             </div>
