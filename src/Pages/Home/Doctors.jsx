@@ -12,9 +12,7 @@ import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 const Doctors = () => {
   const {data, isError, isLoading} = useGetDoctorsQuery()
 
-
-  try {
-    
+  try {   
   } catch (error) {
     console.log(error)
   }

@@ -19,6 +19,8 @@ function App() {
       position="top-right"
       autoClose={3000}
       closeOnClick
+      rtl={false}      
+      limit={1}
       pauseHover={false} />                  
     </div>
   );

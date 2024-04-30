@@ -18,9 +18,7 @@ module.exports = {
           textColor: '#4E545F',
         }
       }
-},
-
-  plugins: [require("daisyui")],
-  // plugins: [],
+},  
+  plugins: [],
 }
 

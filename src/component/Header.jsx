@@ -102,11 +102,11 @@ const Header = () => {
                   </button>
                 </Link>
                 </div>}
-                <button onClick={themeToggle} className="text-[16px] hover:bg-slate-300 rounded-full p-1">
+                {/* <button onClick={themeToggle} className="text-[16px] hover:bg-slate-300 rounded-full p-1">
                    {theme === "dark" ? <CiLight  className="text-[30px]"/>
                     : <CiDark className="text-[30px]"/>}
 
-                </button>      
+                </button>       */}
                      <div className="w-5">       
                     {!open ? <BiMenu onClick={()=> setOpen(!open)} className="text-[35px] cursor-pointer md:hidden" /> 
                     : <button onClick={()=> setOpen(!open)} className='text-[30px] hover:text-red-600 md:hidden cursor-pointer'>X</button>  }        

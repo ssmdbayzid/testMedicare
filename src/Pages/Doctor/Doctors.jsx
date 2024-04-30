@@ -10,19 +10,20 @@ import { useGetDoctorsQuery } from 'features/doctor/doctorApiSlice'
 const Doctors = () => {
   const [queryParams, setQueryParams] = useSearchParams()
   const {data, isError, isLoading} = useGetDoctorsQuery()
-  const [products, setProducts] = useState(null)
-  const [searchInput, setSearchInput] = useState(
-    queryParams.get("category") ? queryParams.get("category") : ""
-  )
+  const [doctors, setDoctors] = useState(null)
+  const [searchInput, setSearchInput] = useState("")
 
 useEffect(()=>{
   if(data){
     localStorage.setItem("doctors", JSON.stringify(data.data))
     const filterDoctor = data.data.filter(
-      doctor =>  doctor.name.toLowerCase().includes(searchInput.toLowerCase()) 
-      || doctor.specialization.toLowerCase().includes(searchInput.toLowerCase()) 
+      doctor =>  doctor?.name?.toLowerCase().includes(searchInput.toLowerCase()) 
+      || doctor?.specialization?.toLowerCase().includes(searchInput.toLowerCase()) 
       )
-      setProducts(filterDoctor)
+      setDoctors(filterDoctor)
+  }
+  if(queryParams.get("category")){
+    setSearchInput(queryParams.get("category"))
   }
 },[searchInput, data, queryParams])
 
@@ -34,7 +35,7 @@ console.log(queryParams.get("category"))
       {(isError || isLoading) ? <> {isError ? <p className="text-center">Something Went Error</p>  
       : <div className=' text-center pt-[10%]'> <Loader/> </div>}    </> :      
       <>
-    <section className="py-4 bg-[#fff9ea]">
+    <section className="py-10 bg-[#fff9ea]">
       <div className="container text-center">
         <h2 className="text-2xl md:text-4xl font-bold mb-1">Find a doctor</h2>
         <div className="w-full md:max-w-[500px]  mx-auto bg-[#0066ff2c] rounded-md flex items-center justify-between">
@@ -52,27 +53,25 @@ console.log(queryParams.get("category"))
       </div>
     </section>
       
-  <section className='container'>
-    
+  <section className='container mb-10'>    
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3">
-
-      {products && products.map((doctor, index)=>
+      {doctors && doctors.map((doctor, index)=>
   <div key={index} className="mx-auto rounded-lg  bg-slate-100">
       <div className='w-full h-[280px]'>
-      <img src={doctor.photo} alt="" className="w-full h-full object-fill rounded-xl" />
+      <img src={doctor?.photo} alt="" className="w-full h-full object-fill rounded-xl" />
       </div>
       <div className=' rounded-b-lg p-2'>
-      <h3 className="text-2xl mb-1 font-bold">{doctor.name}</h3>
+      <h3 className="text-2xl mb-1 font-bold">{doctor?.name}</h3>
       <div className="flex items-center justify-between ">
-      <span className="bg-irisBlueColor/20 font-bold text-[var(text-color)] text-lg">{doctor.specialization}</span>
+      <span className="bg-irisBlueColor/20 font-bold text-[var(text-color)] text-lg">{doctor?.specialization}</span>
         <div className="flex items-center">
         <img src={star} alt="" />
-        <span className="font-semibold">{doctor.avgRating}</span>
-        <span className="text-textColor">({doctor.totalRating})</span>
+        <span className="font-semibold">{doctor?.avgRating}</span>
+        <span className="text-textColor">({doctor?.totalRating})</span>
         </div>
       </div>
       <div className="flex items-center justify-between mt-2">
-          <p className="text-textColor">{doctor.experience[0].hospital}</p>
+          <p className="text-textColor">{doctor?.experience[0]?.hospital}</p>
 
           <Link to={`/doctors/${doctor._id}`} className="flex items-center justify-center text-lg border-2 border-slate-400 hover:border-none hover:bg-[var(--primary-color)] hover:text-white w-10 h-10 rounded-full">
           <BsArrowRight />
@@ -86,7 +85,7 @@ console.log(queryParams.get("category"))
     </section>
 
       {/* ===================== Petient Testimonial   ======================== */}
-      <Testimonial />
+      <Testimonial  />
         </>}
 
     </div>

@@ -76,12 +76,15 @@ const SidePanel = ({doctor}) => {
       <hr className="bg-[var(--primary-color)] w-12 h-1 mx-auto mb-3"/>
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.specialization} />
       <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={doctor?.name} />
-      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={user.name} />
+      <input type="text" className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" value={user?.name} />
       <input type="date" name='date' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-3" placeholder="Appointment Date" />
       <input type="time" name='bookingTime' className="w-full px-4 py-3 border text-lg first-letter:uppercase rounded-full mb-1" placeholder="Appointment Time" />
-      <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.availableTime.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime.endingTime, "HH:mm").format("hh:mm A")}</span> </p> 
-       <button           
-      className="bg-[var(--primary-color)] text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer">Book Appointment</button> 
+     {!doctor?.availableTime?.startingTime ? <p className="text-center text-sm mb-2 text-red-700 font-semibold">{!doctor?.availableTime?.startingTime && "Doctor not available"}</p> :
+     <p className="text-center text-sm mb-2 text-[var(--primary-color)]">Available from <span className="text-red-600 font-bold">{moment(doctor?.availableTime?.startingTime, "HH:mm").format("hh:mm A")}</span> to  <span className="text-red-600 font-bold">{moment(doctor?.availableTime?.endingTime, "HH:mm").format("hh:mm A")} </span> </p> }
+       
+       <button                    
+      className={`${!doctor?.availableTime?.startingTime ? "bg-blue-400" : "bg-[var(--primary-color)]"} text-white rounded-full text-center w-full py-3 px-3 font-semibold text-[24px] md:text-lg cursor-pointer`}>Book Appointment</button> 
+    
       </form>     
     </div>
   );
